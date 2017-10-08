@@ -1,0 +1,11 @@
+{
+  "name": "weather-analyzer",
+  "version": "2.0.0",
+  "private": true,
+  "scripts": {
+    "test": ""
+  },
+  "devDependencies": {
+    "typescript": "^2.5.3"
+  }
+}
