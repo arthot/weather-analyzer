@@ -1,11 +1,7 @@
 import 'reflect-metadata'
 import * as Koa from 'koa'
 import * as bodyParser from 'koa-bodyparser'
-import * as Knex from 'knex'
-
-const knexConfig = require('../knexfile');
-
-const knex = Knex(knexConfig.development);
+import './store/objection'
 
 const app = new Koa();
 

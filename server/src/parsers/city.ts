@@ -7,7 +7,7 @@ export function parse(name: string, lang: string) {
     if (!name) throw new Error('city name should not be empty')
     if (name.length < 2) throw new Error('city name lenght must be not less than 2')
 
-    const url = `https://www.gismeteo.${(lang == "ru" ? "ru" : "com")}/ajax/suggest/?lang=${lang}&startsWith=${name}&sort=typ`
+    const url = `https://www.gismeteo.${(lang == 'ru' ? 'ru' : 'com')}/ajax/suggest/?lang=${lang}&startsWith=${name}&sort=typ`
 
     return request(url)
         .then(r => (<CityApi[]>r.items)
