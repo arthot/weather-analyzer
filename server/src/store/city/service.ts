@@ -49,3 +49,9 @@ export async function cache(query: Query, cities: City[]) {
                 order: cities.findIndex(ci => ci.id === c.id) + 1
             })))
 }
+
+export function getPreloaded() {
+    return CityModel.query()
+        .whereExists(q => q.select('1').from('days').whereRaw('cities.id = days.cityId'))
+        .then(a => a.map(i => i.toModel()));
+}

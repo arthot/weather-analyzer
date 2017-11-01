@@ -5,6 +5,7 @@ import { City } from 'src/common/city'
 import { QueryModel } from './query'
 import { Query } from 'src/common/query'
 import { CityQueryModel } from './cityQuery'
+import { DayModel } from 'src/store/days/days'
 
 describe('city model', () => {
 
@@ -88,6 +89,23 @@ describe('city model', () => {
         expect(result).is.an('array');
         expect(result.length).eq(1);
         expect(result[0].id).eq(5);
+    })
+
+    it('should cache multiple cities for one query', async () => {
+        const c23 = new City(23, 'en', { code: 'code', name: 'name' }, 'kind', 'distinct', 'ct1', '');
+        await CityModel.query().insert(c23);
+
+        await DayModel.query().truncate();
+        await DayModel.query().insert({
+            cityId: 23,
+            date: new Date().toISOString()
+        });
+
+        const result = await Service.getPreloaded();
+
+        expect(result).is.an('array');
+        expect(result.length).eq(1);
+        expect(result[0].id).eq(23);
     })
 
 })
