@@ -7,7 +7,7 @@ import { Query } from 'src/common/query'
 import { CityQueryModel } from './cityQuery'
 import { DayModel } from 'src/store/days/days'
 
-describe('city model', () => {
+describe('city service', () => {
 
     const city = new City(1, 'en', { code: 'code', name: 'name' }, 'kind', 'distinct', 'name', 'subdistinct');
     const query = new Query(undefined, 'query', 'en', Date.now());

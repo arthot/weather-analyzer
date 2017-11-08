@@ -5,7 +5,7 @@ import { City } from 'src/common/city'
 import { DayModel } from 'src/store/days/days'
 import { Day } from 'src/common/day'
 
-describe('city model', () => {
+describe('days service', () => {
 
     const city = new City(1, 'en', { code: 'code', name: 'name' }, 'kind', 'distinct', 'name', 'subdistinct');
 

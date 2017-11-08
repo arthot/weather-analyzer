@@ -3,7 +3,6 @@ import { City } from 'src/common/city'
 import { Query } from 'src/common/query'
 
 export class CityQueryModel extends Model {
-    readonly id: number;
     cityId: number;
     queryId: number;
     order: number;
@@ -36,7 +35,6 @@ export class CityQueryModel extends Model {
         type: 'object',
         required: ['cityId', 'queryId', 'order'],
         properties: {
-            id: { type: 'integer' },
             cityId: { type: 'number' },
             queryId: { type: 'number' },
             order: { type: 'number' }
@@ -45,7 +43,6 @@ export class CityQueryModel extends Model {
 
     toModel() {
         return {
-            id: this.id,
             cityId: this.cityId,
             queryId: this.queryId,
             order: this.order

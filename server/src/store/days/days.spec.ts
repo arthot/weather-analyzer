@@ -4,7 +4,7 @@ import { City } from 'src/common/city'
 import { DayModel } from 'src/store/days/days'
 import { Day } from 'src/common/day'
 
-describe('city model', () => {
+describe('day model', () => {
 
     before(async () => {
         await CityModel.query().truncate();

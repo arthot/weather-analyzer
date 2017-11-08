@@ -3,6 +3,7 @@
   "version": "2.0.0",
   "private": true,
   "scripts": {
+    "build": "tsc",
     "start": "cross-env NODE_ENV=development nodemon --watch 'src/**/*.ts' --ignore 'src/**/*.spec.ts' --exec 'ts-node' src/server.ts",
     "test": "cross-env NODE_ENV=test mocha -r ts-node/register -r tsconfig-paths/register --watch-extensions ts",
     "migrate": "cross-env NODE_ENV=development DEBUG=knex:query knex migrate:latest",
