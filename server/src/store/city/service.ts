@@ -52,6 +52,6 @@ export async function cache(query: Query, cities: City[]) {
 
 export function getPreloaded() {
     return CityModel.query()
-        .whereExists(q => q.select('1').from('days').whereRaw('cities.id = days.cityId'))
+        .whereExists(q => q.select('id').from('days').whereRaw('cities.id = days.cityId'))
         .then(a => a.map(i => i.toModel()));
 }

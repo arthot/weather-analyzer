@@ -9,7 +9,7 @@ import { DayModel } from 'src/store/days/days'
 
 describe('city service', () => {
 
-    const city = new City(1, 'en', { code: 'code', name: 'name' }, 'kind', 'distinct', 'name', 'subdistinct');
+    const city = new City(22, 'en', { code: 'code', name: 'name' }, 'kind', 'distinct', 'name', 'subdistinct');
     const query = new Query(undefined, 'query', 'en', Date.now());
 
     before(async () => {
@@ -17,14 +17,14 @@ describe('city service', () => {
         await QueryModel.query().truncate();
         await CityQueryModel.query().truncate();
 
-        await CityModel.query().insert(city);
-        await QueryModel.query().insert(query);
-        await CityQueryModel.query().insert({ cityId: 1, queryId: 1, order: 1 });
+        const c = await CityModel.query().insert(city);
+        const q = await QueryModel.query().insert(query);
+        await CityQueryModel.query().insert({ cityId: c.id, queryId: q.id, order: 1 });
+        city.id = c.id;
     })
 
     it('should insert and read', async () => {
-        const result = await Service.get('en', 1);
-        city.id = result.id;
+        const result = await Service.get('en', city.id);
 
         expect(result).deep.equal(city);
     })
