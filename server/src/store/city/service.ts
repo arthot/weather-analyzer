@@ -1,3 +1,4 @@
+import { transaction } from 'src/store/objection'
 import { CityModel } from './city'
 import { City } from 'src/common/city'
 import { QueryModel } from './query'
@@ -23,31 +24,34 @@ export async function cache(query: Query, cities: City[]) {
     if (await QueryModel.query().findOne({ query: query.query, lang: query.lang }))
         return;
 
-    const qId = await QueryModel.query().insert(query).then(q => q.id);
+    transaction(QueryModel.knex(), async trx => {
 
-    const existing = await CityModel.query()
-        .where({ lang: query.lang })
-        .andWhere('id', 'in', cities.map(c => c.id))
-        .then(a => a.map(c => c.id));
+        const qId = await QueryModel.query(trx).insert(query).then(q => q.id);
 
-    await CityQueryModel.query().insertGraph(
-        cities.filter(c => existing
-            .some(i => i === c.id))
-            .map(c => ({
-                cityId: c.id,
-                queryId: qId,
-                order: cities.findIndex(ci => ci.id === c.id) + 1
-            })));
+        const existing = await CityModel.query(trx)
+            .where({ lang: query.lang })
+            .andWhere('id', 'in', cities.map(c => c.id))
+            .then(a => a.map(c => c.id));
 
-    await CityQueryModel.query().insertGraph(
-        cities
-            .filter(c => !existing.some(i => i === c.id))
-            .map(c => ({
-                cityId: c.id,
-                queryId: qId,
-                city: c,
-                order: cities.findIndex(ci => ci.id === c.id) + 1
-            })))
+        await CityQueryModel.query(trx).insertGraph(
+            cities.filter(c => existing
+                .some(i => i === c.id))
+                .map(c => ({
+                    cityId: c.id,
+                    queryId: qId,
+                    order: cities.findIndex(ci => ci.id === c.id) + 1
+                })));
+
+        await CityQueryModel.query(trx).insertGraph(
+            cities
+                .filter(c => !existing.some(i => i === c.id))
+                .map(c => ({
+                    cityId: c.id,
+                    queryId: qId,
+                    city: c,
+                    order: cities.findIndex(ci => ci.id === c.id) + 1
+                })));
+    })
 }
 
 export function getPreloaded() {

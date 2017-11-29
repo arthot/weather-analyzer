@@ -1,3 +1,4 @@
+import { transaction } from 'src/store/objection'
 import { Day } from 'src/common/day'
 import { DayModel } from './days'
 
@@ -19,5 +20,7 @@ export function getLastCachedDay(cityId: number, month: number) {
 }
 
 export function save(days: Day[]) {
-    return DayModel.query().insertGraph(days);
+    return transaction(DayModel.knex(), trx =>
+        DayModel.query(trx).insertGraph(days)
+    );
 }
