@@ -14,6 +14,7 @@ export class CityModel extends Model {
     subDistinct: string;
 
     static tableName = 'cities';
+    static idColumn = ['id', 'lang'];
 
     static jsonSchema = {
         type: 'object',

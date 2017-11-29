@@ -15,7 +15,8 @@ export function get(lang: string, id: number) {
 export async function search(query: string, lang: string) {
     const queryId = await QueryModel.query().findOne({ query, lang }).then(v => v ? v.id : null);
     if (queryId) {
-        return CityQueryModel.query().where({ queryId }).orderBy('order').eager('city').then(a => a.map(c => c.city));
+        return CityQueryModel.query().where({ queryId }).orderBy('order')
+            .eager('city').modifyEager('city', b => b.where('lang', lang)).then(a => a.map(c => c.city).filter(c => c));
     }
 }
 
