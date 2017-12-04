@@ -8,6 +8,7 @@
         "node_modules": true,
         "dist": true,
         "*.sqlite3": true,
-        "*.sqlite3-journal": true
+        "*.sqlite3-journal": true,
+        ".nyc_output": true
     }
 }

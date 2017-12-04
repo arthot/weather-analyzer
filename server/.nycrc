@@ -1,0 +1,16 @@
+{
+    "extension": [
+      ".ts"
+    ],
+    "exclude": [
+      "**/*.d.ts",
+      "**/*.spec.ts",
+      "dist/*",
+      "src/store/migrations/*",
+      "src/server.ts"
+    ],
+    "reporter": [
+      "text"
+    ],
+    "all": true  
+  }
