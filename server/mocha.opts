@@ -3,3 +3,4 @@
 --require tsconfig-paths/register
 --watch-extensions ts
 --exit
+--timeout 5s
