@@ -1,7 +1,7 @@
 import * as req from 'request-promise-native'
 
 export function request(url: string) {
-    return req(url, {
+    return req(encodeURI(url), {
         jar: true,
         gzip: true,
         headers: {
@@ -12,7 +12,7 @@ export function request(url: string) {
 }
 
 export function requestPage(url: string) {
-    return req(url, {
+    return req(encodeURI(url), {
         jar: true,
         gzip: true,
         headers: {

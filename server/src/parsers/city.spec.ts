@@ -10,12 +10,26 @@ describe('city parser', () => {
         expect(parse.bind(null, '1', '')).to.throw();
     })
 
-    it('should parse city', async () => {
+    it('should parse city in English', async () => {
         const result = await parse('London', 'en');
         expect(result).is.not.empty;
 
         const city = result[0];
         expect(city.name).eq('London');
+        expect(city.country.code).is.not.empty;
+        expect(city.country.name).is.not.empty;
+        expect(city.district).is.not.empty;
+        expect(city.id).is.greaterThan(0);
+        expect(city.kind).is.not.empty;
+        expect(city.lang).is.not.empty;
+    })
+
+    it('should parse city in Russian', async () => {
+        const result = await parse('Лондон', 'ru');
+        expect(result).is.not.empty;
+
+        const city = result[0];
+        expect(city.name).eq('Лондон');
         expect(city.country.code).is.not.empty;
         expect(city.country.name).is.not.empty;
         expect(city.district).is.not.empty;
