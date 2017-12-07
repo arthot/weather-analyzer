@@ -6,8 +6,7 @@
       "**/*.d.ts",
       "**/*.spec.ts",
       "dist/*",
-      "src/store/migrations/*",
-      "src/server.ts"
+      "src/store/migrations/*"
     ],
     "reporter": [
       "text"

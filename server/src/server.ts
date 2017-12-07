@@ -1,12 +1,13 @@
 import 'reflect-metadata'
-import * as Koa from 'koa'
-import * as bodyParser from 'koa-bodyparser'
+import * as express from 'express'
 import './store/objection'
+import { routes } from 'src/routes'
+import nocache = require('nocache')
 
-const app = new Koa();
+const app = express();
 
-app.use(bodyParser());
+app.use('/api', nocache(), routes);
 
-app.listen(3003);
+export const server = app.listen(3003);
 
 console.log('Application is up and running on port 3003');
