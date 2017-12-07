@@ -29,6 +29,12 @@ describe('city service', () => {
         expect(result).deep.equal(city);
     })
 
+    it('should handle null', async () => {
+        const result = await Service.get('en', 99493232);
+
+        expect(result).is.null;
+    })
+
     it('should search by query', async () => {
         const result = await Service.search('query', 'en');
 

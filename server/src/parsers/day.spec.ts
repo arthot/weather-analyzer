@@ -1,4 +1,5 @@
 import { expect } from 'chai'
+import * as proxyquire from 'proxyquire'
 import { parse } from './day'
 
 describe('city parser', () => {
@@ -43,5 +44,24 @@ describe('city parser', () => {
         const result = await parse(73228, 2006, 7);
 
         expect(result).is.empty;
+    })
+
+    it('should silently handle error', async () => {
+        const mockParser = proxyquire.noPreserveCache().noCallThru().load('./day', {
+            'cheerio': {
+                'load': () => {
+                    return () => ({
+                        toArray: () => [{}],
+                        find: () => { throw new Error('this error should be handled') },
+                        html: () => { 'the error was handled' }
+                    })
+                }
+            },
+            'src/utils/request': {
+                'requestPage': () => Promise.resolve()
+            }
+        });
+
+        await mockParser.parse(1, 1, 1);
     })
 })
