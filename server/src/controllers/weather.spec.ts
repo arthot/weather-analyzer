@@ -1,0 +1,61 @@
+import * as chai from 'chai'
+import { expect } from 'chai'
+import chaiHttp = require('chai-http')
+import { server } from 'src/server'
+import * as Service from 'src/store/days/service'
+
+chai.use(chaiHttp);
+
+const ROOT_URL = '/api/weather/';
+
+let agent: ChaiHttp.Agent;
+
+describe(ROOT_URL, () => {
+
+    before(() => {
+        agent = chai.request.agent(server);
+    })
+
+    it(`should validate cityId`, async () => {
+        return agent
+            .get(`${ROOT_URL}/a/1`)
+            .send({})
+            .then(() => new Error('should return http error'))
+            .catch(err => {
+                const { errors } = err.response.body;
+                expect(errors).has.property('cityId');
+            })
+    })
+
+    it(`should validate query`, async () => {
+        return agent
+            .get(`${ROOT_URL}/123/a`)
+            .send({})
+            .then(() => new Error('should return http error'))
+            .catch(err => {
+                const { errors } = err.response.body;
+                expect(errors).has.property('month');
+            })
+    })
+
+    it(`should return values`, async () => {
+        const cityId = Date.now();
+        const month = 12;
+        const date = new Date(Date.UTC(new Date().getFullYear() + 1, month - 1, 31));
+
+        await Service.save([{ cityId, date: date.toISOString(), chance: 1, cloudiness: 1, fallout: true, temperature: 0 }]);
+
+        return agent
+            .get(`${ROOT_URL}/${cityId}/${month}`)
+            .send({})
+            .then(res => {
+                expect(res.body).is.an('array');
+                expect(res.body.length).eq(1);
+                expect(res.body[0].cityId).eq(cityId);
+            })
+    })
+
+    after(() => {
+        server.close();
+    })
+})
