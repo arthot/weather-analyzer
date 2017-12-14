@@ -1,9 +1,14 @@
 import { load } from 'cheerio'
 import { requestPage } from 'src/utils/request'
 import { Day } from 'src/common/day'
+import { getLogger } from 'src/utils/log'
+
+const log = getLogger(module);
 
 export function parse(cityId: number, year: number, month: number) {
     const url = `https://www.gismeteo.ru/diary/${cityId}/${year}/${month}/`;
+
+    log.debug('requesting page ', url);
 
     return requestPage(url)
         .then(page => {
@@ -28,7 +33,7 @@ export function parse(cityId: number, year: number, month: number) {
                             cityId
                         );
                     } catch (e) {
-                        console.error(e, $(tr).html());
+                        log.error(e, $(tr).html());
                     }
                 })
                 .filter(d => d)

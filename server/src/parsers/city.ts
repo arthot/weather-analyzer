@@ -1,5 +1,8 @@
 import { City } from 'src/common/city'
 import { request } from 'src/utils/request'
+import { getLogger } from 'src/utils/log'
+
+const log = getLogger(module);
 
 const CityRegex = new RegExp('[C,M,T]');
 
@@ -8,6 +11,8 @@ export function parse(name: string, lang: string) {
     if (name.length < 2) throw new Error('city name lenght must be not less than 2')
 
     const url = `https://www.gismeteo.${(lang == 'ru' ? 'ru' : 'com')}/ajax/suggest/?lang=${lang}&startsWith=${name}&sort=typ`
+
+    log.debug('requesting page ', url);
 
     return request(url)
         .then(r => (<CityApi[]>r.items)
