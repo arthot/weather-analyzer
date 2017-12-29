@@ -1,11 +1,7 @@
-import { Router, Request, Response } from 'express'
+import { Router } from 'express'
 import nocache = require('nocache')
-import { getBundle } from 'src/utils/bundles'
+import { router as home } from 'src/controllers/home'
 
 export const routes = Router();
 
-const renderPage = (req: Request, res: Response) => {
-    res.render('index', getBundle());
-}
-
-routes.get('/', renderPage);
+routes.use(nocache(), home);
