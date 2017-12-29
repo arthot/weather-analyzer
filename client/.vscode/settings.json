@@ -1,4 +1,5 @@
 {
+    "typescript.referencesCodeLens.enabled": true,
     "files.exclude": {
         ".idea": true,
         "build": true,
