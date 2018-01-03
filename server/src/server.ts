@@ -11,7 +11,7 @@ const log = getLogger(module);
 const app = express();
 
 app.use('/api', apiRoutes);
-app.use('/', staticRoutes);
+app.use('/*', staticRoutes);
 
 app.engine('mustache', mustacheExpress());
 
