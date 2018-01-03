@@ -13,7 +13,9 @@
         "semicolon": [
             false
         ],
-        "no-var-requires": false
+        "no-var-requires": false,
+        "member-access": false,
+        "arrow-parens": false
     },
     "rulesDirectory": []
 }
