@@ -8,7 +8,6 @@ export class Layout extends PureComponent<ILayoutProps> {
         const { match } = this.props;
         return (
             <div>
-                Layout2
                 <Switch>
                     <Route path={`${match.url}/:id(\\d+)`} component={Weather} />
                     <Route path={`${match.url}/`} exact={true} component={Landing} />
