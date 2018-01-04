@@ -6,7 +6,7 @@ const AssetsWebpackPlugin = require('assets-webpack-plugin');
 const { CheckerPlugin, TsConfigPathsPlugin } = require('awesome-typescript-loader');
 
 const tsSourcePath = path.join(__dirname, '../src');
-const imgPath = path.join(__dirname, '../src/img');
+const imgPath = path.join(__dirname, '../src/images');
 const localesPath = path.join(__dirname, '../src/locales');
 const sourcePath = path.join(__dirname, '../src');
 const nodeModules = path.resolve(__dirname, '../node_modules');

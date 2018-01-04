@@ -15,7 +15,10 @@ export class Parallax extends PureComponent<{ options?: any }> {
 
     render() {
         return (
-            <div ref={el => this.wrap = el}>
+            <div ref={el => this.wrap = el} style={{
+                height: '100%',
+                width: '100%',
+            }}>
                 {this.props.children}
             </div>
         )
