@@ -26,6 +26,27 @@ describe(ROOT_URL, () => {
             })
     })
 
+    it(`should render index page with lang in header`, async () => {
+        return agent
+            .get(ROOT_URL)
+            .set('Accept-Language','en-US,en;q=0.9')
+            .send({})
+            .then(res => {
+                expect(res.status).eq(200);
+                expect(res.text).include('<div id="root"></div>');
+            })
+    })
+
+    it(`should render index page with lang`, async () => {
+        return agent
+            .get(ROOT_URL + 'en')
+            .send({})
+            .then(res => {
+                expect(res.status).eq(200);
+                expect(res.text).include('<div id="root"></div>');
+            })
+    })
+
     after(() => {
         server.close();
     })
