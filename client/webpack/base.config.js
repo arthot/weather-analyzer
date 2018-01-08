@@ -34,16 +34,9 @@ module.exports = {
                 }]
             },
             {
-                test: /\.(png|gif|jpg|svg)$/,
-                include: imgPath,
+                test: /\.(woff|woff2|eot|ttf|png|gif|jpg|svg)$/,
                 loader: 'file-loader',
-                options: { name: 'img/[name]-[hash].[ext]' }
-            },
-            {
-                test: /\.(woff|woff2|eot|ttf|svg)$/,
-                include: /node_modules|fonts/,
-                loader: 'file-loader',
-                options: { name: 'fonts/[name].[ext]' }
+                options: { name: 'assets/[name]-[hash].[ext]' }
             }
         ]
     },
