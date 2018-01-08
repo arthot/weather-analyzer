@@ -1,7 +1,9 @@
+import classNames from 'classnames'
 import React, { PureComponent } from 'react'
 import { Parallax } from 'src/components/global/Paralax'
 
-import 'src/styles/landing.less'
+require('src/styles/landing.less')
+require('famfamfam-flags/dist/sprite/famfamfam-flags.css')
 
 export class Landing extends PureComponent {
     render() {
@@ -15,6 +17,20 @@ export class Landing extends PureComponent {
                         <div data-depth="0.5" className="paralax-layer paralax-layer-1"></div>
                     </Parallax>
                 </div>
+                <footer>
+                    <div className="locale-selector">
+                        {[{ lang: 'en', flag: 'gb' }, { lang: 'ru', flag: 'ru' }].map(l => (
+                            <a key={l.lang} href={`/${l.lang}`} title={l.lang} className="locale-selector-item">
+                                <div className={classNames({
+                                    'famfamfam-flags': true,
+                                    [l.flag]: true,
+                                })}></div>
+                            </a>
+                        ))}
+                    </div>
+                    {new Date().getFullYear()}&nbsp;
+                    <a target="_blank" href="https://github.com/arthot">arthot</a>
+                </footer>
             </div>
         )
     }
