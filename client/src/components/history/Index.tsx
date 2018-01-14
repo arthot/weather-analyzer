@@ -1,9 +1,9 @@
 import React, { PureComponent } from 'react'
 
-export class Weather extends PureComponent {
+export class History extends PureComponent {
     render() {
         return (
-            <div>Weather</div>
+            <div>History</div>
         )
     }
 }

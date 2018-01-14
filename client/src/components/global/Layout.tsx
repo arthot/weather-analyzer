@@ -1,9 +1,9 @@
 import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
 import { match as Match, Route, Switch } from 'react-router'
+import { History } from 'src/components/history/Index'
 import { Landing } from 'src/components/landing/Index'
-import Search from 'src/components/search/Index'
-import { Weather } from 'src/components/weather/Index'
+import { Search } from 'src/components/search/Index'
 import { LANGUAGE_CHANGED } from 'src/lang/actions'
 
 class LayoutComponent extends PureComponent<ILayoutProps> {
@@ -16,7 +16,7 @@ class LayoutComponent extends PureComponent<ILayoutProps> {
             <div>
                 <Search />
                 <Switch>
-                    <Route path={`${match.url}/:id(\\d+)`} component={Weather} />
+                    <Route path={`${match.url}/:id(\\d+)`} component={History} />
                     <Route path={`${match.url}/`} exact={true} component={Landing} />
                 </Switch>
             </div>

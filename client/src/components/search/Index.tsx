@@ -103,11 +103,11 @@ class SearchComponent extends Component<ISearchProps, ISearchState> {
     }
 }
 
-export default connect<ISearchStore, ISearchFunc, React.Props<any>, IAppStore>(
+export const Search = connect<ISearchStore, ISearchFunc, React.Props<any>, IAppStore>(
     (state, own) => Object.assign(state.search, own),
     (dispatch) => ({
         onChange: (text) => {
-            dispatch({
+            dispatch<Actions.IChangeSearchInput>({
                 type: Actions.SEARCH_INPUT_CHANGED,
                 payload: { text }
             })
@@ -118,13 +118,13 @@ export default connect<ISearchStore, ISearchFunc, React.Props<any>, IAppStore>(
             });
         },
         onMonthSelect: (month) => {
-            dispatch({
+            dispatch<Actions.ISelectMonth>({
                 type: Actions.SEARCH_MONTH_SELECT,
                 payload: { month }
             });
         },
         onSelect: (city) => {
-            dispatch({
+            dispatch<Actions.ISelectCity>({
                 type: Actions.SEARCH_CITY_SELECT,
                 payload: { city }
             });

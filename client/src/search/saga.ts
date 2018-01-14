@@ -2,10 +2,11 @@ import { replace } from 'react-router-redux'
 import { delay } from 'redux-saga'
 import { call, cancel, fork, put, select, take, takeEvery, takeLatest } from 'redux-saga/effects'
 import { City } from 'src/common/city'
+import { invalidateDays } from 'src/history/saga'
 import { IAppStore } from 'src/reducers'
 import * as Actions from 'src/search/actions'
 import * as api from 'src/search/api'
-import { SearchItem } from 'src/search/items';
+import { SearchItem } from 'src/search/items'
 
 function* getCities(lang: string, text: string) {
     yield put<Actions.ISearchCity>({
@@ -46,6 +47,7 @@ function* handleCitySelect(action) {
     const { city } = action.payload;
     const lang = yield select<IAppStore>(s => s.lang);
     yield put(replace(`/${lang}/${city.name}-${city.id}/`));
+    yield fork(invalidateDays);
 }
 
 export function* watchCitySelection() {
