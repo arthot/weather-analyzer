@@ -9,7 +9,7 @@ import { DayModel } from 'src/store/days/days'
 
 describe('city service', () => {
 
-    const city = new City(22, 'en', { code: 'code', name: 'name' }, 'kind', 'distinct', 'name', 'subdistinct');
+    const city = new City(22, 'en', { code: 'code', name: 'name' }, 'kind', 'distinct', 'name', 'subDistrict');
     const query = new Query(undefined, 'query', 'en', Date.now());
 
     before(async () => {

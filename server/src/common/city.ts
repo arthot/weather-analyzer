@@ -9,6 +9,6 @@ export class City {
         public kind: string,
         public district: string,
         public name: string,
-        public subDistinct: string
+        public subDistrict: string
     ) { }
 }

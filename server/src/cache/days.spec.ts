@@ -43,7 +43,7 @@ describe('days cacher', () => {
         const month = new Date().getMonth() + 1;
         const max = 21;
 
-        await CityModel.query().insert(new City(4248, 'en', { code: 'code', name: 'name' }, 'kind', 'distinct', 'name', 'subdistinct'));
+        await CityModel.query().insert(new City(4248, 'en', { code: 'code', name: 'name' }, 'kind', 'distinct', 'name', 'subDistrict'));
 
         const Cacher = proxyquire.load('./days', {
             'src/parsers/day': {

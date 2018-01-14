@@ -9,7 +9,7 @@ describe('city model', () => {
     })
 
     it('should insert and read', async () => {
-        const obj = new City(1, 'en', { code: 'code', name: 'name' }, 'kind', 'distinct', 'name', 'subdistinct');
+        const obj = new City(1, 'en', { code: 'code', name: 'name' }, 'kind', 'distinct', 'name', 'subDistrict');
         await CityModel.query()
             .insert(obj);
 

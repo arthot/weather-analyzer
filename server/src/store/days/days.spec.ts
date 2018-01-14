@@ -10,7 +10,7 @@ describe('day model', () => {
         await CityModel.query().truncate();
         await DayModel.query().truncate();
 
-        await CityModel.query().insert(new City(1, 'en', { code: 'code', name: 'name' }, 'kind', 'distinct', 'name', 'subdistinct'));        
+        await CityModel.query().insert(new City(1, 'en', { code: 'code', name: 'name' }, 'kind', 'distinct', 'name', 'subDistrict'));        
     })
 
     it('should insert and read', async () => {
