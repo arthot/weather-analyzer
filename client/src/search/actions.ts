@@ -12,3 +12,5 @@ export const SEARCH_CITY_ID_RESPONSE = 'SEARCH_CITY_ID_RESPONSE'
 
 export type IChangeSearchInput = IAction<{ text: string }>
 export type ISearchCity = IAction<{ items: City[] }>
+export type ISelectCity = IAction<{ city: City }>
+export type ISelectMonth = IAction<{ month: number }>
