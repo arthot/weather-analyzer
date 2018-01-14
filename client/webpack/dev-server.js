@@ -13,6 +13,9 @@ const server = {
         publicPath: 'http://localhost:2123/assets/',
         compress: false,
         hot: true,
+        watchOptions: {
+            ignored: /node_modules/,
+        },
         headers: { "Access-Control-Allow-Origin": "*" },
         stats: {
             assets: true,

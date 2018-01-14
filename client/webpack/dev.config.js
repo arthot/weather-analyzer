@@ -8,6 +8,10 @@ const baseConfig = require('./base.config');
 
 baseConfig.devtool = 'source-map';
 
+baseConfig.watchOptions = {
+    ignored: /node_modules/
+}
+
 baseConfig.entry = {
     app: [
         'webpack-dev-server/client?http://localhost:2123',
