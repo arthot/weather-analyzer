@@ -19,7 +19,7 @@ router
     checkValidation,
     async (req, res, next) => {
         const { query, lang } = req.params;
-        log.debug('search: ', query, lang);
+        log.debug(`[${lang}] search: ${query}`);
         const result = await Provider.search(query, lang);
         return res.json(result);
     });
@@ -34,7 +34,7 @@ router
     checkValidation,
     async (req, res, next) => {
         const { id, lang } = req.params;
-        log.debug('get city by id: ', id, lang);
+        log.debug(`[${lang}] get city by id: ${id}`);
         const result = await Provider.get(lang, id);
         return res.json(result);
     });
