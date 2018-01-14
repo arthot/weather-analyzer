@@ -15,7 +15,16 @@
         ],
         "no-var-requires": false,
         "member-access": false,
-        "arrow-parens": false
+        "arrow-parens": false,
+        "trailing-comma": false,
+        "max-classes-per-file": false,
+        "curly": false,
+        "max-line-length": [
+            true,
+            140
+        ],
+        "object-literal-sort-keys": false,
+        "radix": false
     },
     "rulesDirectory": []
 }

@@ -1,14 +1,19 @@
+import { routerMiddleware } from 'react-router-redux'
 import { applyMiddleware, compose, createStore, Store } from 'redux'
 import { composeWithDevTools } from 'redux-devtools-extension/logOnlyInProduction'
 import saga from 'redux-saga'
-import rootReducer from 'src/reducers'
+import { store as rootReducer } from 'src/reducers'
+import rootSaga from 'src/saga'
 
 const composeEnhancers = composeWithDevTools({});
 
-export function configureStore(initialState = {}) {
+export function configureStore(history, initialState = {}) {
+    const sagaMiddleware = saga();
     const store = createStore(rootReducer, composeEnhancers(
-        applyMiddleware(saga()),
+        applyMiddleware(sagaMiddleware, routerMiddleware(history))
     ));
+
+    sagaMiddleware.run(rootSaga);
 
     if (module.hot) {
         module.hot.accept('src/reducers', () => {

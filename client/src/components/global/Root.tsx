@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react'
-import { Route } from 'react-router-dom'
+import { Route } from 'react-router'
 import { Layout } from 'src/components/global/Layout'
 
 export class Root extends PureComponent {

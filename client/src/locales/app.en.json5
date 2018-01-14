@@ -1,3 +1,18 @@
 {
-    "Search a place": "Search a place"
+    "Search a place": "Search a place",
+    "month_placeholder": "Select a month",
+    "low_chars_hint": "Enter at least 2 chars",
+    "empty_results_hint": "Nothing found",
+    "month_1": "January",
+    "month_2": "February",
+    "month_3": "March",
+    "month_4": "April",
+    "month_5": "May",
+    "month_6": "June",
+    "month_7": "July",
+    "month_8": "August",
+    "month_9": "September",
+    "month_10": "October",
+    "month_11": "November",
+    "month_12": "December"
 }
