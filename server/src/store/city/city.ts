@@ -31,8 +31,8 @@ export class CityModel extends Model {
                     name: { type: 'string' },
                 }
             },
-            district: { type: 'string', maxLength: 256 },
-            subDistrict: { type: 'string', maxLength: 256 }
+            district: { type: ['string', 'null'], maxLength: 256 },
+            subDistrict: { type: ['string', 'null'], maxLength: 256 }
         }
     }
 

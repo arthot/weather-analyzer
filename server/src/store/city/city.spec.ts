@@ -13,7 +13,19 @@ describe('city model', () => {
         await CityModel.query()
             .insert(obj);
 
-        const result = await CityModel.query().first().then(v => v ? v.toModel() : null);
+        const result = await CityModel.query().findOne({ id: 1 }).then(v => v ? v.toModel() : null);
+        obj.id = result.id;
+
+        expect(result).deep.equal(obj);
+    })
+
+
+    it('should insert and read with nulls', async () => {
+        const obj = new City(2, 'en', { code: 'code', name: 'name' }, 'kind', null, 'name', null);
+        await CityModel.query()
+            .insert(obj);
+
+        const result = await CityModel.query().findOne({ id: 2 }).then(v => v ? v.toModel() : null);
         obj.id = result.id;
 
         expect(result).deep.equal(obj);
