@@ -7,7 +7,7 @@ import { Day } from 'src/common/day'
 
 describe('days service', () => {
 
-    const city = new City(1, 'en', { code: 'code', name: 'name' }, 'kind', 'distinct', 'name', 'subdistinct');
+    const city = new City(1, 'en', { code: 'code', name: 'name' }, 'kind', 'distinct', 'name', 'subDistrict');
 
     before(async () => {
         await CityModel.query().truncate();

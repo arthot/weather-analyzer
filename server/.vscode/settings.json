@@ -10,5 +10,8 @@
         "*.sqlite3": true,
         "*.sqlite3-journal": true,
         ".nyc_output": true
+    },
+    "files.associations": {
+        "*.mustache": "html"
     }
 }

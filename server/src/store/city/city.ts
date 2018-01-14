@@ -11,7 +11,7 @@ export class CityModel extends Model {
         name: string
     };
     district: string;
-    subDistinct: string;
+    subDistrict: string;
 
     static tableName = 'cities';
     static idColumn = ['id', 'lang'];
@@ -31,8 +31,8 @@ export class CityModel extends Model {
                     name: { type: 'string' },
                 }
             },
-            district: { type: 'string', maxLength: 256 },
-            subDistinct: { type: 'string', maxLength: 256 }
+            district: { type: ['string', 'null'], maxLength: 256 },
+            subDistrict: { type: ['string', 'null'], maxLength: 256 }
         }
     }
 
@@ -44,7 +44,7 @@ export class CityModel extends Model {
             this.kind,
             this.district,
             this.name,
-            this.subDistinct
+            this.subDistrict
         )
     }
 }

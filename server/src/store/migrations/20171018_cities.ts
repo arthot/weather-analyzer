@@ -8,7 +8,7 @@ export function up(knex: Knex) {
         table.string('kind', 5);
         table.string('country', 256);
         table.string('district', 256);
-        table.string('subDistinct', 256);
+        table.string('subDistrict', 256);
 
         table.primary(['id', 'lang']);
     })

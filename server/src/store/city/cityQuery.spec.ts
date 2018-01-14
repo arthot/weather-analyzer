@@ -13,7 +13,7 @@ describe('city query model', () => {
     before(async () => {
         await CityModel.query().truncate();
         await CityQueryModel.query().truncate();
-        await CityModel.query().insert(new City(1, 'en', { code: 'code', name: 'name' }, 'kind', 'distinct', 'name', 'subdistinct'));
+        await CityModel.query().insert(new City(1, 'en', { code: 'code', name: 'name' }, 'kind', 'distinct', 'name', 'subDistrict'));
         qId = (await QueryModel.query().insert(new Query(undefined, 'query', 'lang', Date.now()))).id;
     })
 

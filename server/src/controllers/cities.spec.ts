@@ -57,7 +57,7 @@ describe(ROOT_URL, () => {
 
         await Service.cache(
             { id: undefined, query, lang, date: Date.now() },
-            [{ id: cityId, lang, name: 'b', country: { code: '', name: '' }, district: '', kind: 'T', subDistinct: '' }]
+            [{ id: cityId, lang, name: 'b', country: { code: '', name: '' }, district: '', kind: 'T', subDistrict: '' }]
         );
 
         return agent
@@ -73,7 +73,7 @@ describe(ROOT_URL, () => {
     it(`/:id should return values`, async () => {
         const cityId = Date.now();
         const lang = 'en';
-        const city = { id: cityId, lang, name: 'b', country: { code: '', name: '' }, district: '', kind: 'T', subDistinct: '' };
+        const city = { id: cityId, lang, name: 'b', country: { code: '', name: '' }, district: '', kind: 'T', subDistrict: '' };
 
         await CityModel.query().insert(city);
 

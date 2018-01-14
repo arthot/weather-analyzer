@@ -1,16 +1,27 @@
 import 'reflect-metadata'
 import * as express from 'express'
 import './store/objection'
-import { routes } from 'src/routes'
-import nocache = require('nocache')
+import { routes as apiRoutes } from 'src/routes'
+import { routes as staticRoutes } from 'src/static'
 import { config } from 'src/utils/config'
-import { getLogger } from 'src/utils/log';
+import { getLogger } from 'src/utils/log'
 
+const mustacheExpress = require('mustache-express');
 const log = getLogger(module);
 const app = express();
 
-app.use('/api', nocache(), routes);
+app.use('/api', apiRoutes);
+app.use(staticRoutes);
 
-export const server = app.listen(config.port);
+app.engine('mustache', mustacheExpress());
 
-log.info(`Application is up and running on port ${config.port}`);
+app.set('view engine', 'mustache');
+app.set('views', __dirname + '/views');
+
+export const server = app.listen(config.port, () => {
+    log.info(`Application is up and running on port ${config.port}`);
+
+    if (process.send) {
+        process.send('online');
+    }
+});

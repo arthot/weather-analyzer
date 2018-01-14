@@ -14,7 +14,12 @@ export function parse(name: string, lang: string) {
 
     log.debug('requesting page ', url);
 
+    var t1 = Date.now();
+
     return request(url)
+        .then(r => {
+            log.debug(`page response time: ${Date.now() - t1} ms`); return r;
+        })
         .then(r => (<CityApi[]>r.items)
             .filter(c => c.kind && CityRegex.test(c.kind))
             .map(c => new City(

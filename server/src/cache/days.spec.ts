@@ -40,10 +40,10 @@ describe('days cacher', () => {
 
     it('should load a month', async () => {
         const city = 4248;
-        const month = new Date().getMonth();
+        const month = new Date().getMonth() + 1;
         const max = 21;
 
-        await CityModel.query().insert(new City(4248, 'en', { code: 'code', name: 'name' }, 'kind', 'distinct', 'name', 'subdistinct'));
+        await CityModel.query().insert(new City(4248, 'en', { code: 'code', name: 'name' }, 'kind', 'distinct', 'name', 'subDistrict'));
 
         const Cacher = proxyquire.load('./days', {
             'src/parsers/day': {
@@ -60,20 +60,20 @@ describe('days cacher', () => {
 
     it('should load only new data', async () => {
         const city = 4248;
-        const month = new Date().getMonth();
+        const month = new Date().getMonth() + 1;
         const monthPart1 = 25;
 
         let Cacher = proxyquire.noPreserveCache().load('./days', {
             'src/parsers/day': {
                 'parse': (cityId, year) => Promise.resolve(
-                    _.range(1, monthPart1).map(d => new Day(new Date(Date.UTC(year, month - 1, d)).toISOString(), 1, 0, true, 0, city))
+                    _.range(1, monthPart1 + 1).map(d => new Day(new Date(Date.UTC(year, month - 1, d)).toISOString(), 1, 0, true, 0, city))
                 )
             }
         });
 
         await Cacher.cache(city, month);
 
-        expect(new Date(await DaysService.getLastCachedDay(city, month)).getDate()).eq(monthPart1 - 1);
+        expect(new Date(await DaysService.getLastCachedDay(city, month)).getDate()).eq(monthPart1);
 
 
         const monthPart2 = getDaysInMonth(month);
@@ -83,7 +83,7 @@ describe('days cacher', () => {
                     if (year <= new Date().getFullYear() - 2)
                         e(new Error('Cacher should not load already partialy cached data'));
                     else r(
-                        _.range(1, monthPart2).map(d => new Day(new Date(Date.UTC(year, month - 1, d)).toISOString(), 1, 0, true, 0, city))
+                        _.range(1, monthPart2 + 1).map(d => new Day(new Date(Date.UTC(year, month - 1, d)).toISOString(), 1, 0, true, 0, city))
                     );
                 })
             }
@@ -91,7 +91,7 @@ describe('days cacher', () => {
 
         await Cacher.cache(city, month);
 
-        expect(new Date(await DaysService.getLastCachedDay(city, month)).getDate()).eq(monthPart2 - 1);
+        expect(new Date(await DaysService.getLastCachedDay(city, month)).getDate()).eq(monthPart2);
 
         Cacher = proxyquire.noPreserveCache().load('./days', {
             'src/parsers/day': {
@@ -101,7 +101,7 @@ describe('days cacher', () => {
 
         await Cacher.cache(city, month);
 
-        expect(new Date(await DaysService.getLastCachedDay(city, month)).getDate()).eq(monthPart2 - 1);
+        expect(new Date(await DaysService.getLastCachedDay(city, month)).getDate()).eq(monthPart2);
     })
 
 })
