@@ -76,7 +76,7 @@ describe('days cacher', () => {
         expect(new Date(await DaysService.getLastCachedDay(city, month)).getDate()).eq(monthPart1);
 
 
-        const monthPart2 = getDaysInMonth(month);
+        const monthPart2 = getDaysInMonth(Date.UTC(new Date().getFullYear(), month - 1));
         Cacher = proxyquire.noPreserveCache().load('./days', {
             'src/parsers/day': {
                 'parse': (cityId, year) => new Promise((r, e) => {
