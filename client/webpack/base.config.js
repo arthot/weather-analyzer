@@ -1,75 +1,72 @@
-const webpack = require('webpack');
 const path = require('path');
 
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const AssetsWebpackPlugin = require('assets-webpack-plugin');
-const { CheckerPlugin, TsConfigPathsPlugin } = require('awesome-typescript-loader');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-const tsSourcePath = path.join(__dirname, '../src');
-const imgPath = path.join(__dirname, '../src/images');
-const localesPath = path.join(__dirname, '../src/locales');
-const sourcePath = path.join(__dirname, '../src');
-const nodeModules = path.resolve(__dirname, '../node_modules');
+const jsPath = path.join(__dirname, '../src');
+const iconsPath = path.join(__dirname, '../src/icons');
+
+const devMode = process.env.NODE_ENV !== 'production';
 
 module.exports = {
-    context: tsSourcePath,
+    entry: {
+        index: './index.js',
+    },
+    context: jsPath,
     module: {
         rules: [
             {
-                test: /\.json5?$/,
-                include: localesPath,
-                loader: 'json5-loader'
+                test: /\.(js|jsx)$/,
+                exclude: /node_modules/,
+                use: 'babel-loader',
             },
             {
-                test: /\.(ts|tsx)$/,
-                include: tsSourcePath,
-                use: [{
-                    loader: 'babel-loader'
-                }, {
-                    loader: 'awesome-typescript-loader',
-                    options: {
-                        useBabel: true,
-                        useCache: false
-                    }
-                }]
+                test: /\.(png|gif|jpg|svg|ico)$/,
+                use: [{ loader: 'file-loader', options: { name: 'images/[name]-[hash].[ext]' } }],
             },
             {
-                test: /\.(woff|woff2|eot|ttf|png|gif|jpg|svg)$/,
-                loader: 'file-loader',
-                options: { name: 'assets/[name]-[hash].[ext]' }
+                test: /\.scss$/,
+                use: [devMode ? 'style-loader' : MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader']
+            },
+            {
+                test: /\.css$/,
+                use: [devMode ? 'style-loader' : MiniCssExtractPlugin.loader, 'css-loader']
             }
         ]
     },
+    optimization: {
+        splitChunks: {
+            cacheGroups: {
+                vendor: {
+                    test: /[\\/]node_modules[\\/]/,
+                    name: 'vendor',
+                    chunks: 'initial',
+                },
+            }
+        },
+        runtimeChunk: true
+    },
     resolve: {
-        extensions: ['.ts', '.tsx', '.less', '.json5', '.js', '.jsx'],
-        modules: [nodeModules, path.resolve(__dirname, '../')]
+        extensions: ['.js', '.jsx'],
+        alias: {
+            'react-dom': '@hot-loader/react-dom',
+        }
     },
     plugins: [
         new AssetsWebpackPlugin({
             filename: 'bundle.json',
             update: true
         }),
-        new webpack.optimize.CommonsChunkPlugin({
-            name: 'vendor',
-            filename: 'vendor-[chunkhash].js',
-            minChunks(module) {
-                const context = module.context;
-                return context && context.indexOf('node_modules') >= 0;
-            },
-            chunks: ['app']
+        new CopyWebpackPlugin([
+            { from: iconsPath, to: 'icons' }
+        ]),
+        new MiniCssExtractPlugin({
+            filename: 'style-[name]-[chunkhash].css'
         }),
-        new webpack.optimize.CommonsChunkPlugin({
-            name: 'manifest',
-            minChunks: Infinity
+        new HtmlWebpackPlugin({
+            template: '../src/index.html'
         }),
-        new webpack.LoaderOptionsPlugin({
-            options: {
-                postcss: [],
-                context: sourcePath,
-            },
-        }),
-        new CheckerPlugin(),
-        new TsConfigPathsPlugin(),
-        new ExtractTextPlugin('style-[name]-[chunkhash].css')
     ]
 };

@@ -1,4 +1,4 @@
-import * as ACTIONS from 'src/lang/actions'
+import * as ACTIONS from './actions'
 const INITIAL_STATE = 'en';
 
 export function lang(state = INITIAL_STATE, action) {

@@ -1,6 +1,6 @@
 import { all, fork } from 'redux-saga/effects'
-import { watchLanguage } from 'src/lang/saga'
-import { watchMonthChange, watchSearchInput } from 'src/search/saga'
+import { watchLanguage } from './lang/saga'
+import { watchMonthChange, watchSearchInput } from './search/saga'
 
 export default function* rootSaga() {
     yield all([

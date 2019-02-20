@@ -1,0 +1,339 @@
+$screen-sm: 756px;
+$padding-base-horizontal: 4px;
+$padding-base-vertical: 4px;
+$brand-primary: blue;
+$navbar-inverse-link-hover-color: white;
+$panel-primary-text: white;
+$text-color: white;
+$panel-bg: blue;
+$panel-primary-heading-bg: rgb(108, 108, 219);
+$panel-warning-heading-bg: rgb(151, 151, 83);
+$panel-warning-text: yellow;
+$panel-info-heading-bg: rgb(80, 117, 80);
+$panel-info-text: green;
+$panel-danger-heading-bg: rgb(168, 94, 94);
+$panel-danger-text: red;
+$left-position: 210px;
+$left-position-sm: 10px;
+$month-selector-width: 100px;
+$right-position: $month-selector-width + 40px;
+$right-position-sm: $month-selector-width + 17px;
+$placeholder-color: lighten(white, 10%);
+$top-position: 40%;
+$top-position-sm: 50%;
+
+@mixin chosen() {
+  animation: from-landing-page 0.5s ease-in-out forwards;
+}
+
+.search-container {
+  position: absolute;
+  left: $left-position;
+  top: $top-position;
+  right: 40px;
+  z-index: 60;
+
+  @media (max-width: ($screen-sm - 1)) {
+    top: $top-position-sm;
+    right: 10px;
+  }
+
+  &.chosen {
+    @include chosen();
+  }
+
+  .search-box {
+    float: left;
+    width: calc(100% - $right-position);
+    height: 50px;
+
+    @media (max-width: ($screen-sm - 1)) {
+      width: calc(100% - $right-position-sm);
+    }
+
+    .search-input {
+      height: 40px;
+      width: 100%;
+      padding: $padding-base-vertical $padding-base-horizontal $padding-base-vertical 38px;
+      background-color: lighten($brand-primary, 7%);
+      color: $navbar-inverse-link-hover-color;
+      border: 1px solid darken($brand-primary, 1%);
+      box-shadow: inset 0 -1px 2px darken($brand-primary, 2%);
+      transition: all linear 0.4s;
+
+      &:focus {
+        padding-left: $padding-base-horizontal;
+      }
+
+      &:hover {
+        background-color: lighten($brand-primary, 10%);
+        box-shadow: inset 0 -1px 4px darken($brand-primary, 4%);
+      }
+
+      &__loading {
+        box-shadow: none;
+        outline-width: 2px;
+        outline-style: solid;
+        animation: pulse-border 1s ease-out infinite;
+      }
+    }
+
+    .search-input-icon {
+      position: absolute;
+      z-index: 60;
+      left: -35px;
+      margin: 5px;
+      margin-left: 42px;
+      color: $placeholder-color;
+      transition: margin-left linear 0.4s;
+
+      &__loading {
+        animation: pulse-icon 1s ease-out infinite;
+      }
+    }
+
+    .search-input:focus ~ .search-input-icon {
+      margin-left: calc(100% - $right-position);
+
+      @media (max-width: ($screen-sm - 1)) {
+        margin-left: calc(100% - $right-position-sm);
+      }
+    }
+
+    @mixin placeholder-color($color) {
+      ::-webkit-input-placeholder {
+        color: $color;
+      }
+  
+      ::-moz-placeholder {
+        color: $color;
+      }
+  
+      :-ms-input-placeholder {
+        color: $color;
+      }
+    }
+
+    @include placeholder-color($placeholder-color);
+  }
+}
+
+@mixin pulse-icon($scale, $darken) {
+  transform: scale($scale);
+  color: darken($placeholder-color, $darken);
+}
+
+@keyframes pulse-icon {
+  0% {
+    @include pulse-icon(1, 0);
+  }
+
+  50% {
+    @include pulse-icon(0.9, 7%);
+  }
+
+  100% {
+    @include pulse-icon(1, 0);
+  }
+}
+
+@mixin pulse-border($fadeout) {
+  $pulse-border-color: lighten($brand-primary, 30%);
+  outline-color: fadeout($pulse-border-color, $fadeout);
+}
+
+@media (max-width: ($screen-sm - 1)) {
+  .search-container {
+    left: $left-position-sm;
+  }
+}
+
+@keyframes pulse-border {
+  0% {
+    @include pulse-border(100%);
+  }
+
+  50% {
+    @include pulse-border(70%);
+  }
+
+  100% {
+    @include pulse-border(100%);
+  }
+}
+
+@keyframes from-landing-page {
+  from {
+    top: $top-position;
+  }
+
+  to {
+    top: 12px;
+  }
+}
+
+@keyframes move-select-city {
+  to {
+    top: 0px;
+  }
+}
+
+/* result */
+
+
+@mixin result-flag() {
+  .result-flag {
+    display: inline-block;
+    vertical-align: top;
+
+    .famfamfam-flags {
+      margin-top: 5px;
+      display: inline-block;
+    }
+  }
+}
+
+@mixin result-data($color) {
+  .result-data {
+    display: inline-block;
+    margin-left: 8px;
+    overflow: hidden;
+    max-width: calc(100% - 45px);
+
+    .result-description {
+      font-size: 11px;
+      line-height: 1.4;
+      color: $color;
+      white-space: nowrap;
+    }
+  }
+}
+
+@mixin search-results {
+  animation: show-items 0.5s ease-out forwards;
+
+  .result {
+    cursor: pointer;
+    margin: 1px 2px;
+    font-size: 14px;
+
+    &:hover {
+      background-color: darken($panel-bg, 4%);
+    }
+
+    &:active {
+      background-color: darken($panel-bg, 8%);
+    }
+
+    .panel-body {
+      padding: 4px 10px;
+    }
+
+    &-hint {
+      background-color: fadeout(lighten($panel-warning-heading-bg, 10%), 10%);
+      color: $panel-warning-text;
+    }
+
+    &-loading {
+      background-color: fadeout(lighten($panel-info-heading-bg, 17%), 10%);
+      color: $panel-info-text;
+    }
+
+    &-location {
+      &--selected {
+        background-color: lighten($panel-primary-heading-bg, 25%) !important;
+      }
+
+      &:active {
+        margin: 0;
+      }
+    }
+
+    &-error {
+      background-color: fadeout(lighten($panel-danger-heading-bg, 10%), 10%);
+      color: $panel-danger-text;
+    }
+
+    @include result-flag();
+    @include result-data(lighten($text-color, 15%));
+  }
+
+  &-hidden {
+    animation: hide-search-results 0.5s ease-out forwards;
+  }
+}
+
+@keyframes show-items {
+  0% {
+    transform: translateY(-10px);
+    opacity: 0.5;
+  }
+
+  100% {
+    transform: translateY(0px);
+    opacity: 1;
+  }
+}
+
+@keyframes hide-search-results {
+  99% {
+    opacity: 0;
+    transform: scale(1);
+    transform: translateY(10px);
+  }
+
+  100% {
+    transform: scale(0);
+  }
+}
+
+.month-selector {
+  float: right;
+
+  select {
+    display: inline;
+    color: $placeholder-color;
+    box-shadow: none !important;
+
+    option {
+      color: $text-color;
+    }
+  }
+}
+
+/* selected */
+
+.selected-item {
+  position: absolute;
+  left: 0;
+  right: $right-position;
+  margin-top: -5px;
+  top: 0;
+  z-index: 100;
+  background-color: lighten($brand-primary, 5%) !important;
+  font-size: 14px;
+  animation: move-select-city 0.5s ease-in-out forwards;
+
+  @media (max-width: ($screen-sm - 1)) {
+    right: $right-position-sm;
+  }
+
+  .panel-body {
+    padding: 2px 10px;
+    color: $panel-primary-text;
+  }
+
+  @include result-flag();
+  @include result-data(darken($panel-primary-text, 8%));
+
+  .close {
+    margin-top: 12px;
+    color: $placeholder-color;
+    font-size: 20px;
+    line-height: 1;
+
+    &:hover {
+      color: $navbar-inverse-link-hover-color;
+    }
+  }
+}

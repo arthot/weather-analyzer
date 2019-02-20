@@ -1,20 +1,17 @@
-import { Reducer } from 'redux'
-import { IAction } from 'src/base/action';
-import { City } from 'src/common/city'
-import * as ACTIONS from 'src/search/actions'
-import * as ITEMS from 'src/search/items'
+import * as ACTIONS from './actions'
+import * as ITEMS from './items'
 
-const INITIAL_SEARCH_STATE: ISearchStore = {
+const INITIAL_SEARCH_STATE = {
     isFetching: false,
     items: [],
     month: new Date().getMonth() + 1,
     selected: null,
 };
 
-export function search(state = INITIAL_SEARCH_STATE, action: IAction): ISearchStore {
+export function search(state = INITIAL_SEARCH_STATE, action) {
     switch (action.type) {
         case ACTIONS.SEARCH_INPUT_CHANGED: {
-            const { text } = (action as ACTIONS.IChangeSearchInput).payload;
+            const { text } = (action).payload;
             if (text.length === 0)
                 return Object.assign({}, state, { items: [] });
             else if (text.length > 0 && text.length < 2)
@@ -23,13 +20,13 @@ export function search(state = INITIAL_SEARCH_STATE, action: IAction): ISearchSt
                 return Object.assign({}, state, { items: state.items.filter(i => i.type !== ITEMS.SearchItemType.Hint) });
         }
         case ACTIONS.SEARCH_CITIES_REQUEST:
-            return Object.assign<{}, ISearchStore, any>({}, state, {
+            return Object.assign({}, state, {
                 isFetching: true
             });
 
         case ACTIONS.SEARCH_CITIES_RESPONSE: {
-            const { items } = (action as ACTIONS.ISearchCity).payload;
-            return Object.assign<{}, ISearchStore, any>({}, state, {
+            const { items } = (action).payload;
+            return Object.assign({}, state, {
                 isFetching: false,
                 items: items.length !== 0 ?
                     items.map(c => new ITEMS.LocationSearchItem(c)) :
@@ -37,24 +34,24 @@ export function search(state = INITIAL_SEARCH_STATE, action: IAction): ISearchSt
             });
         }
         case ACTIONS.SEARCH_CITIES_ERROR: {
-            const { message } = (action as IAction).error
-            return Object.assign<{}, ISearchStore, any>({}, state, {
+            const { message } = action.error
+            return Object.assign({}, state, {
                 isFetching: false,
                 items: [new ITEMS.ErrorSearchItem(message)]
             });
         }
         case ACTIONS.SEARCH_CITY_SELECT:
-            return Object.assign<{}, ISearchStore, any>({}, state, {
+            return Object.assign({}, state, {
                 selected: action.payload.city
             });
 
         case ACTIONS.SEARCH_CITY_CLEAR:
-            return Object.assign<{}, ISearchStore, any>({}, state, {
+            return Object.assign({}, state, {
                 selected: null
             });
 
         case ACTIONS.SEARCH_MONTH_SELECT:
-            return Object.assign<{}, ISearchStore, any>({}, state, {
+            return Object.assign({}, state, {
                 month: action.payload.month
             });
 
@@ -66,11 +63,4 @@ export function search(state = INITIAL_SEARCH_STATE, action: IAction): ISearchSt
         default:
             return state;
     }
-}
-
-export interface ISearchStore {
-    isFetching: boolean;
-    items: ITEMS.SearchItem[];
-    month: number;
-    selected: City | null;
 }

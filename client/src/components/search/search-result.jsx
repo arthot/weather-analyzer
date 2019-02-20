@@ -2,24 +2,23 @@ import classNames from 'classnames'
 import i18n from 'es2015-i18n-tag'
 import React, { Component } from 'react'
 
-import * as Actions from 'src/search/actions'
-import { ErrorSearchItem, HintSearchItem, LocationSearchItem, SearchItem, SearchItemType } from 'src/search/items'
+import { SearchItemType } from '../../search/items'
 
-export class SearchResults extends Component<ISearchResultsProps, ISearchResultsState> {
-    constructor(props: ISearchResultsProps) {
+export class SearchResults extends Component {
+    constructor(props) {
         super(props);
         this.state = this.calculateState(props);
     }
-    componentWillReceiveProps(nextProps: ISearchResultsProps) {
+    componentWillReceiveProps(nextProps) {
         this.setState(this.calculateState(nextProps));
     }
-    calculateState(props: ISearchResultsProps) {
+    calculateState(props) {
         return {
             items: props.items,
-            animationKey: props.items.reduce<number>((p, c) => p + c.key, 0)
+            animationKey: props.items.reduce((p, c) => p + c.key, 0)
         };
     }
-    render(): React.ReactElement<ISearchResultsProps> {
+    render() {
         return (
             <div className={classNames({
                 'search-results': true,
@@ -45,35 +44,35 @@ export class SearchResults extends Component<ISearchResultsProps, ISearchResults
     }
 }
 
-class HintResult extends React.Component<ISearchResultProps, {}> {
-    item: HintSearchItem;
-    constructor(props: ISearchResultProps) {
+class HintResult extends React.Component {
+    item;
+    constructor(props) {
         super(props);
-        this.item = props.item as HintSearchItem;
+        this.item = props.item;
     }
-    render(): React.ReactElement<ISearchResultProps> {
+    render() {
         return (
             <div className="result result-hint">
-                {i18n([this.item.text] as any)}
+                {i18n.translate(this.item.key)}
             </div>
         );
     }
 }
 
-export class LocationResult extends React.Component<ISearchResultProps, {}> {
-    item: LocationSearchItem;
-    constructor(props: ISearchResultProps) {
+export class LocationResult extends React.Component {
+    item;
+    constructor(props) {
         super(props);
-        this.item = props.item as LocationSearchItem;
+        this.item = props.item;
     }
-    handleSelect(event: React.MouseEvent<HTMLElement>) {
-        let node = event.currentTarget as HTMLElement;
+    handleSelect(event) {
+        let node = event.currentTarget;
         if (!node.classList.contains('panel'))
             while (node.parentElement && !node.classList.contains('panel')) node = node.parentElement;
 
         this.props.onSelect(this.item, node.getBoundingClientRect());
     }
-    render(): React.ReactElement<ISearchResultProps> {
+    render() {
         return (
             <div onClick={(ev) => this.handleSelect(ev)}
                 className={classNames({
@@ -102,35 +101,17 @@ export class LocationResult extends React.Component<ISearchResultProps, {}> {
     }
 }
 
-class ErrorResult extends React.Component<ISearchResultProps, {}> {
-    item: ErrorSearchItem;
-    constructor(props: ISearchResultProps) {
+class ErrorResult extends React.Component {
+    item;
+    constructor(props) {
         super(props);
-        this.item = props.item as ErrorSearchItem;
+        this.item = props.item;
     }
-    render(): React.ReactElement<ISearchResultProps> {
+    render() {
         return (
             <div className="result result-error">
                 {this.item.text}
             </div>
         );
     }
-}
-
-interface ISearchResultsProps {
-    items: SearchItem[];
-    hidden: boolean;
-    selected: number;
-    onSelect(item: SearchItem, coords?: ClientRect);
-}
-
-interface ISearchResultsState {
-    items: SearchItem[];
-    animationKey: number;
-}
-
-interface ISearchResultProps {
-    item: SearchItem;
-    selected: boolean;
-    onSelect(item: SearchItem, coords?: ClientRect);
 }

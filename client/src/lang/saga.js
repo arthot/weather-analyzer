@@ -1,6 +1,6 @@
-import { call, cancel, takeEvery } from 'redux-saga/effects'
-import i18 from 'src/i18n'
-import * as Actions from 'src/lang/actions'
+import { call, takeEvery } from 'redux-saga/effects'
+import i18 from '../i18n'
+import * as Actions from './actions'
 
 function* handleLanguageChange(action) {
     const { lang } = action.payload;

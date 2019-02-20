@@ -3,19 +3,17 @@ import i18n from 'es2015-i18n-tag'
 import update from 'immutability-helper'
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { City } from 'src/common/city'
-import { MonthSelector } from 'src/components/search/month-selector'
-import { SearchResults } from 'src/components/search/search-result'
-import { SelectedItem } from 'src/components/search/selected-item'
-import { IAppStore } from 'src/reducers'
-import * as Actions from 'src/search/actions'
-import { LocationSearchItem, SearchItem, SearchItemType } from 'src/search/items'
-import { ISearchStore } from 'src/search/reducer'
-require('src/styles/search.less')
+import { MonthSelector } from './month-selector'
+import { SearchResults } from './search-result'
+import { SelectedItem } from './selected-item'
+import * as Actions from '../../search/actions'
+import { SearchItemType } from '../../search/items'
 
-class SearchComponent extends Component<ISearchProps, ISearchState> {
-    selectedPosition: number = 8;
-    searchInput: HTMLInputElement | null;
+require('../../styles/search.scss')
+
+class SearchComponent extends Component {
+    selectedPosition = 8;
+    searchInput = null;
 
     constructor(props) {
         super(props);
@@ -26,19 +24,19 @@ class SearchComponent extends Component<ISearchProps, ISearchState> {
         };
     }
 
-    componentWillReceiveProps(next: ISearchProps, state: ISearchState) {
+    componentWillReceiveProps(next, state) {
         this.setState({
             chosen: this.state.chosen || !!next.selected,
             selectedItem: state.input !== this.state.input ? -1 : this.state.selectedItem,
         });
     }
-    onSearchChange(ev: React.KeyboardEvent<HTMLInputElement>) {
+    onSearchChange(ev) {
         this.setState(update(this.state, { $set: { input: ev.currentTarget.value } }));
         this.props.onChange(ev.currentTarget.value);
     }
-    onCitySelect = (item: SearchItem, coords?: ClientRect) => {
+    onCitySelect = (item, coords) => {
         if (item.type === SearchItemType.Location) {
-            const city = (item as LocationSearchItem).location;
+            const city = (item).location;
             this.props.onSelect(city);
         }
 
@@ -52,7 +50,7 @@ class SearchComponent extends Component<ISearchProps, ISearchState> {
             this.props.onClear();
         }
     }
-    handleKeyboard(ev: React.KeyboardEvent<HTMLInputElement>) {
+    handleKeyboard(ev) {
         if (ev.keyCode === 13) { // ENTER
             this.onCitySelect(this.props.items[this.state.selectedItem]);
         } else if (ev.keyCode === 38 && this.state.selectedItem > 0) { // UP
@@ -103,7 +101,7 @@ class SearchComponent extends Component<ISearchProps, ISearchState> {
     }
 }
 
-export default connect<ISearchStore, ISearchFunc, React.Props<any>, IAppStore>(
+export default connect(
     (state, own) => Object.assign(state.search, own),
     (dispatch) => ({
         onChange: (text) => {
@@ -131,18 +129,3 @@ export default connect<ISearchStore, ISearchFunc, React.Props<any>, IAppStore>(
         },
     })
 )(SearchComponent);
-
-interface ISearchState {
-    selectedItem: number;
-    chosen: boolean;
-    input: string;
-}
-
-interface ISearchFunc {
-    onChange(text: string);
-    onClear();
-    onMonthSelect(month: number);
-    onSelect(item: City);
-}
-
-type ISearchProps = ISearchStore & ISearchFunc;

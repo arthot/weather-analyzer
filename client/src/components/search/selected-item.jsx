@@ -1,10 +1,8 @@
 import classNames from 'classnames'
 import React, { PureComponent } from 'react'
-import { City } from 'src/common/city'
-import * as Actions from 'src/search/actions'
 
-export class SelectedItem extends PureComponent<ISelectedItemProps, {}> {
-    render(): React.ReactElement<ISelectedItemProps> {
+export class SelectedItem extends PureComponent {
+    render() {
         if (!this.props.selected) return null;
 
         const flagClass = classNames({
@@ -33,10 +31,4 @@ export class SelectedItem extends PureComponent<ISelectedItemProps, {}> {
             </div>
         );
     }
-}
-
-interface ISelectedItemProps {
-    selected: City;
-    position: number;
-    onClear();
 }

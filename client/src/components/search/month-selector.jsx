@@ -1,9 +1,9 @@
 import i18n from 'es2015-i18n-tag'
 import React, { PureComponent } from 'react'
-import { City } from 'src/common/city'
-import { Month, Months } from 'src/common/month'
 
-export class MonthSelector extends PureComponent<IMonthSelectorProps> {
+const Months = [...Array(12).keys()].map(v => ({ value: v + 1, title: v.toString() }));
+
+export class MonthSelector extends PureComponent {
     componentDidMount() {
         this.handleHashChange();
         window.addEventListener('hashchange', this.handleHashChange.bind(this), false);
@@ -19,20 +19,16 @@ export class MonthSelector extends PureComponent<IMonthSelectorProps> {
     handleSelect(ev) {
         this.props.onSelect(parseInt(ev.target.value));
     }
-    render(): React.ReactElement<IMonthSelectorProps> {
+    render() {
         return (
             <div className="month-selector">
                 <select title={i18n``}
                     onChange={this.handleSelect.bind(this)} value={this.props.month}>
-                    {Months.map(m => (<option key={m.value} value={m.value}>{m.title}</option>))}
+                    {Months.map(m => (
+                        <option key={m.value} value={m.value}>{m.title}</option>
+                    ))}
                 </select>
             </div >
         );
     }
-}
-
-interface IMonthSelectorProps {
-    month: number;
-    selected: City;
-    onSelect(month: number);
 }

@@ -1,8 +1,8 @@
 import classNames from 'classnames'
 import React, { PureComponent } from 'react'
-import { Parallax } from 'src/components/global/Paralax'
+import { Parallax } from '../global/Paralax'
 
-require('src/styles/landing.less')
+require('../../styles/landing.scss')
 require('famfamfam-flags/dist/sprite/famfamfam-flags.css')
 
 export class Landing extends PureComponent {

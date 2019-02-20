@@ -1,20 +1,21 @@
 {
   "plugins": [
+    ["@babel/plugin-proposal-decorators", { "legacy": true }],
+    ["@babel/plugin-proposal-class-properties", { "loose": true }],
     "react-hot-loader/babel",
-    "transform-runtime"
   ],
   "presets": [
-    "env",
-    "react"
+    ["@babel/preset-env", { "modules": false }],
+    "@babel/preset-react",
   ],
   "env": {
     "production": {
       "presets": [
         [
-          "env",
+          "@babel/preset-env",
           {
             "targets": {
-              "node": 7,
+              "node": 10,
               "browsers": [
                 "last 2 Chrome versions",
                 "last 2 Firefox versions",
@@ -28,7 +29,7 @@
     "development": {
       "presets": [
         [
-          "env",
+          "@babel/preset-env",
           {
             "targets": {
               "node": "current",
@@ -41,7 +42,7 @@
     "test": {
       "presets": [
         [
-          "env",
+          "@babel/preset-env",
           {
             "targets": {
               "node": "current"

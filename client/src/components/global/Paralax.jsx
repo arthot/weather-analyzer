@@ -1,9 +1,9 @@
 import React, { PureComponent } from 'react'
 const ParallaxJs = require('parallax-js')
 
-export class Parallax extends PureComponent<{ options?: any }> {
-    instance: any;
-    wrap: HTMLDivElement | null;
+export class Parallax extends PureComponent {
+    instance = null
+    wrap = null
 
     componentDidMount() {
         this.instance = new ParallaxJs(this.wrap, this.props.options);
