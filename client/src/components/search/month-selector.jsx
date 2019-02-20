@@ -1,8 +1,10 @@
 import i18n from 'es2015-i18n-tag'
 import React, { PureComponent } from 'react'
+import { localize } from '../../locale/localize'
 
-const Months = [...Array(12).keys()].map(v => ({ value: v + 1, title: v.toString() }));
+const MONTHS = [...Array(12).keys()].map(m => m + 1);
 
+@localize
 export class MonthSelector extends PureComponent {
     componentDidMount() {
         this.handleHashChange();
@@ -24,8 +26,8 @@ export class MonthSelector extends PureComponent {
             <div className="month-selector">
                 <select title={i18n``}
                     onChange={this.handleSelect.bind(this)} value={this.props.month}>
-                    {Months.map(m => (
-                        <option key={m.value} value={m.value}>{m.title}</option>
+                    {MONTHS.map(m => (
+                        <option key={m} value={m}>{i18n.translate(`month_${m}`)}</option>
                     ))}
                 </select>
             </div >

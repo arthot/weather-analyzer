@@ -1,10 +1,15 @@
-import classNames from 'classnames'
 import React, { PureComponent } from 'react'
 import { Parallax } from '../global/Paralax'
+import LocaleSelector from './Locales'
+import i18n from 'es2015-i18n-tag'
 
 require('../../styles/landing.scss')
+import { localize } from '../../locale/localize'
 require('famfamfam-flags/dist/sprite/famfamfam-flags.css')
 
+const YEAR = new Date().getFullYear();
+
+@localize
 export class Landing extends PureComponent {
     render() {
         return (
@@ -18,18 +23,9 @@ export class Landing extends PureComponent {
                     </Parallax>
                 </div>
                 <footer>
-                    <div className="locale-selector">
-                        {[{ lang: 'en', flag: 'gb' }, { lang: 'ru', flag: 'ru' }].map(l => (
-                            <a key={l.lang} href={`/${l.lang}`} title={l.lang} className="locale-selector-item">
-                                <div className={classNames({
-                                    'famfamfam-flags': true,
-                                    [l.flag]: true,
-                                })}></div>
-                            </a>
-                        ))}
-                    </div>
-                    {new Date().getFullYear()}&nbsp;
-                    <a target="_blank" href="https://github.com/arthot">arthot</a>
+                    <LocaleSelector />
+                    {YEAR}&nbsp;
+                    <a target="_blank" href="https://github.com/arthot">{i18n`Art Khatsianovich`}</a>
                 </footer>
             </div>
         )

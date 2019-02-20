@@ -8,9 +8,11 @@ import { SearchResults } from './search-result'
 import { SelectedItem } from './selected-item'
 import * as Actions from '../../search/actions'
 import { SearchItemType } from '../../search/items'
+import { localize } from '../../locale/localize'
 
 require('../../styles/search.scss')
 
+@localize
 class SearchComponent extends Component {
     selectedPosition = 8;
     searchInput = null;

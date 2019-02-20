@@ -56,8 +56,14 @@
             float: right;
 
             &-item {
+                cursor: pointer;
                 display: inline-block;
                 margin-right: 10px;
+
+                &__selected {
+                    transform: scale(1.2);
+                    transition: transform .1s ease-in-out;
+                }
             }
         }
     }

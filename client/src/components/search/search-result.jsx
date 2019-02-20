@@ -3,7 +3,9 @@ import i18n from 'es2015-i18n-tag'
 import React, { Component } from 'react'
 
 import { SearchItemType } from '../../search/items'
+import { localize } from '../../locale/localize'
 
+@localize
 export class SearchResults extends Component {
     constructor(props) {
         super(props);

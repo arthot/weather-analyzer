@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux';
-import { lang } from './lang/reducer'
+import { locale } from './locale/reducer'
 import { search } from './search/reducer'
 
 export const store = combineReducers({
-    lang,
+    locale,
     search,
 })
