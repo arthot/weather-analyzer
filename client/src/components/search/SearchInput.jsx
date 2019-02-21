@@ -1,7 +1,10 @@
 import React, { PureComponent } from 'react'
-import classNames from 'classnames'
 import i18n from 'es2015-i18n-tag'
 import PropTypes from 'prop-types'
+import classNames from 'classnames'
+
+import SearchIcon from '-!svg-react-loader?name=SearchIcon!../../images/search.svg';
+import FetchingIcon from '-!svg-react-loader?name=FetchingIcon!../../images/sunny.svg';
 
 const propTypes = {
     onSearchChange: PropTypes.func.isRequired,
@@ -13,38 +16,32 @@ const propTypes = {
 }
 
 export default class SearchInput extends PureComponent {
-
-    handleKeyboard = (ev) => {
-        if (ev.keyCode === 13) { // ENTER
-            this.onCitySelect(this.props.items[this.state.selectedItem]);
-        } else if (ev.keyCode === 38 && this.state.selectedItem > 0) { // UP
-            this.props.onSelectedChange(-1);
-        } else if (ev.keyCode === 40 && this.state.selectedItem < this.props.items.length - 1) { // DOWN
-            this.props.onSelectedChange(1);
-        } else if (ev.keyCode === 27 && this.props.selected) { // ESC
-            this.props.onClear();
-        }
-    }
-
     render() {
         return (
-            <div className="search-box">
-                <input
-                    value={this.props.input}
-                    onChange={this.props.onSearchChange}
-                    onKeyDown={this.handleKeyboard}
-                    ref={this.props.searchInput}
-                    placeholder={i18n`Search a place`}
-                    className={classNames('search-input', {
-                        'search-input__loading': this.props.isFetching,
-                    })}
-                    type="text"
-                />
-                <i className={classNames('fa fa-search fa-2x search-input-icon', {
-                    'search-input-icon__loading': this.props.isFetching,
-                })} />
+            <div className="search-box-wrap">
+                <div className={classNames({
+                    'search-box__hidden': this.props.disabled
+                })}>
+                    {!this.props.isFetching && (
+                        <SearchIcon className="search-input-icon" />
+                    )}
+                    {!!this.props.isFetching && (
+                        <FetchingIcon className="search-input-icon icon-rotate" />
+                    )}
+                    <input
+                        value={this.props.input}
+                        autoFocus
+                        readOnly={this.props.disabled}
+                        onChange={this.props.onSearchChange}
+                        onKeyDown={this.props.handleKeyboard}
+                        ref={this.props.searchInputRef}
+                        placeholder={i18n`Search a place`}
+                        className="search-input"
+                        type="text"
+                    />
+                </div>
                 {this.props.children}
-            </div>
+            </div >
         )
     }
 }

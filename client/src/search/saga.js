@@ -39,8 +39,7 @@ export function* watchSearchInput() {
 
 function* handleCitySelect(action) {
     const { city } = action.payload;
-    const lang = yield select(s => s.lang);
-    yield put(history.replace(`/${lang}/${city.name}-${city.id}/`));
+    yield put(history.replace(`/${city.lang}/${city.name}-${city.id}/`));
 }
 
 export function* watchCitySelection() {

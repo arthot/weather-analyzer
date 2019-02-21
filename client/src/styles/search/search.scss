@@ -1,0 +1,73 @@
+$placeholder-color: #215726;
+
+.search-container-wrap {
+  position: absolute;
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  align-items: center;
+  justify-content: center;
+}
+
+.search-container {
+  display: flex;
+  flex-direction: row;
+}
+
+.search-box-wrap {
+  position: relative;
+  width: 70vw;
+  max-width: 584px;
+}
+
+.search-box__hidden {
+  animation: hide-search-input $results-animation-speed ease-out forwards;
+}
+
+.search-input {
+  height: 38px;
+  width: calc(100% - 46px);
+  padding: 4px 4px 4px 38px;
+  background-color: white;
+  border: 2px solid #6dc274;
+  outline: none;
+  font-weight: 600;
+  font-size: 14px;
+  border-radius: 4px;
+  color: #215726;
+}
+
+.search-input::-webkit-input-placeholder {
+  color: $placeholder-color;
+}
+
+.search-input-icon {
+  position: absolute;
+  left: 0;
+  margin: 12px 7px;
+  height: 24px;
+  width: 24px;
+  fill: $placeholder-color;
+}
+
+@keyframes hide-search-input {
+  50% {
+    // transform: scale(1);
+  }
+
+  100% {
+    opacity: 0;
+    // transform: scale(0);
+  }
+}
+
+.month-selector {
+  select {
+    color: $placeholder-color;
+    box-shadow: none;
+
+    option {
+      color: $text-color;
+    }
+  }
+}

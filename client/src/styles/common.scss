@@ -1,5 +1,24 @@
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
 .clearfix:after {
-    content: "";
-    display: table;
-    clear: both;
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.icon-rotate {
+  animation: 7s rotate linear infinite;
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }

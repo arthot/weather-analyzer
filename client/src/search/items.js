@@ -14,17 +14,20 @@ export class SearchItem {
 export class HintSearchItem extends SearchItem {
     constructor(text) {
         super(SearchItemType.Hint, text);
+        this.text = text;
     }
 }
 
 export class LocationSearchItem extends SearchItem {
     constructor(location) {
         super(SearchItemType.Location, location.id);
+        this.location = location;
     }
 }
 
 export class ErrorSearchItem extends SearchItem {
     constructor(text) {
         super(SearchItemType.Error, text);
+        this.text = text;
     }
 }

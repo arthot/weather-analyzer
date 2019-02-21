@@ -1,99 +1,104 @@
 import React, { Component } from 'react'
-import classNames from 'classnames'
-import update from 'immutability-helper'
 import { connect } from 'react-redux'
 
-import MonthSelector from './MonthSelector'
 import SearchInput from './SearchInput'
-import { SearchResults } from './search-result'
+import SearchResults from './SearchResults'
 import { SelectedItem } from './selected-item'
 import * as Actions from '../../search/actions'
 import { SearchItemType } from '../../search/items'
 import { localize } from '../../locale/localize'
 
-require('../../styles/search.scss')
+require('../../styles/search/index.scss')
 
 @localize
 class SearchComponent extends Component {
     selectedPosition = 8;
-    searchInput = React.createRef();
+    searchInputEl = React.createRef();
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            chosen: !!this.props.selected,
-            input: '',
-            selectedItem: -1,
-        };
-    }
-
-    componentWillReceiveProps(next, state) {
-        this.setState({
-            chosen: this.state.chosen || !!next.selected,
-            selectedItem: state.input !== this.state.input ? -1 : this.state.selectedItem,
-        });
+    state = {
+        input: '',
+        selectedSuggestion: -1,
     }
 
     onSearchChange = (ev) => {
-        this.setState(update(this.state, { $set: { input: ev.currentTarget.value } }));
-        this.props.onChange(ev.currentTarget.value);
+        const text = ev.currentTarget.value;
+
+        this.setState({ input: text, selectedSuggestion: -1 });
+        this.props.onChange(text);
     }
 
-    onCitySelect = (item, coords) => {
-        if (item.type === SearchItemType.Location) {
-            const city = (item).location;
-            this.props.onSelect(city);
-        }
+    onCitySelect = (item) => {
+        if (item.type === SearchItemType.Location)
+            this.props.onSelect(item.location);
+    }
 
-        if (coords)
-            this.selectedPosition = coords.top;
+    handleKeyboard = (ev) => {
+        switch (ev.keyCode) {
+            case KEYS.ENTER: {
+                const item = this.props.items[this.state.selectedSuggestion];
+                if (item)
+                    this.onCitySelect(item);
+                break;
+            }
+            case KEYS.UP:
+                if (this.state.selectedSuggestion > 0)
+                    this.onSelectedChange(-1);
+                break;
+
+            case KEYS.DOWN:
+                if (this.state.selectedSuggestion < this.props.items.length - 1)
+                    this.onSelectedChange(1);
+                break;
+
+            case KEYS.ESC:
+                if (this.props.selected)
+                    this.onClear();
+                break;
+
+        }
     }
 
     onSelectedChange = (diff) => {
-        this.setState({ selectedItem: this.state.selectedItem + diff });
+        this.setState({ selectedSuggestion: this.state.selectedSuggestion + diff });
     }
 
     onClear = () => {
-        if (this.searchInput.current) {
-            this.searchInput.current.focus();
+        if (this.searchInputEl.current) {
+            this.searchInputEl.current.focus();
+            this.setState({ input: '' });
             this.props.onClear();
         }
     }
 
     render() {
         return (
-            <div className={classNames('search-container', {
-                'chosen': this.state.chosen,
-            })}>
-                <SelectedItem
-                    selected={this.props.selected}
-                    position={this.selectedPosition}
-                    onClear={this.onClear}
-                />
-                <MonthSelector
-                    month={this.props.month}
-                    selected={this.props.selected}
-                    locale={this.props.locale}
-                    onSelect={this.props.onMonthSelect}
-                />
-                <SearchInput
-                    input={this.state.input}
-                    isFetching={this.props.isFetching}
-                    locale={this.props.locale}
-                    searchInput={this.searchInput}
-                    onSearchChange={this.onSearchChange}
-                    onClear={this.onClear}
-                    handleKeyboard={this.handleKeyboard}
-                    onSelectedChange={this.onSelectedChange}
-                >
-                    <SearchResults
-                        items={this.props.items}
-                        hidden={!!this.props.selected}
-                        selected={this.state.selectedItem}
-                        locale={this.props.locale}
-                        onSelect={this.onCitySelect}
+            <div className="search-container-wrap">
+                <div className="search-container">
+                    <SelectedItem
+                        selected={this.props.selected}
+                        position={this.selectedPosition}
+                        onClear={this.onClear}
                     />
-                </SearchInput>
+                    <SearchInput
+                        input={this.state.input}
+                        isFetching={this.props.isFetching}
+                        locale={this.props.locale}
+                        searchInputRef={this.searchInputEl}
+                        onSearchChange={this.onSearchChange}
+                        onClear={this.onClear}
+                        disabled={!!this.props.selected}
+                        handleKeyboard={this.handleKeyboard}
+                        onSelectedChange={this.onSelectedChange}
+                    >
+                        <SearchResults
+                            items={this.props.items}
+                            hidden={!!this.props.selected}
+                            selectedSuggestion={this.state.selectedSuggestion}
+                            locale={this.props.locale}
+                            onSelect={this.onCitySelect}
+                        />
+                    </SearchInput>
+                </div>
             </div>
         )
     }
@@ -127,3 +132,10 @@ export default connect(
         },
     })
 )(SearchComponent);
+
+const KEYS = {
+    'ENTER': 13,
+    'ESC': 27,
+    'UP': 38,
+    'DOWN': 40,
+}

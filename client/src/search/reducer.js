@@ -11,10 +11,10 @@ const INITIAL_SEARCH_STATE = {
 export function search(state = INITIAL_SEARCH_STATE, action) {
     switch (action.type) {
         case ACTIONS.SEARCH_INPUT_CHANGED: {
-            const { text } = (action).payload;
-            if (text.length === 0)
-                return Object.assign({}, state, { items: [] });
-            else if (text.length > 0 && text.length < 2)
+            const { text } = action.payload;
+            if (!text)
+                return Object.assign({}, state, { isFetching: false, items: [] });
+            else if (text && text.length < 2)
                 return Object.assign({}, state, { items: [new ITEMS.HintSearchItem('low_chars_hint')] });
             else
                 return Object.assign({}, state, { items: state.items.filter(i => i.type !== ITEMS.SearchItemType.Hint) });

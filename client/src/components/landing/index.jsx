@@ -3,6 +3,7 @@ import ParallaxBackground from './ParallaxBackground'
 import LocaleSelector from './Locales'
 import i18n from 'es2015-i18n-tag'
 
+import Search from '../search'
 import { localize } from '../../locale/localize'
 
 require('../../styles/landing.scss')
@@ -14,15 +15,18 @@ const YEAR = new Date().getFullYear();
 export default class Landing extends PureComponent {
     render() {
         return (
-            <div className="landing-wrap clearfix">
-                <div className="landing">
-                    <ParallaxBackground />
+            <React.Fragment>
+                <div className="landing-wrap clearfix">
+                    <div className="landing">
+                        <ParallaxBackground />
+                    </div>
+                    <footer>
+                        {YEAR} <a target="_blank" href="https://github.com/arthot">{i18n`Art Khatsianovich`}</a>
+                        <LocaleSelector />
+                    </footer>
                 </div>
-                <footer>
-                    {YEAR} <a target="_blank" href="https://github.com/arthot">{i18n`Art Khatsianovich`}</a>
-                    <LocaleSelector />
-                </footer>
-            </div>
+                <Search />
+            </React.Fragment>
         )
     }
 }
