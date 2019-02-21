@@ -18,7 +18,7 @@ baseConfig.output = {
 
 baseConfig.devServer = {
     port: 3003,
-    host: 'localhost',
+    host: '0.0.0.0',
     publicPath: 'http://localhost:3003/',
     disableHostCheck: true,
     compress: false,

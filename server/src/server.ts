@@ -9,6 +9,6 @@ const app = express();
 
 app.use('/api', apiRoutes);
 
-export const server = app.listen(config.port, () => {
+export const server = app.listen(config.port, config.host, () => {
     log.info(`Application is up and running on port ${config.port}`);
 });
