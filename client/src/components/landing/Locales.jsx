@@ -2,18 +2,26 @@ import React, { PureComponent } from 'react'
 import classNames from 'classnames'
 import { connect } from 'react-redux'
 import i18n from 'es2015-i18n-tag'
+import PropTypes from 'prop-types'
 
 import { localize } from '../../locale/localize'
 import { supportedLocales } from '../../locale/constants'
 import { LOCALE_CHANGED } from '../../locale/actions'
 
-@connect(null, (dispatch) => ({
-    onLocaleChange: locale => dispatch({ type: LOCALE_CHANGED, payload: { locale } }),
-}))
-@localize
-export default class LocaleSelector extends PureComponent {
+const propTypes = {
+    locale: PropTypes.string.isRequired,
+}
 
-    mapFlag = (locale) => locale.length == 2 ? locale : locale.split('-')[1].toLowerCase()
+const mapDispatchToProps = (dispatch) => ({
+    onLocaleChange: locale => dispatch({
+        type: LOCALE_CHANGED,
+        payload: { locale }
+    }),
+})
+
+class LocaleSelector extends PureComponent {
+
+    mapFlag = (locale) => locale.length === 2 ? locale : locale.split('-')[1].toLowerCase()
 
     onClick = (locale) => (ev) => {
         ev.preventDefault();
@@ -40,3 +48,7 @@ export default class LocaleSelector extends PureComponent {
         )
     }
 }
+
+LocaleSelector.propTypes = propTypes;
+
+export default localize(connect(null, mapDispatchToProps)(LocaleSelector));

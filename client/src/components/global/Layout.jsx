@@ -1,8 +1,8 @@
 import React, { PureComponent } from 'react'
 import { Route, Switch } from 'react-router'
-import { Landing } from '../landing/Index'
-import Search from '../search/Index'
-import { Weather } from '../weather/Index'
+import Landing from '../landing'
+import Search from '../search'
+import Weather from '../weather'
 
 export class Layout extends PureComponent {
     render() {

@@ -28,7 +28,7 @@ function* handleInput(action) {
     if (text.length < 2)
         return;
 
-    const lang = yield select(s => s.lang);
+    const lang = yield select(s => s.locale.substring(0, 2));
 
     yield call(getCities, lang, text);
 }
