@@ -1,10 +1,12 @@
 import React, { PureComponent } from 'react'
+import { withRouter } from 'react-router-dom'
 import ParallaxBackground from './ParallaxBackground'
 import LocaleSelector from './Locales'
 import i18n from 'es2015-i18n-tag'
+import { connect } from 'react-redux'
 
-import Search from '../search'
 import { localize } from '../../locale/localize'
+import * as Actions from '../../search/actions'
 
 require('../../styles/landing.scss')
 require('famfamfam-flags/dist/sprite/famfamfam-flags.css')
@@ -12,7 +14,21 @@ require('famfamfam-flags/dist/sprite/famfamfam-flags.css')
 const YEAR = new Date().getFullYear();
 
 @localize
+@withRouter
+@connect(
+    (state, own) => own,
+    (dispatch) => ({
+        clearAll: () => {
+            dispatch({
+                type: Actions.SEARCH_CLEAR_ALL
+            });
+        },
+    })
+)
 export default class Landing extends PureComponent {
+    componentDidMount() {
+        this.props.clearAll();
+    }
     render() {
         return (
             <React.Fragment>
@@ -25,7 +41,6 @@ export default class Landing extends PureComponent {
                         <LocaleSelector />
                     </footer>
                 </div>
-                <Search clearOnStart />
             </React.Fragment>
         )
     }

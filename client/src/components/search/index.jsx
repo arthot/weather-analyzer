@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 
 import SearchInput from './SearchInput'
 import SearchResults from './SearchResults'
-import { SelectedItem } from './selected-item'
+import SelectedItem from './SelectedItem'
 import * as Actions from '../../search/actions'
 import { SearchItemType } from '../../search/items'
 import { localize } from '../../locale/localize'
@@ -12,17 +12,12 @@ require('../../styles/search/index.scss')
 
 @localize
 class SearchComponent extends Component {
-    selectedPosition = 8;
+    selectedPosition = 0;
     searchInputEl = React.createRef();
 
     state = {
         input: '',
         selectedSuggestion: -1,
-    }
-
-    componentDidMount() {
-        if (this.props.clearOnStart)
-            this.props.clearAll();
     }
 
     onSearchChange = (ev) => {
@@ -33,8 +28,10 @@ class SearchComponent extends Component {
     }
 
     onCitySelect = (item) => {
-        if (item.type === SearchItemType.Location)
+        if (item.type === SearchItemType.Location) {
+            this.setState({ selectedSuggestion: this.props.items.indexOf(item) });
             this.props.onSelect(item.location);
+        }
     }
 
     handleKeyboard = (ev) => {
@@ -77,7 +74,7 @@ class SearchComponent extends Component {
 
     render() {
         return (
-            <div className="search-container-wrap">
+            <div className={['search-container-wrap', this.props.className].join(' ')}>
                 <div className="search-container">
                     <SelectedItem
                         selected={this.props.selected}

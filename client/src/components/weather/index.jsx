@@ -3,7 +3,14 @@ import React, { PureComponent } from 'react'
 export default class Weather extends PureComponent {
     render() {
         return (
-            <div>Weather</div>
+            <React.Fragment>
+                <header>
+                    header
+                </header>
+                <main>
+                    table
+                </main>
+            </React.Fragment>
         )
     }
 }

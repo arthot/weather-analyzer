@@ -1,7 +1,9 @@
-import classNames from 'classnames'
 import React, { PureComponent } from 'react'
+import classNames from 'classnames'
 
-export class SelectedItem extends PureComponent {
+import CancelIcon from '-!svg-react-loader?name=SearchIcon!../../images/cross.svg';
+
+export default class SelectedItem extends PureComponent {
     render() {
         if (!this.props.selected) return null;
 
@@ -14,7 +16,6 @@ export class SelectedItem extends PureComponent {
         };
         return (
             <div className="selected-item" style={position} >
-                <button className="close" onClick={this.props.onClear}><i className="fa fa-remove"></i></button>
                 <div className="result-flag">
                     <i className={flagClass}></i>
                 </div>
@@ -28,6 +29,7 @@ export class SelectedItem extends PureComponent {
                         ].filter(i => !!i && i !== this.props.selected.name).join(', ')}
                     </div>
                 </div>
+                <CancelIcon className="close" onClick={this.props.onClear} />
             </div>
         );
     }

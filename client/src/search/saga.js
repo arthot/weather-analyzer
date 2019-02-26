@@ -38,7 +38,7 @@ export function* watchSearchInput() {
 }
 
 function generateCityUrl(city) {
-    return `/${city.lang}/${city.name}-${city.id}/`;
+    return `/${city.lang}/${city.id}/${city.name}/`;
 }
 
 function* handleCitySelect(router, action) {
@@ -49,7 +49,7 @@ function* handleCitySelect(router, action) {
         yield delay(400);
         router.push(url);
     } else {
-        router.replace();
+        router.replace(url);
     }
 }
 

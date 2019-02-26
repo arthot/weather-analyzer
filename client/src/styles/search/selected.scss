@@ -1,15 +1,16 @@
 .selected-item {
   position: absolute;
-  left: 0;
-  right: $right-position;
-  margin-top: -5px;
   top: 0;
   z-index: 100;
+  width: 573px;
   background-color: lighten($brand-primary, 5%) !important;
   font-size: 14px;
+  border: 2px solid #6dc274;
+  border-radius: 4px;
   animation: move-select-city 0.5s ease-in-out forwards;
+  padding: 4px;
 
-  .panel-body {
+  .result-data {
     padding: 2px 10px;
     color: $panel-primary-text;
   }
@@ -18,10 +19,13 @@
   @include result-data(darken($panel-primary-text, 8%));
 
   .close {
-    margin-top: 12px;
-    color: $placeholder-color;
-    font-size: 20px;
-    line-height: 1;
+    fill: $placeholder-color;
+    height: 16px;
+    width: 16px;
+    margin-top: 10px;
+    margin-right: 3px;
+    cursor: pointer;
+    float: right;
 
     &:hover {
       color: $navbar-inverse-link-hover-color;
