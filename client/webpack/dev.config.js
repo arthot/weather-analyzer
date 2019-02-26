@@ -24,7 +24,10 @@ baseConfig.devServer = {
     compress: false,
     hot: true,
     stats: 'minimal',
-    clientLogLevel: 'warning'
+    clientLogLevel: 'warning',
+    historyApiFallback: {
+        historyApiFallback: true
+    }
 }
 
 baseConfig.plugins = baseConfig.plugins.concat([

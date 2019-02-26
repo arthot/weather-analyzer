@@ -12,6 +12,7 @@ services:
       context: ./client
     volumes:
      - ./client/src:/var/www/client/src
+     - ./client/webpack:/var/www/client/webpack
     environment:
       NODE_ENV: development
   nginx:
