@@ -1,9 +1,9 @@
-import React, { PureComponent } from 'react'
+import React, { Component } from 'react'
 import { Route, Switch } from 'react-router'
 import Landing from '../landing'
 import Weather from '../weather'
 
-export class Layout extends PureComponent {
+export class Layout extends Component {
     render() {
         return (
             <div>

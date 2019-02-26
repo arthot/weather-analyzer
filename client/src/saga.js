@@ -1,12 +1,17 @@
 import { all, fork } from 'redux-saga/effects'
-import { watchLanguage } from './locale/saga'
-import { watchMonthChange, watchSearchInput, watchCitySelection } from './search/saga'
+import * as lang from './locale/saga'
+import * as search from './search/saga'
 
-export default function* rootSaga() {
-    yield all([
-        fork(watchSearchInput),
-        fork(watchMonthChange),
-        fork(watchLanguage),
-        fork(watchCitySelection),
-    ])
+const searchSagas = [
+    search.watchMonthChange,
+    search.watchSearchInput,
+    search.watchCitySelection,
+]
+
+const langSagas = [
+    lang.watchLanguage,
+]
+
+export default function* rootSaga(context = {}) {
+    yield all([...searchSagas, ...langSagas].map(sg => fork(sg, context)))
 }

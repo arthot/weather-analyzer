@@ -37,13 +37,24 @@ export function* watchSearchInput() {
     yield takeLatest(Actions.SEARCH_INPUT_CHANGED, handleInput);
 }
 
-function* handleCitySelect(action) {
-    const { city } = action.payload;
-    yield put(history.replace(`/${city.lang}/${city.name}-${city.id}/`));
+function generateCityUrl(city) {
+    return `/${city.lang}/${city.name}-${city.id}/`;
 }
 
-export function* watchCitySelection() {
-    yield takeEvery(Actions.SEARCH_CITY_SELECT, handleCitySelect);
+function* handleCitySelect(router, action) {
+    const { city } = action.payload;
+
+    const url = generateCityUrl(city);
+    if (router.location.pathname === '/') {
+        yield delay(400);
+        router.push(url);
+    } else {
+        router.replace();
+    }
+}
+
+export function* watchCitySelection({ router }) {
+    yield takeEvery(Actions.SEARCH_CITY_SELECT, handleCitySelect.bind(null, router));
 }
 
 function handleMonthChange(action) {
