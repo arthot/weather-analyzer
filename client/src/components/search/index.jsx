@@ -20,6 +20,11 @@ class SearchComponent extends Component {
         selectedSuggestion: -1,
     }
 
+    componentDidMount() {
+        if (this.props.clearOnStart)
+            this.props.clearAll();
+    }
+
     onSearchChange = (ev) => {
         const text = ev.currentTarget.value;
 
@@ -116,6 +121,11 @@ export default connect(
         onClear: () => {
             dispatch({
                 type: Actions.SEARCH_CITY_CLEAR
+            });
+        },
+        clearAll: () => {
+            dispatch({
+                type: Actions.SEARCH_CLEAR_ALL
             });
         },
         onMonthSelect: (month) => {

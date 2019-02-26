@@ -25,7 +25,7 @@ export default class Landing extends PureComponent {
                         <LocaleSelector />
                     </footer>
                 </div>
-                <Search />
+                <Search clearOnStart />
             </React.Fragment>
         )
     }

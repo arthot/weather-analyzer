@@ -55,6 +55,13 @@ export function search(state = INITIAL_SEARCH_STATE, action) {
                 month: action.payload.month
             });
 
+        case ACTIONS.SEARCH_CLEAR_ALL:
+            return Object.assign({}, state, {
+                selected: null,
+                items: [],
+                isFetching: false,
+            });
+
         // case ACTIONS.SEARCH_CITY_ID_RESPONSE:
         //     return Object.assign<{}, ISearchStore, any>({}, state, {
         //         selected: (<Actions.Action<ACTIONS.CityAction>><any>action).payload.city
