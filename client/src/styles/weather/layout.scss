@@ -11,6 +11,21 @@
   animation: header-appear 0.5s;
 }
 
+.app-header-title {
+  color: white;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 50px;
+  margin-left: 15px;
+  text-decoration: none;
+}
+
+@media (max-width: 1050px) {
+  .app-header-title {
+    display: none;
+  }
+}
+
 main {
   height: 2000px;
 }
