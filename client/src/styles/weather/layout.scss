@@ -1,5 +1,26 @@
 .app-header {
+  position: absolute;
+  width: calc(100% - 3px * 2);
   height: 50px;
-  padding: 5px;
-  background-color: green;
+  padding: 3px;
+  background-color: #558b2f;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+}
+
+.app-header__to-weather {
+  animation: header-appear 0.5s;
+}
+
+main {
+  height: 2000px;
+}
+
+@keyframes header-appear {
+  from {
+    top: -100px;
+  }
+
+  to {
+    top: 0;
+  }
 }

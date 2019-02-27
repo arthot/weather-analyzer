@@ -12,12 +12,14 @@ require('../../styles/search/index.scss')
 
 @localize
 class SearchComponent extends Component {
-    selectedPosition = 0;
     searchInputEl = React.createRef();
+    containertEl = React.createRef();
+    resultsEl = React.createRef();
 
     state = {
         input: '',
         selectedSuggestion: -1,
+        selectedItemCoords: 0,
     }
 
     onSearchChange = (ev) => {
@@ -29,9 +31,25 @@ class SearchComponent extends Component {
 
     onCitySelect = (item) => {
         if (item.type === SearchItemType.Location) {
-            this.setState({ selectedSuggestion: this.props.items.indexOf(item) });
+            this.setState({
+                selectedSuggestion: this.props.items.indexOf(item),
+                selectedItemCoords: this.getItemTopPosition(item),
+            }, () => {
+                this.clearDelay = setTimeout(() => {
+                    this.setState({ input: '' })
+                }, 1000);
+            });
             this.props.onSelect(item.location);
         }
+    }
+
+    getItemTopPosition(item) {
+        const element = this.resultsEl.current.findItemNode(item);
+        const container = this.containertEl.current.getBoundingClientRect();
+        if (element) {
+            return element.getBoundingClientRect().top - container.top;
+        } else
+            return container.top;
     }
 
     handleKeyboard = (ev) => {
@@ -39,7 +57,7 @@ class SearchComponent extends Component {
             case KEYS.ENTER: {
                 const item = this.props.items[this.state.selectedSuggestion];
                 if (item)
-                    this.onCitySelect(item);
+                    this.onCitySelect(item, {});
                 break;
             }
             case KEYS.UP:
@@ -67,18 +85,23 @@ class SearchComponent extends Component {
     onClear = () => {
         if (this.searchInputEl.current) {
             this.searchInputEl.current.focus();
+            clearTimeout(this.clearDelay);
             this.setState({ input: '' });
             this.props.onClear();
         }
     }
 
+    componentWillUnmount() {
+        clearTimeout(this.clearDelay);
+    }
+
     render() {
         return (
             <div className={['search-container-wrap', this.props.className].join(' ')}>
-                <div className="search-container">
+                <div className="search-container" ref={this.containertEl} >
                     <SelectedItem
                         selected={this.props.selected}
-                        position={this.selectedPosition}
+                        position={this.state.selectedItemCoords}
                         onClear={this.onClear}
                     />
                     <SearchInput
@@ -93,6 +116,7 @@ class SearchComponent extends Component {
                         onSelectedChange={this.onSelectedChange}
                     >
                         <SearchResults
+                            ref={this.resultsEl}
                             items={this.props.items}
                             hidden={!!this.props.selected}
                             selectedSuggestion={this.state.selectedSuggestion}

@@ -5,7 +5,13 @@ import i18n from 'es2015-i18n-tag'
 import { SearchItemType } from '../../search/items'
 
 export default class SearchResults extends PureComponent {
+    findItemNode = (item) => {
+        return this.props.items && this.nodes[item.key] && this.nodes[item.key].current;
+    }
+
     renderItem = (item, index) => {
+        this.nodes[item.key] = React.createRef();
+
         switch (item.type) {
             case SearchItemType.Hint:
                 return (
@@ -22,6 +28,7 @@ export default class SearchResults extends PureComponent {
                     <LocationResult
                         key={item.key}
                         item={item}
+                        innerRef={this.nodes[item.key]}
                         onSelect={this.props.onSelect}
                         locale={this.props.locale}
                         selected={index === this.props.selectedSuggestion}
@@ -46,7 +53,8 @@ export default class SearchResults extends PureComponent {
 
     render() {
         const { items, hidden } = this.props;
-        if (items.length)
+        if (items.length) {
+            this.nodes = {};
             return (
                 <div className={classNames('search-results', {
                     'search-results__hidden': hidden
@@ -54,7 +62,7 @@ export default class SearchResults extends PureComponent {
                     {items.map(this.renderItem)}
                 </div>
             )
-        else
+        } else
             return null;
     }
 }
@@ -91,7 +99,7 @@ export class LocationResult extends PureComponent {
         if (!node.classList.contains('result'))
             while (node.parentElement && !node.classList.contains('result')) node = node.parentElement;
 
-        this.props.onSelect(this.props.item, node.getBoundingClientRect());
+        this.props.onSelect(this.props.item);
     }
 
     render() {
@@ -101,6 +109,7 @@ export class LocationResult extends PureComponent {
                 className={classNames('result result-location', {
                     'result-location--selected': this.props.selected
                 })}
+                ref={this.props.innerRef}
             >
                 <div className="result-flag">
                     <i className={classNames('famfamfam-flags', {

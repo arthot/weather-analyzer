@@ -1,15 +1,14 @@
 .selected-item {
   position: absolute;
-  top: $search-top-margin;
   z-index: 100;
   width: 573px;
   background-color: lighten($brand-primary, 5%) !important;
   font-size: 14px;
   border: 2px solid #6dc274;
   border-radius: 4px;
-  animation: move-select-city 0.5s ease-in-out forwards;
   padding: 4px;
   padding-bottom: 0px;
+  animation: move-select-city 0.5s ease-in-out forwards;
 
   .result-data {
     padding: 4px 10px;
@@ -30,5 +29,11 @@
     &:hover {
       color: $navbar-inverse-link-hover-color;
     }
+  }
+}
+
+@keyframes move-select-city {
+  to {
+    top: 0;
   }
 }

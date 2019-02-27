@@ -24,7 +24,7 @@ export class Layout extends Component {
             return {
                 isRoot,
                 toLanding: isRoot && !state.isRoot,
-                toHeader: !isRoot && state.isRoot,
+                toWeather: !isRoot && state.isRoot,
             }
         return null;
     }
@@ -34,12 +34,14 @@ export class Layout extends Component {
             <React.Fragment>
                 <Search className={classNames({
                     'search-container-wrap__landing': !this.state.toLanding && this.state.isRoot,
-                    'search-container-wrap__header': !this.state.toHeader && !this.state.isRoot,
+                    'search-container-wrap__header': !this.state.toWeather && !this.state.isRoot,
                     'search-container-wrap__to_landing': this.state.toLanding,
-                    'search-container-wrap__to_header': this.state.toHeader,
+                    'search-container-wrap__to_weather': this.state.toWeather,
                 })} />
                 <Switch>
-                    <Route path={'/:lang/:id(\\d+)'} component={Weather} />
+                    <Route path={'/:lang/:id(\\d+)'} render={() => (
+                        <Weather toWeatherTransition={this.state.toWeather} />
+                    )} />
                     <Route path={'/'} exact={true} component={Landing} />
                 </Switch>
             </React.Fragment>
