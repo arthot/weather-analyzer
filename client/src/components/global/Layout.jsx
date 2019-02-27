@@ -42,8 +42,8 @@ export class Layout extends Component {
                     })}
                 />
                 <Switch>
-                    <Route path={'/:lang/:id(\\d+)'} render={() => (
-                        <Weather toWeatherTransition={this.state.toWeather} />
+                    <Route path={'/:lang/*/:id(\\d+)'} render={props => (
+                        <Weather toWeatherTransition={this.state.toWeather} {...props} />
                     )} />
                     <Route path={'/'} exact={true} component={Landing} />
                 </Switch>

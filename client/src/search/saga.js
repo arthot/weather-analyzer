@@ -1,6 +1,9 @@
 import { call, put, select, takeEvery, takeLatest, delay } from 'redux-saga/effects'
+import UrlSafeString from 'url-safe-string'
 import * as Actions from './actions'
 import * as api from './api'
+
+const tagGenerator = new UrlSafeString();
 
 function* getCities(lang, text) {
     yield put({
@@ -38,7 +41,7 @@ export function* watchSearchInput() {
 }
 
 function generateCityUrl(city) {
-    return `/${city.lang}/${city.id}/${city.name}/`;
+    return `/${city.lang}/${tagGenerator.generate(city.name)}/${city.id}`;
 }
 
 function* handleCitySelect(router, action) {
