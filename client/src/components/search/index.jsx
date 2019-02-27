@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import SearchInput from './SearchInput'
 import SearchResults from './SearchResults'
 import SelectedItem from './SelectedItem'
+import MonthSelector from './MonthSelector'
 import * as Actions from '../../search/actions'
 import { SearchItemType } from '../../search/items'
 import { localize } from '../../locale/localize'
@@ -125,6 +126,13 @@ class SearchComponent extends Component {
                         />
                     </SearchInput>
                 </div>
+                <MonthSelector
+                    visible={!this.props.isRoot}
+                    month={this.props.month}
+                    selected={this.props.selected}
+                    locale={this.props.locale}
+                    onSelect={this.props.onMonthSelect}
+                />
             </div>
         )
     }

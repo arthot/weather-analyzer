@@ -57,11 +57,11 @@ export function* watchCitySelection({ router }) {
     yield takeEvery(Actions.SEARCH_CITY_SELECT, handleCitySelect.bind(null, router));
 }
 
-function handleMonthChange(action) {
+function handleMonthChange(router, action) {
     const { month } = action.payload;
-    window.location.hash = month;
+    router.replace('#' + month);
 }
 
-export function* watchMonthChange() {
-    yield takeEvery(Actions.SEARCH_MONTH_SELECT, handleMonthChange);
+export function* watchMonthChange({ router }) {
+    yield takeEvery(Actions.SEARCH_MONTH_SELECT, handleMonthChange.bind(null, router));
 }
