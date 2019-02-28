@@ -1,4 +1,4 @@
-import { call, put, select, takeEvery } from 'redux-saga/effects'
+import { call, put, select, takeEvery, delay } from 'redux-saga/effects'
 import * as Actions from './actions'
 import { SEARCH_CITY_SELECT } from '../search/actions'
 import * as api from './api'
@@ -14,6 +14,11 @@ function* getWeatherData(cityId, month) {
         const currentCityId = yield select(s => s.weather.cityId);
 
         if (currentCityId === cityId) {
+            const pageLoadSpan = Date.now() - pageLoadTimestamp;
+            if (pageLoadSpan < PAGE_LOAD_DELAY) {
+                yield delay(PAGE_LOAD_DELAY - pageLoadSpan); // smoothe page load animation
+            }
+
             yield put({
                 type: Actions.WEATHER_MONTH_DATA_RESPONSE,
                 payload: { cityId, month, data }
@@ -63,4 +68,15 @@ function* handleCityChange(action) {
 
 export function* watchCityChange() {
     yield takeEvery(SEARCH_CITY_SELECT, handleCityChange);
+}
+
+const PAGE_LOAD_DELAY = 1500;
+let pageLoadTimestamp = Date.now();
+
+function handlePageLoad() {
+    pageLoadTimestamp = Date.now();
+}
+
+export function* watchPageLoad() {
+    yield takeEvery(Actions.WEATHER_PAGE_LOADED, handlePageLoad);
 }
