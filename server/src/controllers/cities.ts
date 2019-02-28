@@ -17,7 +17,7 @@ router
             .isLength({ min: 2 })
     ],
     checkValidation,
-    async (req, res, next) => {
+    async (req, res) => {
         const { query, lang } = req.params;
         log.debug(`[${lang}] search: ${query}`);
         const result = await Provider.search(query, lang);
@@ -32,7 +32,7 @@ router
             .isNumeric()
     ],
     checkValidation,
-    async (req, res, next) => {
+    async (req, res) => {
         const { id, lang } = req.params;
         log.debug(`[${lang}] get city by id: ${id}`);
         const result = await Provider.get(lang, id);
