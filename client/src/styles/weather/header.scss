@@ -1,0 +1,39 @@
+@import './vars.scss';
+
+.app-header {
+  position: absolute;
+  width: calc(100% - #{$app-header-padding * 2});
+  height: $app-header-height;
+  padding: $app-header-padding;
+  background-color: #558b2f;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+}
+
+.app-header__to-weather {
+  animation: header-appear 0.5s;
+}
+
+.app-header-title {
+  color: white;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: $app-header-height;
+  margin-left: 15px;
+  text-decoration: none;
+}
+
+@media (max-width: 1050px) {
+  .app-header-title {
+    display: none;
+  }
+}
+
+@keyframes header-appear {
+  from {
+    top: -100px;
+  }
+
+  to {
+    top: 0;
+  }
+}

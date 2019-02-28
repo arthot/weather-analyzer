@@ -1,41 +1,5 @@
-.app-header {
+.app-main {
   position: absolute;
-  width: calc(100% - 3px * 2);
-  height: 52px;
-  padding: 3px;
-  background-color: #558b2f;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
-}
-
-.app-header__to-weather {
-  animation: header-appear 0.5s;
-}
-
-.app-header-title {
-  color: white;
-  font-size: 20px;
-  font-weight: 600;
-  line-height: 50px;
-  margin-left: 15px;
-  text-decoration: none;
-}
-
-@media (max-width: 1050px) {
-  .app-header-title {
-    display: none;
-  }
-}
-
-main {
+  top: $app-header-full-height;
   height: 2000px;
-}
-
-@keyframes header-appear {
-  from {
-    top: -100px;
-  }
-
-  to {
-    top: 0;
-  }
 }

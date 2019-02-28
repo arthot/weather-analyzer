@@ -1,10 +1,9 @@
 import React, { PureComponent } from 'react'
-import classNames from 'classnames'
-import i18n from 'es2015-i18n-tag'
 import { connect } from 'react-redux'
-import { Link } from 'react-router-dom'
 
 import * as ACTIONS from '../../weather/actions'
+import Header from './Header'
+import Main from './main'
 
 require('../../styles/weather/index.scss')
 
@@ -28,16 +27,8 @@ class Weather extends PureComponent {
     render() {
         return (
             <React.Fragment>
-                <header
-                    className={classNames('app-header', {
-                        'app-header__to-weather': this.props.toWeatherTransition
-                    })}
-                >
-                    <Link to="/" className="app-header-title">{i18n`Weather Archive`}</Link>
-                </header>
-                <main>
-                    table
-                </main>
+                <Header toWeatherTransitio={this.props.toWeatherTransition} />
+                <Main />
             </React.Fragment>
         )
     }
