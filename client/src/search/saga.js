@@ -1,6 +1,7 @@
 import { call, put, select, takeEvery, takeLatest, delay } from 'redux-saga/effects'
 import UrlSafeString from 'url-safe-string'
 import * as Actions from './actions'
+import { WEATHER_PAGE_LOADED } from '../weather/actions'
 import * as api from './api'
 
 const tagGenerator = new UrlSafeString();
@@ -67,4 +68,34 @@ function handleMonthChange(router, action) {
 
 export function* watchMonthChange({ router }) {
     yield takeEvery(Actions.SEARCH_MONTH_SELECT, handleMonthChange.bind(null, router));
+}
+
+function* handleWeatherLoad(action) {
+    const city = yield select(s => s.search.selected);
+    if (!city || action.cityId !== city.id) {
+        yield call(getCity, action.payload.locale, action.payload.cityId)
+    }
+}
+
+function* getCity(lang, id) {
+    yield put({
+        type: Actions.SEARCH_CITY_ID_REQUEST
+    })
+
+    try {
+        const city = yield api.fetchCity(lang, id);
+        yield put({
+            type: Actions.SEARCH_CITY_ID_RESPONSE,
+            payload: { city }
+        });
+    } catch (e) {
+        yield put({
+            type: Actions.SEARCH_CITY_ID_ERROR,
+            error: e
+        })
+    }
+}
+
+export function* watchWeatherLoad() {
+    yield takeEvery(WEATHER_PAGE_LOADED, handleWeatherLoad);
 }

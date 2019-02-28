@@ -62,10 +62,22 @@ export function search(state = INITIAL_SEARCH_STATE, action) {
                 isFetching: false,
             });
 
-        // case ACTIONS.SEARCH_CITY_ID_RESPONSE:
-        //     return Object.assign<{}, ISearchStore, any>({}, state, {
-        //         selected: (<Actions.Action<ACTIONS.CityAction>><any>action).payload.city
-        //     });
+        case ACTIONS.SEARCH_CITY_ID_RESPONSE:
+            return Object.assign({}, state, {
+                isFetching: false,
+                selected: action.payload.city
+            });
+
+        case ACTIONS.SEARCH_CITY_ID_REQUEST:
+            return Object.assign({}, state, {
+                isFetching: true
+            });
+
+        case ACTIONS.SEARCH_CITY_ID_ERROR:
+            return Object.assign({}, state, {
+                isFetching: false,
+                items: [new ITEMS.ErrorSearchItem(action.error.message)]
+            });
 
         default:
             return state;

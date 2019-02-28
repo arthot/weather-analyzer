@@ -1,12 +1,30 @@
 import React, { PureComponent } from 'react'
 import classNames from 'classnames'
 import i18n from 'es2015-i18n-tag'
+import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
+
+import * as ACTIONS from '../../weather/actions'
 
 require('../../styles/weather/index.scss')
 
+const mapStateToProps = (state, own) => ({
+    locale: own.match.params.lang,
+    cityId: own.match.params.id,
+})
 
-export default class Weather extends PureComponent {
+const mapDispatchToProps = (dispatch) => ({
+    onLoad: (locale, cityId) => dispatch({
+        type: ACTIONS.WEATHER_PAGE_LOADED,
+        payload: { locale, cityId }
+    }),
+})
+
+class Weather extends PureComponent {
+    componentDidMount() {
+        this.props.onLoad(this.props.locale, this.props.cityId);
+    }
+
     render() {
         return (
             <React.Fragment>
@@ -24,3 +42,5 @@ export default class Weather extends PureComponent {
         )
     }
 }
+
+export default connect(mapStateToProps, mapDispatchToProps)(Weather)

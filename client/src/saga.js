@@ -6,10 +6,12 @@ const searchSagas = [
     search.watchMonthChange,
     search.watchSearchInput,
     search.watchCitySelection,
+    search.watchWeatherLoad,
 ]
 
 const langSagas = [
     lang.watchLanguage,
+    lang.watchWeatherLoad,
 ]
 
 export default function* rootSaga(context = {}) {

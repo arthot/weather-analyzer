@@ -1,7 +1,6 @@
 import React from 'react'
 import { Provider } from 'react-redux'
 import { withRouter } from 'react-router-dom'
-import i18n from './locale/i18n'
 
 import configureStore from './store'
 
@@ -12,8 +11,6 @@ class ProviderWithRouter extends React.Component {
         this.store = configureStore({
             router: props.history,
         })
-
-        i18n(this.store.locale);
     }
 
     render() {
