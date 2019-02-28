@@ -10,6 +10,7 @@ require('../../styles/weather/index.scss')
 const mapStateToProps = (state, own) => ({
     locale: own.match.params.lang,
     cityId: own.match.params.id,
+    data: state.weather.data,
 })
 
 const mapDispatchToProps = (dispatch) => ({
@@ -28,7 +29,7 @@ class Weather extends PureComponent {
         return (
             <React.Fragment>
                 <Header toWeatherTransitio={this.props.toWeatherTransition} />
-                <Main />
+                <Main data={this.props.data} />
             </React.Fragment>
         )
     }

@@ -18,5 +18,8 @@
     "month_12": "Декабрь",
     "en-GB": "English (UK)",
     "ru": "Русский",
-    "Art Khatsianovich": "Артём Хотянович"
+    "Art Khatsianovich": "Артём Хотянович",
+    "fetching_stage": "загрузка данных",
+    "searching_stage": "поиск истории",
+    "parsing_stage": "обработка данных"
 }

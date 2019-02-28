@@ -2,7 +2,7 @@ import * as ACTIONS from './actions'
 
 const INITIAL_SEARCH_STATE = {
     cityId: 0,
-    data: [...Array(12).keys()]
+    data: [...Array(12)]
 }
 
 export function weather(state = INITIAL_SEARCH_STATE, action) {

@@ -1,0 +1,22 @@
+.data-placeholder-wrap {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.data-placeholder {
+}
+
+.data-placeholder-icon {
+  display: block;
+  margin: 7px auto;
+  height: 35px;
+  width: 35px;
+}
+
+.data-placeholder-text {
+  color: grey;
+  font-size: 12px;
+}

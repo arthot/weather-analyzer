@@ -1,5 +1,9 @@
 .app-main {
   position: absolute;
   top: $app-header-full-height;
-  height: 2000px;
+  width: 100vw;
+}
+
+.app-main-placeholder {
+  height: calc(100vh - #{$app-header-full-height});
 }
