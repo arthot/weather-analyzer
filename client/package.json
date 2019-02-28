@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@hot-loader/react-dom": "^16.8.2",
+    "@sindresorhus/slugify": "^0.8.0",
     "axios": "^0.18.0",
     "babel-polyfill": "^6.23.0",
     "classnames": "^2.2.6",
@@ -29,8 +30,7 @@
     "react-router-dom": "^4.3.1",
     "react-transition-group": "^2.6.0",
     "redux": "^4.0.1",
-    "redux-saga": "^1.0.1",
-    "url-safe-string": "^1.1.0"
+    "redux-saga": "^1.0.1"
   },
   "devDependencies": {
     "@babel/core": "^7.2.0",

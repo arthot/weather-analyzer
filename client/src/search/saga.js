@@ -1,10 +1,8 @@
 import { call, put, select, takeEvery, takeLatest, delay } from 'redux-saga/effects'
-import UrlSafeString from 'url-safe-string'
+import slugify from '@sindresorhus/slugify'
 import * as Actions from './actions'
 import { WEATHER_PAGE_LOADED } from '../weather/actions'
 import * as api from './api'
-
-const tagGenerator = new UrlSafeString();
 
 function* getCities(lang, text) {
     yield put({
@@ -42,7 +40,7 @@ export function* watchSearchInput() {
 }
 
 function generateCityUrl(city) {
-    return `/${city.lang}/${tagGenerator.generate(city.name)}/${city.id}`;
+    return `/${city.lang}/${slugify(city.name)}/${city.id}`;
 }
 
 function* handleCitySelect(router, action) {
