@@ -1,7 +1,9 @@
 @import './vars.scss';
 
 .app-header {
-  position: absolute;
+  position: fixed;
+  left: 0;
+  z-index: 50;
   width: calc(100% - #{$app-header-padding * 2});
   height: $app-header-height;
   padding: $app-header-padding;

@@ -1,0 +1,50 @@
+.workspace-wrap {
+}
+
+.header {
+  position: sticky;
+  top: 58px;
+  height: 20px;
+  width: 3000px;
+  background-color: grey;
+}
+
+.footer {
+  position: sticky;
+  bottom: 0;
+  height: 20px;
+  width: 3000px;
+  background-color: grey;
+}
+
+.data {
+  width: 3000px;
+  height: 600px;
+}
+
+.border1 {
+  position: sticky;
+  float: left;
+  top: 0;
+  left: 0;
+  width: 50px;
+  height: 600px;
+  background-color: rgba(255, 0, 0, 0.473);
+}
+
+.border2 {
+  position: sticky;
+  float: right;
+  top: 0;
+  right: 0;
+  width: 50px;
+  height: 600px;
+  background-color: rgba(255, 0, 0, 0.473);
+}
+
+.stats {
+  height: 1000px;
+  position: sticky;
+  float: left;
+  left: 0;
+}
