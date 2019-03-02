@@ -3,6 +3,10 @@ $items-width: 50px;
 .workspace-wrap {
 }
 
+.workspace-wrap__scrollable {
+  cursor: move;
+}
+
 .header {
   position: sticky;
   top: 58px;

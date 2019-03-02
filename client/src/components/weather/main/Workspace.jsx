@@ -4,6 +4,8 @@ import range from 'lodash/range'
 import classNames from 'classnames'
 import PropTypes from 'prop-types'
 
+import ScrollDragger from './ScrollDragger'
+
 require('../../../styles/weather/workspace.scss')
 
 const propTypes = {
@@ -24,7 +26,7 @@ export default class Main extends Component {
     render() {
         const months = this.getMonthsMap(this.props.month);
         return (
-            <div className="workspace-wrap">
+            <ScrollDragger className="workspace-wrap">
                 <div className="header">
                     {months.map(m => (
                         <div key={m} className={"header-month " + `header-month__${MONTHS_LENGTH[m]}`}>
@@ -53,7 +55,7 @@ export default class Main extends Component {
                         </div>
                     ))}
                 </div>
-            </div>
+            </ScrollDragger>
         )
     }
 }
