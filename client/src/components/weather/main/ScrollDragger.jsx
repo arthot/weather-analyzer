@@ -41,12 +41,18 @@ export default class ScrollTracker extends PureComponent {
         }
     }
 
+    onWheelHandle(e) {
+        e.preventDefault();
+        document.documentElement.scrollLeft += e.deltaY;
+    }
+
     render() {
         return (
             <div className={classNames(this.props.className, { 'workspace-wrap__scrollable': this.state.dragging })}
                 onMouseDown={this.mouseDownHandle.bind(this)}
                 onMouseUp={this.mouseUpHandle.bind(this)}
                 onMouseMove={this.mouseMoveHandle.bind(this)}
+                onWheel={this.onWheelHandle.bind(this)}
                 ref={this.container}
             >
                 {this.props.children}
