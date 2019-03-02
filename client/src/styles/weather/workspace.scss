@@ -1,3 +1,5 @@
+$items-width: 50px;
+
 .workspace-wrap {
 }
 
@@ -5,21 +7,76 @@
   position: sticky;
   top: 58px;
   height: 20px;
-  width: 3000px;
   background-color: grey;
+  padding: 0 50px;
+
+  .header-month {
+    display: inline-block;
+    border-left: 1px black solid;
+    border-right: 1px black solid;
+  }
+
+  .header-month-title {
+    display: inline-block;
+    position: sticky;
+    left: 40px;
+    right: 40px;
+    padding-left: 40px;
+    padding-right: 40px;
+  }
+
+  .header-month-title:first-child {
+    float: left;
+    margin-left: 25%;
+  }
+
+  .header-month-title:last-child {
+    float: right;
+    margin-right: 25%;
+  }
+}
+
+.header-month__31 {
+  width: 31 * $items-width;
+}
+
+.header-month__30 {
+  width: 30 * $items-width;
+}
+
+.header-month__29 {
+  width: 29 * $items-width;
 }
 
 .footer {
   position: sticky;
   bottom: 0;
   height: 20px;
-  width: 3000px;
   background-color: grey;
+  padding: 0 50px;
+
+  .footer-month {
+    display: inline-block;
+    border-left: 1px black solid;
+    border-right: 1px black solid;
+  }
+  .footer-month-day {
+    display: inline-block;
+    width: $items-width;
+    text-align: center;
+  }
 }
 
 .data {
-  width: 3000px;
+  width: $items-width * 370;
   height: 600px;
+}
+
+.data-month {
+  display: inline-block;
+  height: 100%;
+  border-left: 1px black solid;
+  border-right: 1px black solid;
 }
 
 .border1 {
@@ -40,11 +97,4 @@
   width: 50px;
   height: 600px;
   background-color: rgba(255, 0, 0, 0.473);
-}
-
-.stats {
-  height: 1000px;
-  position: sticky;
-  float: left;
-  left: 0;
 }

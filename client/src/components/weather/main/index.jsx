@@ -6,6 +6,7 @@ import Workspace from './Workspace'
 
 const propTypes = {
     data: PropTypes.array.isRequired,
+    month: PropTypes.number.isRequired,
 }
 
 export default class Main extends PureComponent {
@@ -20,7 +21,7 @@ export default class Main extends PureComponent {
                     </div>
                 )}
                 {isEmpty && (
-                    <Workspace data={this.props.data} />
+                    <Workspace data={this.props.data} month={this.props.month} />
                 )}
             </main>
         )

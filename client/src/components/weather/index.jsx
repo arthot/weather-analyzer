@@ -11,6 +11,7 @@ const mapStateToProps = (state, own) => ({
     locale: own.match.params.lang,
     cityId: own.match.params.id,
     data: state.weather.data,
+    month: state.search.month,
 })
 
 const mapDispatchToProps = (dispatch) => ({
@@ -29,7 +30,7 @@ class Weather extends PureComponent {
         return (
             <React.Fragment>
                 <Header toWeatherTransitio={this.props.toWeatherTransition} />
-                <Main data={this.props.data} />
+                <Main data={this.props.data} month={this.props.month} />
             </React.Fragment>
         )
     }
