@@ -1,4 +1,5 @@
-$items-width: 50px;
+$items-width: 60px;
+$items-height: 100px;
 
 .workspace-wrap {
 }
@@ -72,8 +73,8 @@ $items-width: 50px;
 }
 
 .data {
-  width: $items-width * 370;
-  height: 600px;
+  width: $items-width * 367 + 50 * 2 - 12 * 2 - 2;
+  height: $items-height * 5;
 }
 
 .data-month {
@@ -83,13 +84,33 @@ $items-width: 50px;
   border-right: 1px black solid;
 }
 
+.data-year {
+  height: $items-height + 1;
+}
+
+.data-day {
+  display: inline-block;
+  height: 100%;
+  width: $items-width - 1;
+  text-align: center;
+  border-right: 1px gray dashed;
+  border-bottom: 1px gray dashed;
+}
+
+.border-year {
+  height: $items-height;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 1px black solid;
+}
+
 .border1 {
   position: sticky;
   float: left;
   top: 0;
   left: 0;
   width: 50px;
-  height: 600px;
   background-color: rgba(255, 0, 0, 0.473);
 }
 
@@ -99,6 +120,5 @@ $items-width: 50px;
   top: 0;
   right: 0;
   width: 50px;
-  height: 600px;
   background-color: rgba(255, 0, 0, 0.473);
 }

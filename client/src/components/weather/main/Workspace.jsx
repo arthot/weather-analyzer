@@ -17,7 +17,7 @@ export default class Main extends Component {
     getMonthsMap(month) {
         return Array(12).fill(0).map((el, i) => {
             const shift = month + i - 5;
-            return shift < 0 ? shift + 12 :
+            return shift < 1 ? shift + 12 :
                 shift > 12 ? shift - 12 :
                     shift;
         })
@@ -37,13 +37,25 @@ export default class Main extends Component {
                 </div>
                 <div className="data">
                     <div className="border1">
-                        bor1
+                        {YEARS.map(y => (
+                            <div key={y} className="border-year">{y}</div>
+                        ))}
                     </div>
                     {months.map(m => (
-                        <div key={m} className={"data-month " + `header-month__${MONTHS_LENGTH[m]}`}>{i18n.translate(`month_${m}`)}</div>
+                        <div key={m} className={"data-month " + `header-month__${MONTHS_LENGTH[m]}`}>
+                            {YEARS.map(y => (
+                                <div key={y} className="data-year">
+                                    {range(1, MONTHS_LENGTH[m] + 1).map(d => (
+                                        <div key={d} className="data-day">{d}</div>
+                                    ))}
+                                </div>
+                            ))}
+                        </div>
                     ))}
                     <div className="border2">
-                        bor2
+                        {YEARS.map(y => (
+                            <div key={y} className="border-year">{y}</div>
+                        ))}
                     </div>
                 </div>
                 <div className="footer">
@@ -74,6 +86,8 @@ const MONTHS_LENGTH = {
     11: 30,
     12: 31
 }
+
+const YEARS = range(new Date().getFullYear() - 4, new Date().getFullYear() + 1);
 
 Main.propTypes = propTypes;
 
