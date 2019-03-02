@@ -1,7 +1,8 @@
-import React, { PureComponent } from 'react'
+import React, { Component } from 'react'
 import classNames from 'classnames'
 
-export default class ScrollTracker extends PureComponent {
+
+export default class ScrollTracker extends Component {
     container = React.createRef();
     state = {
         dragging: false
