@@ -37,20 +37,37 @@ class Workspace extends Component {
     monthTracker = React.createRef();
 
     static getDerivedStateFromProps(props, state) {
-        if (!state.changeByScroll && state.month !== props.month)
+        if (!state.repositionScroll && !state.changeByScroll && state.month !== props.month)
             return {
                 month: props.month,
-                months: (state.months && state.months.indexOf(props.month) > 1 && state.months.indexOf(props.month) < 11) ?
+                months: (state.months && state.months.indexOf(props.month) > 1 && state.months.indexOf(props.month) < 10) ?
                     state.months :
                     Workspace.getMonthsMap(props.month),
                 changeByScroll: false,
                 movingToMonth: true,
             }
 
+        if (state.changeByScroll && state.month !== props.month &&
+            (state.months.indexOf(props.month) < 2 || state.months.indexOf(props.month) > 9)) {
+            return {
+                month: props.month,
+                months: Workspace.getMonthsMap(props.month),
+                changeByScroll: false,
+                movingToMonth: false,
+                repositionScroll: true,
+            }
+        }
+
         return null;
     }
 
     getSnapshotBeforeUpdate(prevProps, prevState) {
+        if (this.state.repositionScroll) {
+            return {
+                month: prevState.month,
+                position: this.monthTracker.current.getMonthPosition(prevState.month) - document.documentElement.scrollLeft,
+            }
+        }
         return null;
     }
 
@@ -62,30 +79,30 @@ class Workspace extends Component {
         }
     }
 
-    componentDidUpdate(snapshot) {
+    componentDidUpdate(prevProps, prevState, snapshot) {
         if (this.state.movingToMonth) {
-            this.setState({ movingToMonth: false }, () => {
-                this.scrollToMonth(this.state.month);
+            this.scrollToMonth(this.state.month);
+            this.setState({ movingToMonth: false });
+        } else if (this.state.repositionScroll) {
+            this.setState({ repositionScroll: false }, () => {
+                this.repositionScroll(this.state.month, snapshot.position, snapshot.month);
             });
-        } else if (Number.isFinite(snapshot.position)) {
-            this.repositionScroll(this.state.month, snapshot.position);
         } else if (this.state.changeByScroll)
             this.setState({ changeByScroll: false });
     }
 
     scrollToMonth(month) {
         const x = this.monthTracker.current.getMonthPosition(month);
-        console.log('scroll to ' + month + '; position ' + x + '; array ' + this.state.months.join());
         document.documentElement.scrollLeft = x - 50;
     }
 
-    repositionScroll(month, oldPosition) {
-
+    repositionScroll(month, oldPosition, oldMonth) {
+        const x = this.monthTracker.current.getMonthPosition(month);
+        document.documentElement.scrollLeft = x + oldPosition + 150 * (month - oldMonth);
     }
 
     onMonthChanged = (month) => {
         if (month !== this.props.month) {
-            console.log('month changed to ' + month + '; was at ' + this.state.month);
             this.setState({ month, changeByScroll: true }, () => {
                 this.props.onMonthChanged(month);
             });
