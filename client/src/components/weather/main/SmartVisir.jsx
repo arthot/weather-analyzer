@@ -12,6 +12,7 @@ export default class ScrollTracker extends Component {
 
     componentDidMount() {
         this.observer = new IntersectionObserver(this.handleIntersection.bind(this), {
+            root: document.getElementById('workspace'),
             rootMargin: '-60px',
             threshold: [this.props.threshold, 0.5],
         });
@@ -23,12 +24,28 @@ export default class ScrollTracker extends Component {
     }
 
     handleIntersection(entities) {
+        const entity = this.ensureNegativeIntersection(entities[0]);
+
         this.setState({
-            visible: entities[0].isIntersecting
+            visible: entity.isIntersecting
         });
 
         if (this.props.onItersection)
-            this.props.onItersection(entities[0]);
+            this.props.onItersection(entity);
+    }
+
+    ensureNegativeIntersection(entity) {
+        if (!entity.rootBounds) {
+            const intersectionRatio = Math.abs((document.documentElement.scrollLeft - this.wrapEl.current.offsetLeft) / document.documentElement.offsetWidth);
+            if (intersectionRatio < 0.9) {
+                /* CHROME BUG? Intersection is wrong in case of rapid programatically scroll movement */
+                return {
+                    isIntersecting: true,
+                    intersectionRatio,
+                }
+            }
+        }
+        return entity;
     }
 
     getPosition() {

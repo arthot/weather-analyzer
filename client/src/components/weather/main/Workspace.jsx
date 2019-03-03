@@ -122,7 +122,7 @@ class Workspace extends Component {
         const { months } = this.state;
         if (months)
             return (
-                <ScrollDragger className="workspace-wrap">
+                <ScrollDragger className="workspace-wrap" id="workspace">
                     <div className="header">
                         {months.map(m => (
                             <div key={m} className={"header-month " + `header-month__${MONTHS_LENGTH[m]}`}>
