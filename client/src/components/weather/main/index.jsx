@@ -4,10 +4,6 @@ import PropTypes from 'prop-types'
 import Placeholder from './Placeholder'
 import Workspace from './Workspace'
 
-const propTypes = {
-    data: PropTypes.array.isRequired,
-    month: PropTypes.number.isRequired,
-}
 
 export default class Main extends PureComponent {
     render() {
@@ -21,11 +17,9 @@ export default class Main extends PureComponent {
                     </div>
                 )}
                 {isEmpty && (
-                    <Workspace data={this.props.data} month={this.props.month} />
+                    <Workspace />
                 )}
             </main>
         )
     }
 }
-
-Main.propTypes = propTypes;

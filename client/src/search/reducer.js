@@ -4,9 +4,17 @@ import * as ITEMS from './items'
 const INITIAL_SEARCH_STATE = {
     isFetching: false,
     items: [],
-    month: new Date().getMonth() + 1,
+    month: getDefaultMonth(),
     selected: null,
 };
+
+function getDefaultMonth() {
+    const hash = document.location.hash;
+    if (hash && hash.length > 1 && Number.isInteger(parseInt(hash.substr(1))))
+        return parseInt(hash.substr(1));
+    else
+        return new Date().getMonth() + 1;
+}
 
 export function search(state = INITIAL_SEARCH_STATE, action) {
     switch (action.type) {

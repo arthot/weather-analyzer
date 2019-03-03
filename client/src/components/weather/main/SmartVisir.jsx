@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 
 const propTypes = {
     children: PropTypes.func.isRequired,
+    onItersection: PropTypes.func,
 }
 
 export default class ScrollTracker extends Component {
@@ -11,8 +12,8 @@ export default class ScrollTracker extends Component {
 
     componentDidMount() {
         this.observer = new IntersectionObserver(this.handleIntersection.bind(this), {
-            rootMargin: '-30px',
-            threshold: this.props.threshold,
+            rootMargin: '-60px',
+            threshold: [this.props.threshold, 0.5],
         });
         this.observer.observe(this.wrapEl.current);
     }
@@ -21,11 +22,17 @@ export default class ScrollTracker extends Component {
         this.observer.disconnect();
     }
 
-    handleIntersection(ev) {
-        const [[, entry]] = ev.entries();
+    handleIntersection(entities) {
         this.setState({
-            visible: entry.isIntersecting
+            visible: entities[0].isIntersecting
         });
+
+        if (this.props.onItersection)
+            this.props.onItersection(entities[0]);
+    }
+
+    getPosition() {
+        return this.wrapEl.current.offsetLeft;
     }
 
     render() {
