@@ -14,7 +14,7 @@ router
         check('query')
             .exists()
             .trim()
-            .isLength({ min: 2 })
+            .isLength({ min: 2, max: 50 })
     ],
     checkValidation,
     async (req, res) => {
