@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import i18n from 'es2015-i18n-tag'
 import range from 'lodash/range'
-import classNames from 'classnames'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
@@ -122,7 +121,7 @@ class Workspace extends Component {
         const { months } = this.state;
         if (months)
             return (
-                <ScrollDragger className="workspace-wrap" id="workspace">
+                <ScrollDragger className="workspace-wrap">
                     <div className="header">
                         {months.map(m => (
                             <div key={m} className={"header-month " + `header-month__${MONTHS_LENGTH[m]}`}>

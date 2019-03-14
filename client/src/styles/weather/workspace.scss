@@ -2,6 +2,8 @@ $items-width: 60px;
 $items-height: 100px;
 
 .workspace-wrap {
+  background-color: white;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
 }
 
 .workspace-wrap__scrollable {
@@ -11,23 +13,28 @@ $items-height: 100px;
 .header {
   position: sticky;
   top: 58px;
+  background-color: rgb(240, 243, 232);
+  padding: 0 51px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
   height: 20px;
-  background-color: grey;
-  padding: 0 50px;
 
   .header-month {
+    height: 20px;
     display: inline-block;
-    border-left: 1px black solid;
-    border-right: 1px black solid;
+    border-right: 2px rgb(56, 51, 52) solid;
+    &:last-child {
+      border-right: none;
+    }
   }
 
   .header-month-title {
     display: inline-block;
     position: sticky;
-    left: 40px;
-    right: 40px;
-    padding-left: 40px;
-    padding-right: 40px;
+    left: 0;
+    right: 0;
+    padding-left: 80px;
+    padding-right: 80px;
+    background-color: rgb(240, 243, 232);
   }
 
   .header-month-title:first-child {
@@ -56,14 +63,16 @@ $items-height: 100px;
 .footer {
   position: sticky;
   bottom: 0;
-  height: 20px;
-  background-color: grey;
-  padding: 0 50px;
+  background-color: rgb(240, 243, 232);
+  padding: 0 51px;
+  box-shadow: 0 -1px 3px rgba(0, 0, 0, 0.12), 0 -1px 2px rgba(0, 0, 0, 0.24);
 
   .footer-month {
     display: inline-block;
-    border-left: 1px black solid;
-    border-right: 1px black solid;
+    border-right: 2px rgb(56, 51, 52) solid;
+    &:last-child {
+      border-right: none;
+    }
   }
   .footer-month-day {
     display: inline-block;
@@ -75,13 +84,11 @@ $items-height: 100px;
 .data {
   display: flex;
   width: $items-width * 367 + 50 * 2 - 12 * 2 - 2;
-  height: $items-height * 5;
 }
 
 .data-month {
   height: 100%;
-  border-left: 1px black solid;
-  border-right: 1px black solid;
+  border-right: 2px rgb(56, 51, 52) solid;
 }
 
 .data-month__placeholder {
@@ -89,16 +96,23 @@ $items-height: 100px;
 }
 
 .data-year {
-  height: $items-height + 1;
+  &:last-child .data-day {
+    border-bottom: none;
+  }
 }
 
 .data-day {
   display: inline-block;
-  height: 100%;
+  height: $items-height;
   width: $items-width - 1;
   text-align: center;
-  border-right: 1px gray dashed;
-  border-bottom: 1px gray dashed;
+  border-right: 1px rgb(167, 167, 167) solid;
+  border-bottom: 1px rgb(167, 167, 167) solid;
+
+  &:last-child {
+    border-right: none;
+    width: $items-width;
+  }
 }
 
 .border-year {
@@ -106,23 +120,30 @@ $items-height: 100px;
   display: flex;
   align-items: center;
   justify-content: center;
-  border-bottom: 1px black solid;
+  border-bottom: 1px rgb(56, 51, 52) solid;
+  &:last-child {
+    border-bottom: none;
+  }
 }
 
 .border1 {
+  z-index: 10;
   position: sticky;
   float: left;
   top: 0;
   left: 0;
   width: 50px;
-  background-color: rgba(255, 0, 0, 0.473);
+  background-color: rgb(240, 243, 232);
+  border-right: 1px solid rgba(0, 0, 0, 0.15);
 }
 
 .border2 {
+  z-index: 10;
   position: sticky;
   float: right;
   top: 0;
   right: 0;
   width: 50px;
-  background-color: rgba(255, 0, 0, 0.473);
+  background-color: rgb(240, 243, 232);
+  border-left: 1px solid rgba(0, 0, 0, 0.15);
 }
