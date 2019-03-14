@@ -10,6 +10,11 @@ module.exports = {
         migrations: {
             directory: path.join(__dirname, 'src/store/migrations'),
             tableName: '_migrations'
+        },
+        pool: {
+            afterCreate: (conn, cb) => {
+                conn.run('PRAGMA foreign_keys = ON;PRAGMA journal_mode = WAL;', cb);
+            }
         }
     },
     test: {
@@ -21,6 +26,11 @@ module.exports = {
         migrations: {
             directory: path.join(__dirname, 'src/store/migrations'),
             tableName: '_migrations'
+        },
+        pool: {
+            afterCreate: (conn, cb) => {
+                conn.run('PRAGMA foreign_keys = ON;PRAGMA journal_mode = WAL;', cb);
+            }
         }
     },
     production: {
@@ -32,6 +42,11 @@ module.exports = {
         migrations: {
             directory: path.join(__dirname, 'src/store/migrations'),
             tableName: '_migrations'
+        },
+        pool: {
+            afterCreate: (conn, cb) => {
+                conn.run('PRAGMA foreign_keys = ON;PRAGMA journal_mode = WAL;', cb);
+            }
         }
     }
 };
