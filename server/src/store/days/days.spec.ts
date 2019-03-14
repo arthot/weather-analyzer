@@ -10,7 +10,7 @@ describe('day model', () => {
         await CityModel.query().truncate();
         await DayModel.query().truncate();
 
-        await CityModel.query().insert(new City(1, 'en', { code: 'code', name: 'name' }, 'kind', 'distinct', 'name', 'subDistrict'));        
+        await CityModel.query().insert(new City(1, 'en', { code: 'code', name: 'name' }, 'kind', 'distinct', 'name', 'subDistrict'));
     })
 
     it('should insert and read', async () => {
@@ -19,6 +19,15 @@ describe('day model', () => {
             .insert(obj);
 
         const result = await DayModel.query().first().then(v => v ? v.toModel() : null);
+        expect(result).deep.equal(obj);
+    })
+
+    it('should insert with null chance', async () => {
+        const obj = new Day(new Date().toISOString(), 0.2, 0.2, true, null, 2);
+        await DayModel.query()
+            .insert(obj);
+
+        const result = await DayModel.query().findById(2).then(v => v ? v.toModel() : null);
         expect(result).deep.equal(obj);
     })
 

@@ -24,7 +24,7 @@ export class DayModel extends Model {
             temperature: { type: 'number' },
             cloudiness: { type: 'number' },
             fallout: { type: 'boolean' },
-            chance: { type: 'number' },
+            chance: { type: ['number', 'null'] },
         }
     }
 
