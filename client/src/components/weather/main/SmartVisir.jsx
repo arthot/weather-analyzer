@@ -6,14 +6,13 @@ const propTypes = {
     onItersection: PropTypes.func,
 }
 
-export default class ScrollTracker extends Component {
+export default class SmartVisir extends Component {
     state = { visible: false }
     wrapEl = React.createRef();
 
     componentDidMount() {
         this.observer = new IntersectionObserver(this.handleIntersection.bind(this), {
-            root: document.getElementById('workspace'),
-            rootMargin: '-60px',
+            rootMargin: '60px',
             threshold: [this.props.threshold, 0.5],
         });
         this.observer.observe(this.wrapEl.current);
@@ -61,4 +60,4 @@ export default class ScrollTracker extends Component {
     }
 }
 
-ScrollTracker.propTypes = propTypes;
+SmartVisir.propTypes = propTypes;
