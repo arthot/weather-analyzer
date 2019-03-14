@@ -17,10 +17,14 @@ router
             .exists()
             .isNumeric()
     ],
-    checkValidation,
-    async (req, res, next) => {
-        const { cityId, month } = req.params;
-        log.debug('get weather for ', cityId, month);
-        const result = await Provider.get(cityId, month);
-        return res.json(result);
-    });
+        checkValidation,
+        async (req, res, next) => {
+            try {
+                const { cityId, month } = req.params;
+                log.debug('get weather for ', cityId, month);
+                const result = await Provider.get(cityId, month);
+                return res.json(result);
+            } catch (e) {
+                next(e);
+            }
+        });
