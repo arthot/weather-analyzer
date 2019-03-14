@@ -1,16 +1,17 @@
 import React, { Component } from 'react'
-import i18n from 'es2015-i18n-tag'
-import range from 'lodash/range'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
 import { SEARCH_MONTH_SELECT } from '../../../search/actions'
-import { MONTHS_LENGTH, YEARS } from '../../../weather/constants'
-import ScrollDragger from './ScrollDragger'
-import SmartVisir from './SmartVisir'
-import MonthTracker from './MonthTracker'
 
-require('../../../styles/weather/workspace.scss')
+import ScrollDragger from './ScrollDragger'
+import MonthTracker from './MonthTracker'
+import YearsStrip from './YearsBorder'
+import MonthsStrip from './MonthsStrip'
+import DaysStrip from './DaysStrip'
+import Month from './Month'
+
+require('../../../styles/weather/workspace/index.scss')
 
 const propTypes = {
     data: PropTypes.array.isRequired,
@@ -32,32 +33,53 @@ const mapDispatchToProps = (dispatch) => ({
 })
 
 class Workspace extends Component {
-    state = { month: -1, months: null, changeByScroll: false };
+    state = {
+        month: -1,
+        months: null,
+        changeByScroll: false
+    };
     monthTracker = React.createRef();
 
     static getDerivedStateFromProps(props, state) {
         if (!state.repositionScroll && !state.changeByScroll && state.month !== props.month)
-            return {
-                month: props.month,
-                months: (state.months && state.months.indexOf(props.month) > 1 && state.months.indexOf(props.month) < 10) ?
-                    state.months :
-                    Workspace.getMonthsMap(props.month),
-                changeByScroll: false,
-                movingToMonth: true,
-            }
+            return Workspace.reshapeIfMonthChanged(props.month, state.months);
 
-        if (state.changeByScroll && state.month !== props.month &&
-            (state.months.indexOf(props.month) < 2 || state.months.indexOf(props.month) > 9)) {
-            return {
-                month: props.month,
-                months: Workspace.getMonthsMap(props.month),
-                changeByScroll: false,
-                movingToMonth: false,
-                repositionScroll: true,
-            }
+        const idx = state.months.indexOf(props.month);
+        if (state.changeByScroll && state.month !== props.month && (idx < 2 || idx > 9)) {
+            return Workspace.reshapeIfTooCloseToBorders(props.month);
         }
 
         return null;
+    }
+
+    static getMonthsMap(month) {
+        return Array(12).fill(0).map((el, i) => {
+            const shift = month + i - 5;
+            return shift < 1 ? shift + 12 :
+                shift > 12 ? shift - 12 :
+                    shift;
+        })
+    }
+
+    static reshapeIfTooCloseToBorders(month) {
+        return {
+            month: month,
+            months: Workspace.getMonthsMap(month),
+            changeByScroll: false,
+            movingToMonth: false,
+            repositionScroll: true,
+        }
+    }
+
+    static reshapeIfMonthChanged(month, monthsMap) {
+        return {
+            month: month,
+            months: (monthsMap && monthsMap.indexOf(month) > 1 && monthsMap.indexOf(month) < 10) ?
+                monthsMap :
+                Workspace.getMonthsMap(month),
+            changeByScroll: false,
+            movingToMonth: true,
+        }
     }
 
     getSnapshotBeforeUpdate(prevProps, prevState) {
@@ -108,67 +130,23 @@ class Workspace extends Component {
         }
     }
 
-    static getMonthsMap(month) {
-        return Array(12).fill(0).map((el, i) => {
-            const shift = month + i - 5;
-            return shift < 1 ? shift + 12 :
-                shift > 12 ? shift - 12 :
-                    shift;
-        })
-    }
-
     render() {
         const { months } = this.state;
+
         if (months)
             return (
                 <ScrollDragger className="workspace-wrap">
-                    <div className="header">
-                        {months.map(m => (
-                            <div key={m} className={"header-month " + `header-month__${MONTHS_LENGTH[m]}`}>
-                                <div className="header-month-title">{i18n.translate(`month_${m}`)}</div>
-                                <div className="header-month-title">{i18n.translate(`month_${m}`)}</div>
-                            </div>
-                        ))}
-                    </div>
-                    <div className="data">
-                        <div className="border1">
-                            {YEARS.map(y => (
-                                <div key={y} className="border-year">{y}</div>
-                            ))}
-                        </div>
+                    <MonthsStrip months={months} />
+                    <div className="workspace-data">
+                        <YearsStrip left />
                         <MonthTracker onMonthChanged={this.onMonthChanged} ref={this.monthTracker}>
                             {months.map(m => (
-                                <SmartVisir
-                                    month={m}
-                                    key={m}
-                                    className={"data-month " + `header-month__${MONTHS_LENGTH[m]}`}
-                                    threshold={0}
-                                >
-                                    {(visible) => visible ? YEARS.map(y => (
-                                        <div key={y} className="data-year">
-                                            {range(1, MONTHS_LENGTH[m] + 1).map(d => (
-                                                <div key={d} className="data-day">{d}</div>
-                                            ))}
-                                        </div>
-                                    )) : <div className="data-month data-month__placeholder"></div>}
-                                </SmartVisir>
+                                <Month key={m} month={m} />
                             ))}
                         </MonthTracker>
-                        <div className="border2">
-                            {YEARS.map(y => (
-                                <div key={y} className="border-year">{y}</div>
-                            ))}
-                        </div>
+                        <YearsStrip right />
                     </div>
-                    <div className="footer">
-                        {months.map(m => (
-                            <div key={m} className={"footer-month " + `header-month__${MONTHS_LENGTH[m]}`}>
-                                {range(1, MONTHS_LENGTH[m] + 1).map(d => (
-                                    <div key={`${m}_${d}`} className="footer-month-day" >{d}</div>
-                                ))}
-                            </div>
-                        ))}
-                    </div>
+                    <DaysStrip months={months} />
                 </ScrollDragger>
             )
         else
@@ -176,8 +154,6 @@ class Workspace extends Component {
     }
 }
 
-
 Workspace.propTypes = propTypes;
 
 export default connect(mapStateToProps, mapDispatchToProps)(Workspace)
-

@@ -1,0 +1,65 @@
+$shadow-light: rgba(0, 0, 0, 0.12);
+$shadow-dark: rgba(0, 0, 0, 0.24);
+
+$stip-height: 20px;
+
+.workspace-border-strip {
+  position: sticky;
+  height: $stip-height;
+  background-color: $white-bg;
+  padding: 0 52px;
+}
+
+.strip-month-item {
+  display: inline-block;
+  height: $stip-height;
+  border-right: 2px $border-dark solid;
+  &:last-child {
+    border-right: none;
+  }
+}
+
+.workspace-border-strip__header {
+  top: 58px;
+  box-shadow: 0 1px 3px $shadow-light, 0 1px 2px $shadow-dark;
+
+  .header-month-title {
+    display: inline-block;
+    position: sticky;
+    left: 0;
+    right: 0;
+    padding: 0 $side-width + 30px;
+    background-color: $white-bg;
+  }
+
+  .header-month-title:first-child {
+    float: left;
+    margin-left: 25%;
+  }
+
+  .header-month-title:last-child {
+    float: right;
+    margin-right: 25%;
+  }
+}
+
+@mixin month-length__x {
+  @for $i from 29 through 31 {
+    .month-length__#{$i} {
+      width: $i * $items-width;
+    }
+  }
+}
+
+@include month-length__x;
+
+.workspace-border-strip__footer {
+  bottom: 0;
+  box-shadow: 0 -1px 3px $shadow-light, 0 -1px 2px $shadow-dark;
+
+  .footer-month-day {
+    display: inline-block;
+    width: $items-width;
+    text-align: center;
+  }
+}

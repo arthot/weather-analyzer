@@ -1,0 +1,31 @@
+.side {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  width: $side-width;
+  background-color: $white-bg;
+  border-right: $border-sides;
+  border-left: $border-sides;
+}
+
+.side__left {
+  float: left;
+  left: 0;
+}
+
+.side__right {
+  float: right;
+  right: 0;
+}
+
+.side-year-item {
+  display: flex;
+  height: $items-height;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 1px $border-dark solid;
+
+  &:last-child {
+    border-bottom: none;
+  }
+}

@@ -1,0 +1,33 @@
+.workspace-data {
+  display: flex;
+  width: $items-width * 367 + 50 * 2 - 12 * 2 - 2;
+}
+
+.data-month {
+  height: 100%;
+  border-right: 2px $border-dark solid;
+}
+
+.data-month__placeholder {
+  height: auto;
+}
+
+.data-year {
+  &:last-child .data-day {
+    border-bottom: none;
+  }
+}
+
+.data-day {
+  display: inline-block;
+  height: $items-height;
+  width: $items-width - 1;
+  text-align: center;
+  border-right: 1px $border-cell solid;
+  border-bottom: 1px $border-cell solid;
+
+  &:last-child {
+    border-right: none;
+    width: $items-width;
+  }
+}

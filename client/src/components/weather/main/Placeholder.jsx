@@ -10,25 +10,30 @@ require('../../../styles/weather/placeholder.scss')
 
 const STAGES = {
     FETCHING: 'fetching_stage',
-    SEARCH: 'searching_stage',
+    SEARCHING: 'searching_stage',
     PARSING: 'parsing_stage',
 }
 
-const INITTIAL_STAGE = STAGES.FETCHING;
+const INITIAL_STAGE = STAGES.FETCHING;
 
-export default class Main extends Component {
-    state = { stage: INITTIAL_STAGE }
+const STAGES_DELAYS = {
+    [INITIAL_STAGE]: 1,
+    [STAGES.SEARCHING]: 5,
+    [STAGES.PARSING]: 0,
+}
+
+export default class Placeholder extends Component {
+    state = { stage: INITIAL_STAGE }
 
     componentDidMount() {
         this.searchTimer = setTimeout(() => {
-
-            this.setState({ stage: STAGES.SEARCH });
+            this.setState({ stage: STAGES.SEARCHING });
 
             this.parsingTimer = setTimeout(() => {
                 this.setState({ stage: STAGES.PARSING })
-            }, 5000 * 1);
+            }, 1000 * STAGES_DELAYS[this.state.stage]);
 
-        }, 1000 * 1);
+        }, 1000 * STAGES_DELAYS[this.state.stage]);
     }
 
     componentWillUnmount() {
@@ -43,7 +48,7 @@ export default class Main extends Component {
                 <div className="data-placeholder">
                     <Icon
                         className={classNames('data-placeholder-icon', {
-                            'icon-rotate': this.state.stage !== INITTIAL_STAGE
+                            'icon-rotate': this.state.stage !== INITIAL_STAGE
                         })}
                     />
                     <span className="data-placeholder-text">{i18n.translate(this.state.stage)}...</span>

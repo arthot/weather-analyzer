@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 
 const propTypes = {
     children: PropTypes.func.isRequired,
-    onItersection: PropTypes.func,
+    onItersection: PropTypes.func.isRequired,
 }
 
 export default class SmartVisir extends Component {
