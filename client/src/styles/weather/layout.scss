@@ -6,4 +6,6 @@
 
 .app-main-placeholder {
   height: calc(100vh - #{$app-header-full-height});
+  width: 100vw;
 }
+

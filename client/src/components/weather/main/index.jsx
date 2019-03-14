@@ -13,7 +13,7 @@ export default class Main extends PureComponent {
             <main className="app-main">
                 {!isEmpty && (
                     <div className="app-main-placeholder">
-                        <Placeholder />
+                        <Placeholder app />
                     </div>
                 )}
                 {isEmpty && (

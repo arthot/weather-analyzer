@@ -3,6 +3,7 @@ import i18n from 'es2015-i18n-tag'
 import classNames from 'classnames'
 
 import FetchingIcon from '-!svg-react-loader?name=FetchingIcon!../../../images/sunny.svg';
+import FetchingAppIcon from '-!svg-react-loader?name=FetchingIcon!../../../images/snowflake.svg';
 
 require('../../../styles/weather/placeholder.scss')
 
@@ -36,10 +37,11 @@ export default class Main extends Component {
     }
 
     render() {
+        const Icon = this.props.app ? FetchingAppIcon : FetchingIcon;
         return (
             <div className="data-placeholder-wrap">
                 <div className="data-placeholder">
-                    <FetchingIcon
+                    <Icon
                         className={classNames('data-placeholder-icon', {
                             'icon-rotate': this.state.stage !== INITTIAL_STAGE
                         })}
