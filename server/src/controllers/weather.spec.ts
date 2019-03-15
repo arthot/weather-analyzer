@@ -21,7 +21,8 @@ describe(ROOT_URL, () => {
             .get(`${ROOT_URL}/a/1`)
             .send({})
             .then(() => new Error('should return http error'))
-            .catch(err => {
+            .catch(err => {              
+                expect(err.response).to.have.status(400);
                 const { errors } = err.response.body;
                 expect(errors).has.property('cityId');
             })
@@ -33,6 +34,7 @@ describe(ROOT_URL, () => {
             .send({})
             .then(() => new Error('should return http error'))
             .catch(err => {
+                expect(err.response).to.have.status(400);
                 const { errors } = err.response.body;
                 expect(errors).has.property('month');
             })
@@ -49,9 +51,10 @@ describe(ROOT_URL, () => {
             .get(`${ROOT_URL}/${cityId}/${month}`)
             .send({})
             .then(res => {
-                expect(res.body).is.an('array');
-                expect(res.body.length).eq(1);
-                expect(res.body[0].cityId).eq(cityId);
+                expect(res).to.have.status(200);
+                expect(res.body).is.an('object');
+                expect(res.body[date.toISOString()].cityId).eq(cityId);
+                
             })
     })
 

@@ -1,4 +1,5 @@
 import { load } from 'cheerio'
+import {format} from 'date-fns'
 import { requestPage } from 'src/utils/request'
 import { Day } from 'src/common/day'
 import { getLogger } from 'src/utils/log'
@@ -23,7 +24,7 @@ export function parse(cityId: number, year: number, month: number) {
                         if (!tds.length || tds.eq(1).html().includes('img/still')) return;
 
                         return new Day(
-                            new Date(Date.UTC(year, month - 1, parseInt(tds.eq(0).text()))).toISOString(),
+                            format(Date.UTC(year, month - 1, parseInt(tds.eq(0).text())), 'YYYY-MM-DD'),
                             parseFloat(tds.eq(1).text()),
                             tds.eq(3).html().includes('sun.png') ? 0 :
                                 tds.eq(3).html().includes('sunc.png') ? 0.25 :

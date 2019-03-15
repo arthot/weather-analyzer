@@ -1,5 +1,5 @@
 import { Router } from 'express'
-import { check, validationResult } from 'express-validator/check'
+import { check } from 'express-validator/check'
 import { checkValidation } from 'src/utils/validation'
 import * as Provider from 'src/providers/days'
 import { getLogger } from 'src/utils/log'
@@ -18,13 +18,9 @@ router
             .isNumeric()
     ],
         checkValidation,
-        async (req, res, next) => {
-            try {
-                const { cityId, month } = req.params;
-                log.debug('get weather for ', cityId, month);
-                const result = await Provider.get(parseInt(cityId), parseInt(month));
-                return res.json(result);
-            } catch (e) {
-                next(e);
-            }
+        async (req, res) => {
+            const { cityId, month } = req.params;
+            log.debug('get weather for ', cityId, month);
+            const result = await Provider.get(parseInt(cityId), parseInt(month));
+            return res.json(result);
         });

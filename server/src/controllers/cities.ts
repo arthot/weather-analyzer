@@ -17,15 +17,11 @@ router
             .isLength({ min: 2, max: 50 })
     ],
         checkValidation,
-        async (req, res, next) => {
-            try {
-                const { query, lang } = req.params;
-                log.debug(`[${lang}] search: ${query}`);
-                const result = await Provider.search(query, lang);
-                return res.json(result);
-            } catch (e) {
-                next(e);
-            }
+        async (req, res) => {
+            const { query, lang } = req.params;
+            log.debug(`[${lang}] search: ${query}`);
+            const result = await Provider.search(query, lang);
+            return res.json(result);
         });
 
 router
@@ -36,13 +32,9 @@ router
             .isNumeric()
     ],
         checkValidation,
-        async (req, res, next) => {
-            try {
-                const { id, lang } = req.params;
-                log.debug(`[${lang}] get city by id: ${id}`);
-                const result = await Provider.get(lang, id);
-                return res.json(result);
-            } catch (e) {
-                next(e);
-            }
+        async (req, res) => {
+            const { id, lang } = req.params;
+            log.debug(`[${lang}] get city by id: ${id}`);
+            const result = await Provider.get(lang, id);
+            return res.json(result);
         });
