@@ -9,7 +9,7 @@ require('../../styles/weather/index.scss')
 
 const mapStateToProps = (state, own) => ({
     locale: own.match.params.lang,
-    cityId: own.match.params.id,
+    cityId: (parseInt(own.match.params.id) || null),
     data: state.weather.data,
     month: state.search.month,
 })

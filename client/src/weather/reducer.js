@@ -21,7 +21,7 @@ export function weather(state = INITIAL_SEARCH_STATE, action) {
             return {
                 ...state,
                 data: Object.assign([], state.data, {
-                    [month - 1]: { loading: false, data }
+                    [month - 1]: { loading: false, weather: data }
                 })
             }
         }
@@ -37,7 +37,7 @@ export function weather(state = INITIAL_SEARCH_STATE, action) {
         case ACTIONS.WEATHER_RESET_CITY: {
             return {
                 cityId: action.payload.cityId,
-                data: [...Array(12).keys()]
+                data: [...Array(12)]
             }
         }
         default:

@@ -10,7 +10,7 @@ const propTypes = {
 
 export default class Main extends PureComponent {
     render() {
-        const isEmpty = this.props.data.every(i => !i || !i.data);
+        const isEmpty = this.props.data.every(i => !i || !i.weather);
 
         return (
             <main className="app-main">

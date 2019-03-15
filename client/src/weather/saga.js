@@ -1,4 +1,4 @@
-import { call, put, select, takeEvery, delay } from 'redux-saga/effects'
+import { call, put, select, takeEvery, takeLatest, delay } from 'redux-saga/effects'
 import * as Actions from './actions'
 import { SEARCH_CITY_SELECT } from '../search/actions'
 import * as api from './api'
@@ -13,7 +13,7 @@ function* getWeatherData(cityId, month) {
         const data = yield api.fetchWeather(cityId, month);
         const currentCityId = yield select(s => s.weather.cityId);
 
-        if (currentCityId === cityId) {
+        if (!currentCityId || currentCityId === cityId) {
             const pageLoadSpan = Date.now() - pageLoadTimestamp;
             if (pageLoadSpan < PAGE_LOAD_DELAY) {
                 yield delay(PAGE_LOAD_DELAY - pageLoadSpan); // smoothe page load animation
@@ -38,6 +38,8 @@ function* getWeatherData(cityId, month) {
 }
 
 function* handleMonthShown(action) {
+    yield delay(500);
+
     const { month, cityId } = action.payload;
 
     const weather = yield select(s => s.weather);
@@ -50,7 +52,7 @@ function* handleMonthShown(action) {
 }
 
 export function* watchWeatherLoad() {
-    yield takeEvery(Actions.WEATHER_MONTH_VISIBLE, handleMonthShown);
+    yield takeLatest(Actions.WEATHER_MONTH_VISIBLE, handleMonthShown);
 }
 
 
@@ -73,8 +75,12 @@ export function* watchCityChange() {
 const PAGE_LOAD_DELAY = 1500;
 let pageLoadTimestamp = Date.now();
 
-function handlePageLoad() {
+function* handlePageLoad(action) {
     pageLoadTimestamp = Date.now();
+    const { month } = yield select(s => s.search);
+    const { cityId } = action.payload;
+
+    yield call(getWeatherData, cityId, month);
 }
 
 export function* watchPageLoad() {
