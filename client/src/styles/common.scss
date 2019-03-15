@@ -11,16 +11,3 @@ body {
   display: table;
   clear: both;
 }
-
-.icon-rotate {
-  animation: 7s rotate linear infinite;
-}
-
-@keyframes rotate {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}

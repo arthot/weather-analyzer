@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import i18n from 'es2015-i18n-tag'
-import classNames from 'classnames'
 
 import FetchingIcon from '-!svg-react-loader?name=FetchingIcon!../../../images/sunny.svg';
 import FetchingAppIcon from '-!svg-react-loader?name=FetchingIcon!../../../images/snowflake.svg';
@@ -46,11 +45,7 @@ export default class Placeholder extends Component {
         return (
             <div className="data-placeholder-wrap">
                 <div className="data-placeholder">
-                    <Icon
-                        className={classNames('data-placeholder-icon', {
-                            'icon-rotate': this.state.stage !== INITIAL_STAGE
-                        })}
-                    />
+                    <Icon className="data-placeholder-icon" />
                     <span className="data-placeholder-text">{i18n.translate(this.state.stage)}...</span>
                 </div>
             </div>

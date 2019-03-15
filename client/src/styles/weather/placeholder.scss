@@ -7,6 +7,15 @@
 }
 
 .data-placeholder {
+  position: sticky;
+  left: calc(30vw - 66px);
+  right: calc(30vw - 66px);
+  padding: 0 20vw;
+  width: 130px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .data-placeholder-icon {
