@@ -18,15 +18,27 @@
 }
 
 .data-day {
-  display: inline-block;
+  position: relative;
+  display: inline-flex;
+  flex-direction: column;
   height: $items-height;
   width: $items-width - 1;
-  text-align: center;
   border-right: 1px $border-cell solid;
   border-bottom: 1px $border-cell solid;
+  align-items: center;
+  justify-content: flex-end;
+  color: grey;
 
   &:last-child {
     border-right: none;
     width: $items-width;
   }
+}
+
+.data-day-temperature-bar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: green;
 }
