@@ -6,7 +6,8 @@
       "**/*.d.ts",
       "**/*.spec.ts",
       "dist/*",
-      "src/utils/config.ts"
+      "src/utils/config.ts",
+      "knexfile.ts"
     ],
     "reporter": [
       "text"

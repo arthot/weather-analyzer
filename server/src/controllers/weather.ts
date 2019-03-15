@@ -22,7 +22,7 @@ router
             try {
                 const { cityId, month } = req.params;
                 log.debug('get weather for ', cityId, month);
-                const result = await Provider.get(cityId, month);
+                const result = await Provider.get(parseInt(cityId), parseInt(month));
                 return res.json(result);
             } catch (e) {
                 next(e);

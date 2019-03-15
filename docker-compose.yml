@@ -5,6 +5,7 @@ services:
       context: ./server
     volumes:
      - ./server/src:/var/www/server/src
+     - ./server/db.sqlite3:/var/www/server/db.sqlite3
     environment:
       NODE_ENV: development
   client:

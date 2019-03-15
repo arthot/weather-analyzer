@@ -11,7 +11,7 @@ describe('city parser', () => {
 
         const dayAt = result.find(d => new Date(Date.parse(d.date)).getDate() === 20);
 
-        expect(dayAt.date).eq(new Date(Date.UTC(2013, 8, 20)).toISOString());
+        expect(dayAt.date).eq(new Date(Date.UTC(2013, 7, 20)).toISOString());
         expect(dayAt.cityId).eq(4233);
         expect(dayAt.temperature).eq(26);
         expect(dayAt.cloudiness).eq(0.5);
@@ -22,7 +22,7 @@ describe('city parser', () => {
         const result = await parse(4248, 2014, 9);
         const dayAt = result.find(d => new Date(Date.parse(d.date)).getDate() === 10);
 
-        expect(dayAt.date).eq(new Date(Date.UTC(2014, 9, 10)).toISOString());
+        expect(dayAt.date).eq(new Date(Date.UTC(2014, 8, 10)).toISOString());
         expect(dayAt.cityId).eq(4248);
         expect(dayAt.temperature).eq(16);
         expect(dayAt.cloudiness).eq(1);
@@ -33,7 +33,7 @@ describe('city parser', () => {
         const result = await parse(73228, 2014, 7);
         const dayAt = result.find(d => new Date(Date.parse(d.date)).getDate() === 30);
 
-        expect(dayAt.date).eq(new Date(Date.UTC(2014, 7, 30)).toISOString());
+        expect(dayAt.date).eq(new Date(Date.UTC(2014, 6, 30)).toISOString());
         expect(dayAt.cityId).eq(73228);
         expect(dayAt.temperature).eq(36);
         expect(dayAt.cloudiness).eq(0);

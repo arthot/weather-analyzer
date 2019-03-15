@@ -23,7 +23,7 @@ export function parse(cityId: number, year: number, month: number) {
                         if (!tds.length || tds.eq(1).html().includes('img/still')) return;
 
                         return new Day(
-                            new Date(Date.UTC(year, month, parseInt(tds.eq(0).text()))).toISOString(),
+                            new Date(Date.UTC(year, month - 1, parseInt(tds.eq(0).text()))).toISOString(),
                             parseFloat(tds.eq(1).text()),
                             tds.eq(3).html().includes('sun.png') ? 0 :
                                 tds.eq(3).html().includes('sunc.png') ? 0.25 :
