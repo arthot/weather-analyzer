@@ -40,6 +40,12 @@ export function weather(state = INITIAL_SEARCH_STATE, action) {
                 data: [...Array(12)]
             }
         }
+        case ACTIONS.WEATHER_PAGE_LOADED: {
+            return {
+                ...state,
+                cityId: action.payload.cityId,
+            }
+        }
         default:
             return state;
     }

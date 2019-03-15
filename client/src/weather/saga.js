@@ -1,4 +1,4 @@
-import { call, put, select, takeEvery, takeLatest, delay } from 'redux-saga/effects'
+import { call, put, select, takeEvery, delay } from 'redux-saga/effects'
 import * as Actions from './actions'
 import { SEARCH_CITY_SELECT } from '../search/actions'
 import * as api from './api'
@@ -38,21 +38,16 @@ function* getWeatherData(cityId, month) {
 }
 
 function* handleMonthShown(action) {
-    yield delay(500);
-
-    const { month, cityId } = action.payload;
+    const { month } = action.payload;
 
     const weather = yield select(s => s.weather);
 
-    if (weather.cityId !== cityId)
-        return;
-
     if (!weather.data[month - 1])
-        yield call(getWeatherData, cityId, month);
+        yield call(getWeatherData, weather.cityId, month);
 }
 
 export function* watchWeatherLoad() {
-    yield takeLatest(Actions.WEATHER_MONTH_VISIBLE, handleMonthShown);
+    yield takeEvery(Actions.WEATHER_MONTH_VISIBLE, handleMonthShown);
 }
 
 
