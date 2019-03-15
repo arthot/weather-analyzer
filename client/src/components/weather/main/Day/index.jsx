@@ -3,7 +3,7 @@ import { MIN, MAX, getTemperatureColor } from './colors'
 
 export default class Day extends PureComponent {
     render() {
-        const { day, data } = this.props;
+        const { data } = this.props;
 
         if (data) {
             const percent = (Math.max(Math.min(MAX, data.temperature), MIN) - MIN) / (MAX - MIN) * 100;
@@ -16,8 +16,7 @@ export default class Day extends PureComponent {
             )
         } else {
             return (
-                <div className="data-day">
-                </div>
+                <div className="data-day data-day__empty">&nbsp;</div>
             )
         }
     }
