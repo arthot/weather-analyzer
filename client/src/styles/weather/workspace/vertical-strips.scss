@@ -44,7 +44,7 @@ $stip-height: 20px;
 }
 
 @mixin month-length__x {
-  @for $i from 29 through 31 {
+  @for $i from 28 through 31 {
     .month-length__#{$i} {
       width: $i * $items-width;
     }

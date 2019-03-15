@@ -2,7 +2,7 @@ import range from 'lodash/range'
 
 export const MONTHS_LENGTH = {
     1: 31,
-    2: 29,
+    2: 28,
     3: 31,
     4: 30,
     5: 31,
