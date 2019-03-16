@@ -1,7 +1,15 @@
 import React, { PureComponent } from 'react'
-import { MIN, MAX, getTemperatureColor } from './colors'
+import PropTypes from 'prop-types'
+
+import { MODES } from '../../../../weather/constants'
+import { MIN, MAX, getTemperatureColor, getPrecipitationColor } from './colors'
 
 import getIconSrc from './icon'
+
+const propTypes = {
+    mode: PropTypes.string.isRequired,
+    data: PropTypes.object,
+}
 
 export default class Day extends PureComponent {
     render() {
@@ -10,7 +18,9 @@ export default class Day extends PureComponent {
 
         if (data) {
             const percent = (Math.max(Math.min(MAX, data.temperature), MIN) - MIN) / (MAX - MIN) * 100;
-            const gradient = getTemperatureColor(percent);
+            const gradient = this.props.mode === MODES.TEMPERATURE ?
+                getTemperatureColor(percent) :
+                getPrecipitationColor(percent, data.cloudiness, data.fallout);
 
             return (
                 <div className="data-day" style={{ backgroundImage: gradient }}>
@@ -29,3 +39,4 @@ export default class Day extends PureComponent {
     }
 }
 
+Day.propTypes = propTypes;

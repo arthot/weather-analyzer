@@ -13,7 +13,7 @@ export default class DaysStrip extends PureComponent {
                 {months.map(m => (
                     <div key={m} className={classNames('strip-month-item', `month-length__${MONTHS_LENGTH[m]}`)}>
                         {range(1, MONTHS_LENGTH[m] + 1).map(d => (
-                            <div key={d} className="footer-month-day" >{d}</div>
+                            <div key={d} className="footer-month-day">{d}</div>
                         ))}
                     </div>
                 ))}
