@@ -1,8 +1,13 @@
 import * as ACTIONS from './actions'
+import { MODES } from './constants'
+import qs from 'query-string'
+
+const query = qs.parse(document.location.search);
 
 const INITIAL_SEARCH_STATE = {
     cityId: 0,
-    data: [...Array(12)]
+    mode: query.mode || MODES.TEMPERATURE,
+    data: [...Array(12)],
 }
 
 export function weather(state = INITIAL_SEARCH_STATE, action) {
@@ -44,6 +49,12 @@ export function weather(state = INITIAL_SEARCH_STATE, action) {
             return {
                 ...state,
                 cityId: action.payload.cityId,
+            }
+        }
+        case ACTIONS.WEATHER_MODE_CHANGED: {
+            return {
+                ...state,
+                mode: action.payload.mode,
             }
         }
         default:

@@ -23,6 +23,7 @@
     "immutable": "^3.8.2",
     "lodash": "^4.17.11",
     "parallax-js": "^3.1.0",
+    "query-string": "^6.4.0",
     "react": "^16.6.3",
     "react-dom": "^16.6.3",
     "react-hot-loader": "^4.6.0",

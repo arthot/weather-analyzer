@@ -1,4 +1,5 @@
 import { call, put, select, takeEvery, delay } from 'redux-saga/effects'
+import qs from 'query-string'
 import * as Actions from './actions'
 import { SEARCH_CITY_SELECT } from '../search/actions'
 import * as api from './api'
@@ -80,4 +81,14 @@ function* handlePageLoad(action) {
 
 export function* watchPageLoad() {
     yield takeEvery(Actions.WEATHER_PAGE_LOADED, handlePageLoad);
+}
+
+function handleModeChange(router, action) {
+    const { mode } = action.payload;
+    const query = qs.stringify({ mode });
+    router.replace('?' + query + document.location.hash);
+}
+
+export function* watchModeChange({ router }) {
+    yield takeEvery(Actions.WEATHER_MODE_CHANGED, handleModeChange.bind(null, router));
 }

@@ -19,6 +19,7 @@ const weatherSagas = [
     weather.watchWeatherLoad,
     weather.watchCityChange,
     weather.watchPageLoad,
+    weather.watchModeChange,
 ]
 
 export default function* rootSaga(context = {}) {

@@ -1,5 +1,10 @@
 import range from 'lodash/range'
 
+export const MODES = {
+    TEMPERATURE: 'temp',
+    PRECIPITATION: 'cloud',
+}
+
 export const MONTHS_LENGTH = {
     1: 31,
     2: 28,

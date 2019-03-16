@@ -1,5 +1,6 @@
 import { call, put, select, takeEvery, takeLatest, delay } from 'redux-saga/effects'
 import slugify from '@sindresorhus/slugify'
+import qs from 'query-string'
 import * as Actions from './actions'
 import { WEATHER_PAGE_LOADED } from '../weather/actions'
 import * as api from './api'
@@ -59,9 +60,12 @@ export function* watchCitySelection({ router }) {
     yield takeEvery(Actions.SEARCH_CITY_SELECT, handleCitySelect.bind(null, router));
 }
 
-function handleMonthChange(router, action) {
+function* handleMonthChange(router, action) {
     const { month } = action.payload;
-    router.replace('#' + month);
+    const { mode } = yield select(s => s.weather);
+
+    const query = qs.stringify({ mode });
+    router.replace('?' + query + '#' + month);
 }
 
 export function* watchMonthChange({ router }) {

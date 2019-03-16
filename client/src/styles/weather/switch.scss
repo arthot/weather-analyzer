@@ -39,6 +39,7 @@ $alt-color: rgb(255, 145, 0);
       height: 5px;
       vertical-align: middle;
       margin-left: -1px;
+      user-select: none;
     }
 
     &:active .toggle {
