@@ -4,6 +4,9 @@ import classNames from 'classnames'
 import i18n from 'es2015-i18n-tag'
 import PropTypes from 'prop-types'
 
+import ModeSwitch from './ModeSwitch'
+
+
 require('../../styles/weather/header.scss')
 
 const propTypes = {
@@ -19,6 +22,7 @@ export default class Header extends PureComponent {
                 })}
             >
                 <Link to="/" className="app-header-title">{i18n`Weather Archive`}</Link>
+                <ModeSwitch />
             </header>
         )
     }

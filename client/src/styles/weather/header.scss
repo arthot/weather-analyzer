@@ -1,7 +1,9 @@
-@import './vars.scss';
+@import "./vars.scss";
 
 .app-header {
   position: fixed;
+  display: flex;
+  justify-content: space-between;
   left: 0;
   z-index: 50;
   width: calc(100% - #{$app-header-padding * 2});
@@ -22,6 +24,10 @@
   line-height: $app-header-height;
   margin-left: 15px;
   text-decoration: none;
+}
+
+.app-header-switch {
+  margin: auto 15px;
 }
 
 @media (max-width: 1050px) {
