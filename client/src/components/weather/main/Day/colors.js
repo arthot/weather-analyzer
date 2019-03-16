@@ -7,10 +7,10 @@ export const MIN = -30;
 const backGradient = (percent, r, g, b) => `linear-gradient(to bottom, 
     white 0%,
     white ${100 - percent}%,
-    rgba(${r}, ${g}, ${b}, 1) ${100 - percent}%,
-    rgba(${r}, ${g}, ${b}, 1) ${100 - percent + 3}%,
+    rgba(${r}, ${g}, ${b}, 0.7) ${100 - percent}%,
     rgba(${r}, ${g}, ${b}, 0.7) ${100 - percent + 3}%,
-    rgba(${r}, ${g}, ${b}, 0.7) 100%)`;
+    rgba(${r}, ${g}, ${b}, 0.5) ${100 - percent + 3}%,
+    rgba(${r}, ${g}, ${b}, 0.5) 100%)`;
 
 /*
     This code is a pentagone path on hue diagram from red to blue colors replacing green part with minty colors

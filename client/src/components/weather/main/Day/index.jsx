@@ -1,9 +1,12 @@
 import React, { PureComponent } from 'react'
 import { MIN, MAX, getTemperatureColor } from './colors'
 
+import getIconSrc from './icon'
+
 export default class Day extends PureComponent {
     render() {
         const { data } = this.props;
+        const iconSrc = getIconSrc(data);
 
         if (data) {
             const percent = (Math.max(Math.min(MAX, data.temperature), MIN) - MIN) / (MAX - MIN) * 100;
@@ -11,12 +14,16 @@ export default class Day extends PureComponent {
 
             return (
                 <div className="data-day" style={{ backgroundImage: gradient }}>
+                    <img src={iconSrc} className="data-day-icon" />
                     <span className="data-day-temperature">{data.temperature}</span>
                 </div>
             )
         } else {
             return (
-                <div className="data-day data-day__empty">&nbsp;</div>
+                <div className="data-day data-day__empty">
+                    <img src={iconSrc} className="data-day-icon-empty" />
+                    <span className="data-day-temperature">&nbsp;</span>
+                </div>
             )
         }
     }
