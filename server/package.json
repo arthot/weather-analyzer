@@ -6,7 +6,7 @@
     "build": "tsc",
     "start": "NODE_ENV=development nodemon --watch 'src/**/*.ts' --ignore 'src/**/*.spec.ts' --exec 'ts-node' -r tsconfig-paths/register src/server.ts",
     "test": "NODE_ENV=test mocha --opts mocha.opts",
-    "test:all": "NODE_ENV=test LOG_LEVEL=silent nyc mocha --opts mocha.opts --recursive 'src/**/*.spec.ts'",
+    "test:all": "NODE_ENV=test PORT=3004 LOG_LEVEL=silent nyc mocha --opts mocha.opts --recursive 'src/**/*.spec.ts'",
     "migrate": "NODE_ENV=development DEBUG=knex:query knex migrate:latest  --knexfile ./knexfile.ts",
     "migrate:test": "NODE_ENV=test DEBUG=knex:query knex migrate:latest  --knexfile ./knexfile.ts",
     "lint": "tslint src",
