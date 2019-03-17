@@ -22,17 +22,19 @@ describe('days cacher', () => {
     })
 
     it('should return valid years range', async () => {
-        const prev = Cacher.getYearsRange(new Date().getMonth() - 1);
+        const MONTH = new Date().getMonth() + 1;
+
+        const prev = Cacher.getYearsRange(MONTH - 1);
 
         expect(_.last(prev)).eq(new Date().getFullYear());
         expect(prev.length).eq(Cacher.YEARS_DEPTH);
 
-        const curr = Cacher.getYearsRange(new Date().getMonth());
+        const curr = Cacher.getYearsRange(MONTH);
 
         expect(_.last(curr)).eq(new Date().getFullYear());
         expect(curr.length).eq(Cacher.YEARS_DEPTH);
 
-        const next = Cacher.getYearsRange(new Date().getMonth() + 1);
+        const next = Cacher.getYearsRange(MONTH + 1);
 
         expect(_.last(next)).eq(new Date().getFullYear() - 1);
         expect(next.length).eq(Cacher.YEARS_DEPTH - 1);

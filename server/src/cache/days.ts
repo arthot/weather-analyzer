@@ -25,7 +25,7 @@ export async function cache(cityId: number, month: number) {
 export function getYearsRange(month: number) {
     const date = new Date();
     const start = date.getFullYear() - YEARS_DEPTH + 1;
-    const length = date.getMonth() >= month ? YEARS_DEPTH : YEARS_DEPTH - 1;
+    const length = date.getMonth() + 1 >= month ? YEARS_DEPTH : YEARS_DEPTH - 1;
 
     return range(start, start + length);
 }
