@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import classNames from 'classnames'
 import i18n from 'es2015-i18n-tag'
 import PropTypes from 'prop-types'
+import { localize } from '../../locale/localize'
 
 import ModeSwitch from './ModeSwitch'
 
@@ -13,6 +14,7 @@ const propTypes = {
     toWeatherTransition: PropTypes.bool,
 }
 
+@localize
 export default class Header extends PureComponent {
     render() {
         return (

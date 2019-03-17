@@ -21,5 +21,7 @@
     "Art Khatsianovich": "Артём Хотянович",
     "fetching_stage": "загрузка данных",
     "searching_stage": "поиск истории",
-    "parsing_stage": "обработка данных"
+    "parsing_stage": "обработка данных",
+    "Mode temp description": "Режим Температуры. Переключить в режим Осадков",
+    "Mode cloud description": "Режим Осадков. Переключить в режим Температуры"
 }

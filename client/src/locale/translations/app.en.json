@@ -21,5 +21,7 @@
     "Art Khatsianovich": "Art Khatsianovich",
     "fetching_stage": "loading",
     "searching_stage": "searching for data",
-    "parsing_stage": "parsing the data"
+    "parsing_stage": "parsing the data",
+    "Mode temp description": "Temperature mode. Go to Precipitation mode",
+    "Mode cloud description": "Precipitation mode. Go to Temperature mode"
 }

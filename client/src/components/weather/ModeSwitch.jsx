@@ -54,7 +54,7 @@ class ModeSwitch extends Component {
     render() {
         const { mode } = this.state;
         return (
-            <label className="app-header-switch cl-switch cl-switch-large">
+            <label className="app-header-switch cl-switch cl-switch-large" title={i18n.translate(`Mode ${mode} description`)}>
                 <input type="checkbox" onChange={this.onChange} checked={mode === MODES.PRECIPITATION} />
                 <div className="switcher">
                     <div className="toggle">
