@@ -9,8 +9,8 @@ const backGradient = (percent, r, g, b) => `linear-gradient(to bottom,
     white ${100 - percent}%,
     rgba(${r}, ${g}, ${b}, 1) ${100 - percent}%,
     rgba(${r}, ${g}, ${b}, 1) ${100 - percent + 3}%,
-    rgba(${r}, ${g}, ${b}, 0.9) ${100 - percent + 3}%,
-    rgba(${r}, ${g}, ${b}, 0.9) 100%)`;
+    rgba(${r}, ${g}, ${b}, 0.8) ${100 - percent + 3}%,
+    rgba(${r}, ${g}, ${b}, 1) 100%)`;
 
 /*
     This code is a pentagone path on hue diagram from red to blue colors replacing green part with minty colors
