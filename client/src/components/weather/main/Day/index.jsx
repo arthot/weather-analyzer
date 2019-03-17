@@ -13,12 +13,12 @@ const propTypes = {
 
 export default class Day extends PureComponent {
     render() {
-        const { data } = this.props;
-        const iconSrc = getIconSrc(data);
+        const { data, mode } = this.props;
+        const iconSrc = getIconSrc(mode, data);
 
         if (data) {
             const percent = (Math.max(Math.min(MAX, data.temperature), MIN) - MIN) / (MAX - MIN) * 100;
-            const gradient = this.props.mode === MODES.TEMPERATURE ?
+            const gradient = mode === MODES.TEMPERATURE ?
                 getTemperatureColor(percent) :
                 getPrecipitationColor(percent, data.cloudiness, data.fallout);
 
