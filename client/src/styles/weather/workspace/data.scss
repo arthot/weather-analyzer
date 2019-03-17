@@ -21,7 +21,7 @@
   position: relative;
   display: inline-flex;
   flex-direction: column;
-  height: $items-height;
+  height: $items-height - 3;
   width: $items-width - 1;
   border-right: 1px $border-cell solid;
   border-bottom: 1px $border-cell solid;
@@ -29,6 +29,7 @@
   justify-content: flex-end;
   color: #646464;
   font-size: 14px;
+  padding-bottom: 3px;
 
   &:last-child {
     border-right: none;
@@ -42,11 +43,26 @@
 }
 
 .data-day-icon {
-  height: 74px;
   width: auto;
 }
 
 .data-day-icon-empty {
   height: 58px;
   width: auto;
+}
+
+.data-year__temp .data-day-icon {
+  height: 70px;
+}
+
+.data-year__cloud .data-day-icon {
+  height: 74px;
+}
+
+.data-year__temp .data-day {
+  font-size: 14px;
+}
+
+.data-year__cloud .data-day {
+  font-size: 12px;
 }

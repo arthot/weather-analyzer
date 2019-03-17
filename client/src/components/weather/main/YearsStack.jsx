@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react'
+import classNames from 'classnames'
 import PropTypes from 'prop-types'
 import range from 'lodash/range'
 import { connect } from 'react-redux'
@@ -36,7 +37,7 @@ class YearsStack extends PureComponent {
         if (data && !data.loading && data.weather) {
             return (
                 YEARS.map(y => (
-                    <div key={y} className="data-year">
+                    <div key={y} className={classNames('data-year', `data-year__${mode}`)}>
                         {range(1, MONTHS_LENGTH[month] + 1).map(d => (
                             <Day
                                 key={d}

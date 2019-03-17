@@ -25,7 +25,7 @@ export default class Day extends PureComponent {
             return (
                 <div className="data-day" style={{ backgroundImage: gradient }}>
                     <img src={iconSrc} className="data-day-icon" />
-                    <span className="data-day-temperature">{data.temperature}</span>
+                    <span className="data-day-temperature">{data.temperature}°</span>
                 </div>
             )
         } else {
