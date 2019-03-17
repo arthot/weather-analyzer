@@ -41,6 +41,7 @@ export function weather(state = INITIAL_SEARCH_STATE, action) {
         }
         case ACTIONS.WEATHER_RESET_CITY: {
             return {
+                ...state,
                 cityId: action.payload.cityId,
                 data: [...Array(12)]
             }

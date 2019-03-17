@@ -53,15 +53,18 @@ export function* watchWeatherLoad() {
 
 
 function* handleCityChange(action) {
-    const { city: { id } } = action.payload;
+    const { city: { id: newCityId } } = action.payload;
 
-    const cityId = yield select(s => s.weather.cityId);
+    const { cityId: currentCityId } = yield select(s => s.weather);
+    const { month } = yield select(s => s.search);
 
-    if (cityId !== id)
+    if (currentCityId !== newCityId) {
         yield put({
             type: Actions.WEATHER_RESET_CITY,
-            payload: { cityId: id }
-        })
+            payload: { cityId: newCityId }
+        });
+        yield call(getWeatherData, newCityId, month);
+    }
 }
 
 export function* watchCityChange() {
