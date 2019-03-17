@@ -9,6 +9,8 @@ export function up(knex: Knex) {
         table.boolean('fallout');
         table.float('chance');
         table.integer('cityId').notNullable();
+
+        table.index(['cityId']);
     })
 }
 

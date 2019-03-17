@@ -13,7 +13,7 @@ module.exports = {
         },
         pool: {
             afterCreate: (conn, cb) => {
-                conn.run('PRAGMA foreign_keys = ON;PRAGMA journal_mode = WAL;', cb);
+                conn.run('PRAGMA journal_mode = WAL;', cb);
             }
         }
     },
