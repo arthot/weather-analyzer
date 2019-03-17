@@ -8,8 +8,7 @@ export function up(knex: Knex) {
         table.float('cloudiness');
         table.boolean('fallout');
         table.float('chance');
-
-        table.integer('cityId').notNullable().references('cities.id').onDelete('CASCADE');
+        table.integer('cityId').notNullable();
     })
 }
 
