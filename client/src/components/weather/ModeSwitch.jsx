@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react'
+import React, { Component } from 'react'
 import i18n from 'es2015-i18n-tag'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
@@ -27,18 +27,38 @@ const mapDispatchToProps = (dispatch) => ({
     }),
 })
 
-class ModeSwitch extends PureComponent {
+class ModeSwitch extends Component {
+    state = { mode: null, byClick: false };
+
+    static getDerivedStateFromProps(props, state) {
+        if (props.mode !== state.mode && !state.byClick)
+            return { mode: props.mode, byClick: false };
+
+        return null;
+    }
+
     onChange = (ev) => {
-        this.props.onChange(ev.target.checked ? MODES.PRECIPITATION : MODES.TEMPERATURE);
+        const mode = ev.target.checked ? MODES.PRECIPITATION : MODES.TEMPERATURE;
+        this.setState({ mode, byClick: true }, () => {
+            this.delayedUpdate = setTimeout(() => {
+                this.props.onChange(mode);
+                this.setState({ byClick: false });
+            }, 200);
+        });
+    }
+
+    componentWillUnmount() {
+        clearTimeout(this.delayedUpdate);
     }
 
     render() {
+        const { mode } = this.state;
         return (
             <label className="app-header-switch cl-switch cl-switch-large">
-                <input type="checkbox" onChange={this.onChange} checked={this.props.mode === MODES.PRECIPITATION} />
+                <input type="checkbox" onChange={this.onChange} checked={mode === MODES.PRECIPITATION} />
                 <div className="switcher">
                     <div className="toggle">
-                        <img className="toggle-icon" src={this.props.mode === MODES.PRECIPITATION ? CloudIcon : TempIcon} />
+                        <img className="toggle-icon" src={mode === MODES.PRECIPITATION ? CloudIcon : TempIcon} />
                     </div>
                 </div>
             </label>
