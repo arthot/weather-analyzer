@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
+import i18n from 'es2015-i18n-tag'
 
 import { MODES } from '../../../../weather/constants'
 import { MIN, MAX, getTemperatureColor, getPrecipitationColor } from './colors'
@@ -12,6 +13,13 @@ const propTypes = {
 }
 
 export default class Day extends PureComponent {
+    generateDescription(data) {
+        return `
+${i18n`Cloudiness`} ${data.cloudiness * 100}%
+${i18n`Temperature`} ${data.temperature}°
+${i18n`Fallout`} ${i18n.translate(data.fallout)}
+`
+    }
     render() {
         const { data, mode } = this.props;
         const iconSrc = getIconSrc(mode, data);
@@ -23,7 +31,7 @@ export default class Day extends PureComponent {
                 getPrecipitationColor(percent, data.cloudiness, data.fallout);
 
             return (
-                <div className="data-day" style={{ backgroundImage: gradient }}>
+                <div className="data-day" style={{ backgroundImage: gradient }} title={this.generateDescription(data)}>
                     <img src={iconSrc} className="data-day-icon" />
                     <span className="data-day-temperature">{data.temperature}°</span>
                 </div>

@@ -23,5 +23,10 @@
     "searching_stage": "searching for data",
     "parsing_stage": "parsing the data",
     "Mode temp description": "Temperature mode. Go to Precipitation mode",
-    "Mode cloud description": "Precipitation mode. Go to Temperature mode"
+    "Mode cloud description": "Precipitation mode. Go to Temperature mode",
+    "Cloudiness": "Cloudiness: ",
+    "Temperature": "Temperature:",
+    "Fallout": "Fallout:    ",
+    "true": "yes",
+    "false": "no"
 }

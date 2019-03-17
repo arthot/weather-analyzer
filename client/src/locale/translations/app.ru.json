@@ -23,5 +23,10 @@
     "searching_stage": "поиск истории",
     "parsing_stage": "обработка данных",
     "Mode temp description": "Режим Температуры. Переключить в режим Осадков",
-    "Mode cloud description": "Режим Осадков. Переключить в режим Температуры"
+    "Mode cloud description": "Режим Осадков. Переключить в режим Температуры",
+    "Cloudiness": "Облачность: ",
+    "Temperature": "Температура:",
+    "Fallout": "Осадки:     ",
+    "true": "да",
+    "false": "нет"
 }
