@@ -62,7 +62,7 @@ describe('days cacher', () => {
 
     it('should load only new data', async () => {
         const city = 4248;
-        const month = new Date().getMonth() + 1;
+        const month = new Date().getMonth() + 3;
         const monthPart1 = 25;
 
         let Cacher = proxyquire.noPreserveCache().load('./days', {
@@ -104,6 +104,34 @@ describe('days cacher', () => {
         await Cacher.cache(city, month);
 
         expect(new Date(await DaysService.getLastCachedDay(city, month)).getDate()).eq(monthPart2);
+    })
+
+    it('should load only new data for current month', async () => {
+        const city = 4248;
+        const month = new Date().getMonth() + 1;
+        const monthPart1 = new Date().getDate();
+
+        let Cacher = proxyquire.noPreserveCache().load('./days', {
+            'src/parsers/day': {
+                'parse': (cityId, year) => Promise.resolve(
+                    _.range(1, monthPart1 + 1).map(d => new Day(new Date(Date.UTC(year, month - 1, d)).toISOString(), 1, 0, true, 0, city))
+                )
+            }
+        });
+
+        await Cacher.cache(city, month);
+
+        expect(new Date(await DaysService.getLastCachedDay(city, month)).getDate()).eq(monthPart1);
+
+        Cacher = proxyquire.noPreserveCache().load('./days', {
+            'src/parsers/day': {
+                'parse': (cityId, year) => Promise.reject('Cacher should not load already cached data')
+            }
+        });
+
+        await Cacher.cache(city, month);
+
+        expect(new Date(await DaysService.getLastCachedDay(city, month)).getDate()).eq(monthPart1);
     })
 
 })
