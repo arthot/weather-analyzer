@@ -7,6 +7,7 @@ import { connect } from 'react-redux'
 
 import { localize } from '../../locale/localize'
 import * as Actions from '../../search/actions'
+import Title from './Title'
 
 require('../../styles/landing.scss')
 require('famfamfam-flags/dist/sprite/famfamfam-flags.css')
@@ -33,6 +34,7 @@ export default class Landing extends PureComponent {
         return (
             <React.Fragment>
                 <div className="landing-wrap clearfix">
+                    <Title locale={this.props.locale} />
                     <div className="landing">
                         <ParallaxBackground />
                     </div>
