@@ -6,7 +6,7 @@ const query = qs.parse(document.location.search);
 
 const INITIAL_SEARCH_STATE = {
     cityId: 0,
-    mode: query.mode || MODES.TEMPERATURE,
+    mode: query.mode || MODES.PRECIPITATION,
     data: [...Array(12)],
 }
 
