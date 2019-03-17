@@ -24,7 +24,7 @@ export function parse(name: string, lang: string) {
             .filter(c => c.kind && CityRegex.test(c.kind))
             .map(c => new City(
                 c.id,
-                c.lang,
+                lang,
                 { code: c.country_code, name: c.country_name },
                 c.kind,
                 c.district_name,
