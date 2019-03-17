@@ -59,6 +59,8 @@ function* handleCityChange(action) {
     const { month } = yield select(s => s.search);
 
     if (currentCityId !== newCityId) {
+        if (currentCityId) yield delay(500);
+
         yield put({
             type: Actions.WEATHER_RESET_CITY,
             payload: { cityId: newCityId }
