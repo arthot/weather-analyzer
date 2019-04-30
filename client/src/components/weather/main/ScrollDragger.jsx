@@ -47,7 +47,7 @@ export default class ScrollTracker extends Component {
     onWheelHandle = (e) => {
         if (!e.ctrlKey) {
             e.preventDefault();
-            document.documentElement.scrollLeft += e.deltaY;
+            document.documentElement.scrollLeft += Math.sign(e.deltaY) * 50;
         }
     }
 
