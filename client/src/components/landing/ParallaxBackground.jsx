@@ -8,6 +8,9 @@ export default class ParallaxBackground extends PureComponent {
 
     componentDidMount() {
         this.paralaxInstance = new ParallaxJs(this.wrapEl.current, this.props.options);
+
+        if (/firefox/i.test(navigator.userAgent))
+            this.paralaxInstance.disable();
     }
 
     componentWillUnmount() {
