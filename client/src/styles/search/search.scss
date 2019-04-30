@@ -106,6 +106,7 @@ $placeholder-color: #215726;
   margin-left: 10px;
 
   select {
+    -moz-appearance: none;
     height: $search-header-height - 10px;
     font-size: 16px;
     color: white;
