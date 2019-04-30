@@ -1,11 +1,13 @@
 const path = require('path');
 
+const DB_PATH = process.env.WEATHER_DB_PATH || './db.sqlite3';
+
 module.exports = {
     development: {
         client: 'sqlite3',
         useNullAsDefault: true,
         connection: {
-            filename: './db.sqlite3'
+            filename: DB_PATH
         },
         migrations: {
             directory: path.join(__dirname, 'src/store/migrations'),
@@ -32,7 +34,7 @@ module.exports = {
         client: 'sqlite3',
         useNullAsDefault: true,
         connection: {
-            filename: './db.sqlite3'
+            filename: DB_PATH
         },
         migrations: {
             directory: path.join(__dirname, 'src/store/migrations'),
