@@ -9,7 +9,7 @@ baseConfig.mode = 'production';
 
 baseConfig.output = {
     path: buildPath,
-    publicPath: '/assets/',
+    publicPath: '/',
     filename: '[name]-[chunkhash].js',
 };
 
