@@ -1,8 +1,17 @@
 $items-width: 60px;
 $items-height: 100px;
-$side-width: 50px;
 
 $white-bg: rgb(240, 243, 232);
 $border-dark: rgb(128, 128, 128);
 $border-cell: rgb(167, 167, 167);
 $border-sides: 1px solid rgba(0, 0, 0, 0.15);
+
+:root {
+  --side-width: 51px;
+}
+
+@media (max-width: 769px) {
+  :root {
+    --side-width: 31px;
+  }
+}

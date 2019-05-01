@@ -15,12 +15,18 @@
     display: inline-block;
     margin-left: 8px;
     overflow: hidden;
+    max-width: calc(100% - 25px);
+    white-space: nowrap;
+
+    .result-title {
+      overflow: hidden;
+    }
 
     .result-description {
       font-size: 11px;
       line-height: 1.4;
       color: $color;
-      white-space: nowrap;
+      overflow: hidden;
     }
   }
 }

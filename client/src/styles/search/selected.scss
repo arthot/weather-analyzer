@@ -10,13 +10,14 @@
   padding-bottom: 0px;
   animation: move-select-city 0.5s ease-in-out forwards;
 
+  @include result-flag();
+  @include result-data(darken($panel-primary-text, 8%));
+
   .result-data {
     padding: 4px 10px;
     color: $panel-primary-text;
+    max-width: calc(100% - 79px);
   }
-
-  @include result-flag();
-  @include result-data(darken($panel-primary-text, 8%));
 
   .close {
     fill: $placeholder-color;
@@ -35,5 +36,11 @@
 @keyframes move-select-city {
   to {
     top: 0;
+  }
+}
+
+@media (max-width: 769px) {
+  .selected-item {
+    width: calc(64vw - 12px);
   }
 }

@@ -1,8 +1,8 @@
 .side {
   position: sticky;
-  top: 0;
+  top: 0; 
   z-index: 10;
-  width: $side-width;
+  width: var(--side-width);
   background-color: $white-bg;
   border-right: $border-sides;
   border-left: $border-sides;
@@ -32,11 +32,7 @@
   }
 }
 
-@media (max-width: 735px) {
-  .side {
-    width: 30px;
-  }
-
+@media (max-width: 769px) {
   .side__right {
     display: none;
   }

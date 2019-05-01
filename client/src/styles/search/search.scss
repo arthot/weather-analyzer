@@ -121,3 +121,12 @@ $placeholder-color: #215726;
     }
   }
 }
+
+@media (max-width: 769px) {
+  .search-box-wrap {
+    width: 64vw;
+  }
+  .search-container-wrap__landing {
+    height: 85vh;
+  }
+}

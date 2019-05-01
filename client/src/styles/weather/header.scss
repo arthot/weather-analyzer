@@ -45,3 +45,9 @@
     top: 0;
   }
 }
+
+@media (max-width: 769px) {
+  .app-header-switch {
+    margin: auto 0;
+  }
+}

@@ -7,7 +7,7 @@ $stip-height: 20px;
   position: sticky;
   height: $stip-height;
   background-color: $white-bg;
-  padding: 0 52px;
+  padding: 0 calc(var(--side-width) + 1px);
 }
 
 .strip-month-item {
@@ -28,7 +28,7 @@ $stip-height: 20px;
     position: sticky;
     left: 0;
     right: 0;
-    padding: 0 $side-width + 30px;
+    padding: 0 calc(var(--side-width) + 30px);
     background-color: $white-bg;
   }
 

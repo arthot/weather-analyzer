@@ -35,6 +35,12 @@
     }
   }
 
+  @media (max-width: 497px) {
+    .landing-title-text svg {
+      width: auto;
+    }
+  }
+
   .landing {
     position: absolute;
     top: -15%;
