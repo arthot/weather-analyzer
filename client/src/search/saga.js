@@ -11,7 +11,7 @@ function* getCities(lang, text) {
     })
 
     try {
-        const items = yield api.fetchCities(lang, text);
+        const items = yield api.fetchCities(lang, text.toLocaleLowerCase());
         yield put({
             type: Actions.SEARCH_CITIES_RESPONSE,
             payload: { items }
