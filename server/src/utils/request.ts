@@ -1,4 +1,5 @@
 import * as req from 'request-promise-native'
+import { config } from 'src/utils/config'
 
 const headers = {
     'Accept-Language': 'en-GB,en-US;q=0.9,en;q=0.8,ru;q=0.7',
@@ -11,7 +12,8 @@ export function request(url: string) {
         jar: true,
         gzip: true,
         headers,
-        json: true
+        json: true,
+        proxy: config.proxy,
     })
 }
 
@@ -20,5 +22,6 @@ export function requestPage(url: string) {
         jar: true,
         gzip: true,
         headers,
+        proxy: config.proxy,
     })
 }
