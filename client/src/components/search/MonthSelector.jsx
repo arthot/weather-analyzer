@@ -37,7 +37,7 @@ export default class MonthSelectorComponent extends PureComponent {
 
 const MonthSelector = (props) => {
     return (
-        <div className="month-selector" style={{ visibility: props.visible ? 'visible' : 'hidden' }} >
+        <div className="month-selector" style={{ visibility: props.visible ? 'visible' : 'visible' }} >
             <select
                 title={i18n`Select a month`}
                 onChange={props.handleSelect}

@@ -127,7 +127,6 @@ class SearchComponent extends Component {
                     </SearchInput>
                 </div>
                 <MonthSelector
-                    visible={!this.props.isRoot}
                     month={this.props.month}
                     selected={this.props.selected}
                     locale={this.props.locale}
