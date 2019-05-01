@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
+import debounce from 'debounce'
 
 import { SEARCH_MONTH_SELECT } from '../../../search/actions'
 
@@ -39,6 +40,7 @@ class Workspace extends Component {
         changeByScroll: false
     };
     monthTracker = React.createRef();
+    resetChangeByScroll = debounce(() => this.setState({ changeByScroll: false }), 200);
 
     static getDerivedStateFromProps(props, state) {
         if (!state.repositionScroll && !state.changeByScroll && state.month !== props.month)
@@ -109,7 +111,7 @@ class Workspace extends Component {
                 this.repositionScroll(this.state.month, snapshot.position, snapshot.month);
             });
         } else if (this.state.changeByScroll)
-            this.setState({ changeByScroll: false });
+            this.resetChangeByScroll();
     }
 
     scrollToMonth(month) {
