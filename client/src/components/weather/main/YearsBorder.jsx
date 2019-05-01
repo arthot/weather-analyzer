@@ -12,9 +12,15 @@ export default class YearsStrip extends PureComponent {
                 'side__left': left,
                 'side__right': right
             })}>
-                {YEARS.map(y => (
-                    <div key={y} className="side-year-item">{y}</div>
-                ))}
+                {YEARS.map(y => {
+                    const parts = [y.toString().slice(0, 2), y.toString().slice(2, 4)];
+                    return (
+                        <div key={y} className="side-year-item">
+                            <span className="side-year-item-part__hide-xs">{parts[0]}</span>
+                            <span>{parts[1]}</span>
+                        </div>
+                    )
+                })}
             </div>
         )
     }

@@ -10,11 +10,13 @@
 
 .side__left {
   float: left;
+  border-left: none;
   left: 0;
 }
 
 .side__right {
   float: right;
+  border-right: none;
   right: 0;
 }
 
@@ -27,5 +29,19 @@
 
   &:last-child {
     border-bottom: none;
+  }
+}
+
+@media (max-width: 735px) {
+  .side {
+    width: 30px;
+  }
+
+  .side__right {
+    display: none;
+  }
+
+  .side-year-item-part__hide-xs {
+    display: none;
   }
 }
