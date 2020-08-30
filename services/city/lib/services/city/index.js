@@ -1,5 +1,6 @@
 import errors from '@umnico/api-errors';
 import fetch from 'node-fetch';
+import { convertApiResult } from './convert-result';
 
 const { NotFound, BadRequest, InternalServerError } = errors;
 
@@ -33,7 +34,7 @@ export async function searchCity(lang, query) {
     const data = await res.json();
     cookieStore.set(host, res.headers.raw()['set-cookie']);
 
-    return data.total === 0 ? [] : data.items;
+    return convertApiResult(data);
   }
 
   throw new InternalServerError();

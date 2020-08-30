@@ -1,5 +1,6 @@
 import logger from '../../logger';
 import { toHttpResult } from '../../utils/to-http-result';
+import { ensureValidParams } from './ensure-valid-params';
 
 /**
  * Get cities by id
@@ -10,6 +11,9 @@ import { toHttpResult } from '../../utils/to-http-result';
  */
 export const getCityById = async (lang, id) => {
   logger.debug(`Reading city "${id}" [lang=${lang}]`);
+
+  ensureValidParams({ lang, id });
+
   const item = {};
 
   return {

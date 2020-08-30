@@ -15,7 +15,7 @@
     "eslint": "eslint --ext .js .",
     "format": "./node_modules/.bin/prettier --write '**/*.{js,json,md,yaml,yml}'",
     "start": "node --es-module-specifier-resolution=node --experimental-json-modules lib/index.js",
-    "test": "LOGGER_LEVEL=error node_modules/.bin/nyc node_modules/.bin/mocha --exclude 'test/end-to-end/**' 'test/**/**/*.spec.js' -R mocha-multi-reporters --reporter-options configFile=./test/mocha-config.json"
+    "test": "LOGGER_LEVEL=error c8 node --es-module-specifier-resolution=node --experimental-json-modules node_modules/mocha/lib/cli/cli.js --exclude 'test/end-to-end/**' 'test/**/**/*.spec.js' -R mocha-multi-reporters --reporter-options configFile=./test/mocha-config.json"
   },
   "prettier": {
     "printWidth": 100,
@@ -29,20 +29,11 @@
     "mochawesome-report",
     ".nyc_output"
   ],
-  "nyc": {
-    "exclude": [
-      "test/**/*.js"
-    ],
-    "reporter": [
-      "lcov",
-      "text-summary"
-    ],
-    "report-dir": "./reports"
-  },
   "dependencies": {
     "@umnico/api-errors": "^1.0.0",
     "ajv": "^6.12.4",
     "bunyan": "^1.8.14",
+    "c8": "^7.3.0",
     "lodash": "^4.17.20",
     "micro": "^9.3.4",
     "microrouter": "^3.1.3",
@@ -65,7 +56,6 @@
     "mocha": "^8.1.3",
     "mocha-junit-reporter": "^2.0.0",
     "mocha-multi-reporters": "^1.1.7",
-    "nyc": "^15.1.0",
     "prettier": "^2.1.1",
     "sinon": "^9.0.3",
     "supertest": "^4.0.2",

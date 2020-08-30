@@ -1,6 +1,6 @@
 import micro from 'micro';
 import { middleware } from './middleware';
-import { searchCityByName } from './api/search-city-by-name';
+import { searchCityByName } from './api/search-city-by-query';
 import { getCityById } from './api/get-city-by-id';
 
 const { send } = micro;

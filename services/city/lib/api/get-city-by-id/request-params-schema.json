@@ -1,0 +1,18 @@
+{
+  "title": "Get id params object",
+  "additionalProperties": false,
+  "required": ["id", "lang"],
+  "properties": {
+    "id": {
+      "description": "City id",
+      "type": "number",
+      "min": 0
+    },
+    "lang": {
+      "description": "Conduct search using specified language",
+      "type": "string",
+      "minLength": 2,
+      "maxLength": 5
+    }
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "title": "Search params object",
+  "additionalProperties": false,
+  "required": ["query", "lang"],
+  "properties": {
+    "query": {
+      "description": "City name to search for",
+      "type": "string",
+      "minLength": 2,
+      "maxLength": 265
+    },
+    "lang": {
+      "description": "Conduct search using specified language",
+      "type": "string",
+      "minLength": 2,
+      "maxLength": 5
+    }
+  }
+}
