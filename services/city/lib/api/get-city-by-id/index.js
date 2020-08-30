@@ -1,6 +1,10 @@
+import errors from '@umnico/api-errors';
 import logger from '../../logger';
 import { toHttpResult } from '../../utils/to-http-result';
 import { ensureValidParams } from './ensure-valid-params';
+import { getById } from '../../services/db';
+
+const { NotFound } = errors;
 
 /**
  * Get cities by id
@@ -14,7 +18,11 @@ export const getCityById = async (lang, id) => {
 
   ensureValidParams({ lang, id });
 
-  const item = {};
+  const item = await getById(lang, id);
+
+  if (!item) {
+    throw new NotFound();
+  }
 
   return {
     status: 200,

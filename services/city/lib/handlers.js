@@ -18,7 +18,7 @@ export const ping = (req, res) => send(res, 200, { ping: 'pong' });
 export const searchCity = middleware(async req => {
   const { lang } = req.params;
   const { query } = req.query;
-  searchCityByName(lang, query);
+  return searchCityByName(lang, query);
 });
 
 /**
@@ -27,5 +27,5 @@ export const searchCity = middleware(async req => {
  */
 export const getCity = middleware(async req => {
   const { lang, id } = req.params;
-  getCityById(lang, id);
+  return getCityById(lang, parseInt(id, 10));
 });

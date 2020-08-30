@@ -6,6 +6,7 @@ const { MongoClient } = mongodb;
  * @typedef {import('mongodb').Db} Db
  * @typedef {import('mongodb').MongoClient} MongoClient
  * @typedef {import('mongodb').Collection<any>} CityCollection
+ * @typedef {import('mongodb').Collection<any>} QueryCollection
  */
 
 /**
@@ -45,4 +46,9 @@ export const disconnectDB = async () => {
 /**
  * @returns {CityCollection}
  */
-export const cities = () => db.collection('cities');
+export const cities = () => db.collection('city');
+
+/**
+ * @returns {QueryCollection}
+ */
+export const queries = () => db.collection('query');

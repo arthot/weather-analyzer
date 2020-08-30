@@ -16,6 +16,6 @@ const areValidParams = ajv.compile(schema);
 export const ensureValidParams = params => {
   if (!areValidParams(params)) {
     const [{ dataPath, message }] = areValidParams.errors;
-    throw BadRequest(`Invalid parameters${dataPath}: ${message}`);
+    throw new BadRequest(`Invalid parameters${dataPath}: ${message}`);
   }
 };
