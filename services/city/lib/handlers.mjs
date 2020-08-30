@@ -1,11 +1,31 @@
 import micro from 'micro';
+import { middleware } from './middleware';
+import { searchCityByName } from './api/search-city-by-name';
+import { getCityById } from './api/get-city-by-id';
 
 const { send } = micro;
-
-// const middleware = require('./middleware');
 
 /**
  * @param {Request} req
  * @param {Response} res
  */
 export const ping = (req, res) => send(res, 200, { ping: 'pong' });
+
+/**
+ * @param {Request} req
+ * @param {Response} res
+ */
+export const searchCity = middleware(async req => {
+  const { lang } = req.params;
+  const { query } = req.query;
+  searchCityByName(lang, query);
+});
+
+/**
+ * @param {Request} req
+ * @param {Response} res
+ */
+export const getCity = middleware(async req => {
+  const { lang, id } = req.params;
+  getCityById(lang, id);
+});

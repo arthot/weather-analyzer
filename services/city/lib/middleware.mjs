@@ -1,12 +1,23 @@
-const micro = require('micro');
-const { ApiError } = require('@umnico/api-errors');
-const logger = require('./logger');
+import errors from '@umnico/api-errors';
+import micro from 'micro';
+import logger from './logger';
 
-module.exports = handler => async (req, res) => {
+const { ApiError } = errors;
+
+/**
+ * @callback requestCallback
+ * @param  {Request} req
+ * @param  {Response} res
+ */
+
+/**
+ * Handles all the work with http protocol
+ *
+ * @param {function(Request,Response)} handler
+ */
+export const middleware = handler => async (req, res) => {
   try {
-    const { account } = req.query;
-
-    const { status, body = null } = await handler(req, account);
+    const { status, body = null } = await handler(req);
 
     return micro.send(res, status, body);
   } catch (err) {
