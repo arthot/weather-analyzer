@@ -1,0 +1,40 @@
+logs
+*.log
+
+node_modules
+
+# Typescript v1 declaration files
+typings/
+
+# Optional npm cache directory
+.npm
+
+# Optional eslint cache
+.eslintcache
+
+# Output of 'npm pack'
+*.tgz
+
+# dotenv environment variables file
+.env
+.npmrc
+.idea
+.idea/*
+reports
+*.DS_Store
+*.sublime-*
+*.git-crypt
+*.swp
+*.iml
+
+# Crash log files
+crash.log
+
+.nyc_output
+
+# Tests reports
+mochawesome-report
+
+# IntelliJ project files
+.idea
+*.iml
