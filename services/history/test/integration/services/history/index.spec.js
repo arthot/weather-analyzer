@@ -40,4 +40,28 @@ describe('Integration test: lib/services/city/index.js', () => {
 
     assert.equal(result.length, 0);
   });
+
+  it('should throw if underlying service returns 400', async () => {
+    const url = 'https://www.gismeteo.ru/diary';
+
+    nock(url).get('/10997/2002/9/').reply(400);
+
+    await assert.isRejected(parse(10997, 2002, 9), 'Bad Request');
+  });
+
+  it('should throw if underlying service returns 404', async () => {
+    const url = 'https://www.gismeteo.ru/diary';
+
+    nock(url).get('/1099427/2002/9/').reply(404);
+
+    await assert.isRejected(parse(1099427, 2002, 9), 'Not Found');
+  });
+
+  it('should throw if underlying service returns 500', async () => {
+    const url = 'https://www.gismeteo.ru/diary';
+
+    nock(url).get('/10997/2002/9/').reply(500);
+
+    await assert.isRejected(parse(10997, 2002, 9), 'Internal Server Error');
+  });
 });
