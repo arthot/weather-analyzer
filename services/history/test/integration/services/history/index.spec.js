@@ -2,12 +2,12 @@ import chai from 'chai';
 import chaiAsPromised from 'chai-as-promised';
 import nock from 'nock';
 import { parse } from '../../../../lib/services/history/index';
-import { okEmptyResult, okResul1 } from '../../../utils/gismeteo-generator';
+import { okEmptyResult, okResult1 } from '../../../utils/gismeteo-generator';
 
 const { assert } = chai;
 chai.use(chaiAsPromised);
 
-describe('Integration test: lib/services/city/index.js', () => {
+describe('Integration test: lib/services/history/index.js', () => {
   after(() => {
     nock.cleanAll();
   });
@@ -15,7 +15,7 @@ describe('Integration test: lib/services/city/index.js', () => {
   it('should parse page for /4248/2019/9/', async () => {
     const url = 'https://www.gismeteo.ru/diary';
 
-    nock(url).get('/4248/2019/9/').reply(200, okResul1);
+    nock(url).get('/4248/2019/9/').reply(200, okResult1);
 
     const result = await parse(4248, 2019, 9);
 
