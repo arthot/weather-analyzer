@@ -1,5 +1,4 @@
 import cheerio from 'cheerio';
-
 import logger from '../../logger';
 
 /**
@@ -79,5 +78,5 @@ export function parseResult(page) {
       }
     })
     .filter(d => d)
-    .sort((a, b) => (a.date > b.date ? 1 : -1));
+    .sort((a, b) => (a.day > b.day ? 1 : -1));
 }

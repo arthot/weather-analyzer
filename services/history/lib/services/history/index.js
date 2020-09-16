@@ -1,9 +1,8 @@
 import errors from '@umnico/api-errors';
 import fetch from 'node-fetch';
-import { format } from 'date-fns';
 import logger from '../../logger';
 
-import { convertApiResult } from './parse-result';
+import { parseResult } from './parse-result';
 
 const { NotFound, BadRequest, InternalServerError } = errors;
 
@@ -16,16 +15,6 @@ const headers = {
 };
 
 const cookieStore = new Map();
-
-/**
- * Builds and formats date to YYYY-MM-DD
- *
- * @param {number} day
- * @param {number} year
- * @param {number} month
- * @returns {string}
- */
-const buildDate = (day, year, month) => format(Date.UTC(year, month - 1), 'YYYY-MM-DD');
 
 /**
  * Parses Gismeteo archive page
@@ -48,12 +37,13 @@ export async function parse(cityId, year, month) {
   if (res.status === 400) throw new BadRequest();
 
   if (res.status === 200) {
-    const page = await res.textConverted();
+    const page = await res.text();
     cookieStore.set(host, res.headers.raw()['set-cookie']);
 
-    return convertApiResult(page).map(i => ({
+    return parseResult(page).map(i => ({
       ...i,
-      date: buildDate(i.day),
+      year,
+      month,
       cityId,
     }));
   }
