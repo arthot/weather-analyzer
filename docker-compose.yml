@@ -8,6 +8,7 @@ services:
      - ./server/db.sqlite3:/var/www/server/db.sqlite3
     environment:
       NODE_ENV: development
+      MONGODB_URI: 'mongo:27017'
   client:
     build:
       context: ./client
@@ -24,3 +25,8 @@ services:
     depends_on:
      - server
      - client
+  mongo:
+    image: mongo:4
+    command: mongod
+    ports:
+     - 27017:27017
