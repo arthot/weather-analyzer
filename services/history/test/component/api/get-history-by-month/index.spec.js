@@ -6,7 +6,7 @@ import Chance from 'chance';
 import { cities } from '../../../../lib/mongo';
 import { startServer, stopServer } from '../../../../lib/server';
 import { api } from '../../../utils/index';
-import { okEmptyResult, okResultEn1 } from '../../../utils/gismeteo-generator';
+import { okEmptyResult, okResult1 } from '../../../utils/gismeteo-generator';
 
 const { assert } = chai;
 chai.use(chaiAsPromised);

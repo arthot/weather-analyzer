@@ -1,8 +1,8 @@
 import logger from '../../logger';
 import { toHttpResult } from '../../utils/to-http-result';
 import { ensureValidParams } from './ensure-valid-params';
-import { getHistoryByCity, cacheHistory } from '../../services/db';
-import { parse } from '../../services/history';
+import { getHistoryByCity } from '../../services/db';
+import { cacheData } from './cache-data';
 
 /**
  * Get weather history by cityId and month
