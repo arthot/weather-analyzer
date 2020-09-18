@@ -1,5 +1,5 @@
 import bunyan from 'bunyan';
-import { logger } from './config/index';
+import { logger } from './config/index.js';
 
 import pckg from '../package.json';
 

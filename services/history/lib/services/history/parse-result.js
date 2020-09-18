@@ -1,5 +1,5 @@
 import cheerio from 'cheerio';
-import logger from '../../logger';
+import logger from '../../logger.js';
 
 /**
  * @typedef DayRecord

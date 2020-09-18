@@ -1,5 +1,5 @@
 import errors from '@umnico/api-errors';
-import routes from './routes';
+import routes from './routes.js';
 
 const { ApiError, NotFound } = errors;
 

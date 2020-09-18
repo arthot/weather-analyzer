@@ -1,8 +1,8 @@
 import chai from 'chai';
 import chaiAsPromised from 'chai-as-promised';
 import nock from 'nock';
-import { parse } from '../../../../lib/services/history/index';
-import { okEmptyResult, okResult1 } from '../../../utils/gismeteo-generator';
+import { parse } from '../../../../lib/services/history/index.js';
+import { okEmptyResult, okResult1 } from '../../../utils/gismeteo-generator.js';
 
 const { assert } = chai;
 chai.use(chaiAsPromised);

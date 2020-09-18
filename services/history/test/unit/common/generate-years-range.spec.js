@@ -1,6 +1,6 @@
 import chai from 'chai';
 import sinon from 'sinon';
-import { getYearsRange, YEARS_DEPTH } from '../../../lib/common/generate-years-range';
+import { getYearsRange, YEARS_DEPTH } from '../../../lib/common/generate-years-range.js';
 
 const { assert } = chai;
 let clock;

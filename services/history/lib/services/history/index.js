@@ -1,8 +1,8 @@
 import errors from '@umnico/api-errors';
 import fetch from 'node-fetch';
-import logger from '../../logger';
+import logger from '../../logger.js';
 
-import { parseResult } from './parse-result';
+import { parseResult } from './parse-result.js';
 
 const { NotFound, BadRequest, InternalServerError } = errors;
 

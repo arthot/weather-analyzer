@@ -1,6 +1,6 @@
 import errors from '@umnico/api-errors';
 import micro from 'micro';
-import logger from './logger';
+import logger from './logger.js';
 
 const { ApiError } = errors;
 

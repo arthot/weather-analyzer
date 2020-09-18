@@ -1,5 +1,5 @@
 import dateFns from 'date-fns';
-import { getYearsRange } from './generate-years-range';
+import { getYearsRange } from './generate-years-range.js';
 
 const { getDaysInMonth } = dateFns;
 

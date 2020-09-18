@@ -1,6 +1,6 @@
 import chai from 'chai';
-import { parseResult } from '../../../../lib/services/history/parse-result';
-import { okEmptyResult, okResult1, okResult2 } from '../../../utils/gismeteo-generator';
+import { parseResult } from '../../../../lib/services/history/parse-result.js';
+import { okEmptyResult, okResult1, okResult2 } from '../../../utils/gismeteo-generator.js';
 
 const { assert } = chai;
 

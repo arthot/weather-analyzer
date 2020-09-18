@@ -1,8 +1,8 @@
-import logger from '../../logger';
-import { toHttpResult } from '../../utils/to-http-result';
-import { ensureValidParams } from './ensure-valid-params';
-import { getHistoryByCity } from '../../services/db';
-import { cacheData } from './cache-data';
+import logger from '../../logger.js';
+import { toHttpResult } from '../../utils/to-http-result.js';
+import { ensureValidParams } from './ensure-valid-params.js';
+import { getHistoryByCity } from '../../services/db.js';
+import { cacheData } from './cache-data.js';
 
 /**
  * Get weather history by cityId and month

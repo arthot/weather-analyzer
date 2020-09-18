@@ -3,10 +3,10 @@ import chaiAsPromised from 'chai-as-promised';
 import sinon from 'sinon';
 import nock from 'nock';
 import Chance from 'chance';
-import { weather } from '../../../../lib/mongo';
-import { startServer, stopServer } from '../../../../lib/server';
-import { api } from '../../../utils/index';
-import { okEmptyResult, okResult1 } from '../../../utils/gismeteo-generator';
+import { weather } from '../../../../lib/mongo.js';
+import { startServer, stopServer } from '../../../../lib/server.js';
+import { api } from '../../../utils/index.js';
+import { okEmptyResult, okResult1 } from '../../../utils/gismeteo-generator.js';
 
 const { assert } = chai;
 chai.use(chaiAsPromised);

@@ -1,9 +1,9 @@
 import micro from 'micro';
 import util from 'util';
-import { connectDB, disconnectDB } from './mongo';
-import { handler } from './app';
-import { db, port } from './config/index';
-import logger from './logger';
+import { connectDB, disconnectDB } from './mongo.js';
+import { handler } from './app.js';
+import { db, port } from './config/index.js';
+import logger from './logger.js';
 import pckg from '../package.json';
 
 const { name, version } = pckg;

@@ -1,4 +1,4 @@
-import { weather } from '../mongo';
+import { weather } from '../mongo.js';
 
 /** @typedef {import('./history/parse-result').DayRecord} DayRecord */
 

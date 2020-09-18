@@ -1,8 +1,8 @@
-import { cacheHistory, getLastCachedMonth } from '../../services/db';
-import { getLastCachedDate } from '../../common/get-last-cached-date';
-import { parse } from '../../services/history';
-import { getYearsRangeToUpdate } from '../../common/get-years-range-to-update';
-import logger from '../../logger';
+import { cacheHistory, getLastCachedMonth } from '../../services/db.js';
+import { getLastCachedDate } from '../../common/get-last-cached-date.js';
+import { parse } from '../../services/history/index.js';
+import { getYearsRangeToUpdate } from '../../common/get-years-range-to-update.js';
+import logger from '../../logger.js';
 
 /**
  * Caches weather history by cityId and month

@@ -1,6 +1,6 @@
 import micro from 'micro';
-import { middleware } from './middleware';
-import { getHistoryByMonth } from './api/get-history-by-month';
+import { middleware } from './middleware.js';
+import { getHistoryByMonth } from './api/get-history-by-month/index.js';
 
 const { send } = micro;
 
