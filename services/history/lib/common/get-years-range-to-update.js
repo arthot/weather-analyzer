@@ -1,4 +1,5 @@
 import dateFns from 'date-fns';
+import { getYearsRange } from './generate-years-range';
 
 const { getDaysInMonth } = dateFns;
 
@@ -37,13 +38,25 @@ const isPartiallyDownloadedCurrentMonth = (year, month, lastCachedDate, today) =
  * @returns {boolean}
  */
 const shouldMonthDataBeUpdate = (year, month, lastCachedDate, today) => {
-  if (!lastCachedDate) return true;
-
-  if (lastCachedDate.getFullYear() < year) return true;
-
   if (isPartiallyDownloadedPastMonth(year, month, lastCachedDate, today)) return true;
-
   if (isPartiallyDownloadedCurrentMonth(year, month, lastCachedDate, today)) return true;
-
   return false;
 };
+
+/**
+ * Gets years to load history data
+ *
+ * @param {number} month
+ * @param {Date} lastCachedDate
+ * @returns {Array<number>}
+ */
+export function getYearsRangeToUpdate(month, lastCachedDate) {
+  return getYearsRange(month).filter(y => {
+    if (!lastCachedDate) return true;
+
+    return (
+      lastCachedDate.getFullYear() <= y &&
+      shouldMonthDataBeUpdate(y, month, lastCachedDate, new Date())
+    );
+  });
+}

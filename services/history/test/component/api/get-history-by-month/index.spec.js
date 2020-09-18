@@ -3,7 +3,7 @@ import chaiAsPromised from 'chai-as-promised';
 import sinon from 'sinon';
 import nock from 'nock';
 import Chance from 'chance';
-import { cities } from '../../../../lib/mongo';
+import { weather } from '../../../../lib/mongo';
 import { startServer, stopServer } from '../../../../lib/server';
 import { api } from '../../../utils/index';
 import { okEmptyResult, okResult1 } from '../../../utils/gismeteo-generator';
@@ -22,13 +22,13 @@ describe('Component test: GET /city/:lang/search', () => {
   });
 
   beforeEach(async () => {
-    await cities().deleteMany({});
+    await weather().deleteMany({});
   });
 
   after(async function testSetup() {
     nock.cleanAll();
     clock.restore();
-    await cities().deleteMany({});
+    await weather().deleteMany({});
     await stopServer();
   });
 

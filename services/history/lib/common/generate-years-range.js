@@ -10,9 +10,10 @@ export const YEARS_DEPTH = 4;
  * @param {number} month
  */
 export function getYearsRange(month) {
-  const date = new Date();
-  const start = date.getFullYear() - YEARS_DEPTH;
-  const length = date.getMonth() >= month - 1 ? YEARS_DEPTH + 1 : YEARS_DEPTH;
+  const now = new Date();
+  const year = now.getFullYear();
 
-  return range(start, start + length);
+  const length = now.getMonth() >= month - 1 ? 1 : 0;
+
+  return range(year - YEARS_DEPTH, year + length);
 }
