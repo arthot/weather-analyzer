@@ -4,9 +4,6 @@ import { connectDB, disconnectDB } from './mongo.js';
 import { handler } from './app.js';
 import { db, port } from './config/index.js';
 import logger from './logger.js';
-import pckg from '../package.json';
-
-const { name, version } = pckg;
 
 export const server = micro(handler);
 const serverListen = util.promisify(server.listen).bind(server);
@@ -19,7 +16,7 @@ const serverClose = util.promisify(server.close).bind(server);
 export async function startServer() {
   await connectDB(db);
   await serverListen(port);
-  logger.info(name, { port, version });
+  logger.info('weather-history-service', { port });
 }
 
 /**

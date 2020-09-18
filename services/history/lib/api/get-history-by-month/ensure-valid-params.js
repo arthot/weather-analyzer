@@ -1,6 +1,6 @@
 import Ajv from 'ajv';
 import errors from '@umnico/api-errors';
-import schema from './request-params-schema.json';
+import schema from './request-params-schema.js';
 
 const { BadRequest } = errors;
 

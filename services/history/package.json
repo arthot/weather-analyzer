@@ -14,8 +14,8 @@
     "audit": "npm audit",
     "eslint": "eslint --ext .js .",
     "format": "./node_modules/.bin/prettier --write '**/*.{js,json,md,yaml,yml}'",
-    "start": "node --es-module-specifier-resolution=node --experimental-json-modules lib/index.js",
-    "test": "c8 node --experimental-json-modules node_modules/mocha/lib/cli/cli.js --exclude 'test/end-to-end/**' 'test/**/**/*.spec.js' -R mocha-multi-reporters --reporter-options configFile=./test/mocha-config.json"
+    "start": "node lib/index.js",
+    "test": "c8 mocha --exclude 'test/end-to-end/**' 'test/**/**/*.spec.js' -R mocha-multi-reporters --reporter-options configFile=./test/mocha-config.json"
   },
   "prettier": {
     "printWidth": 100,
