@@ -19,13 +19,14 @@ describe('Integration test: lib/services/history/index.js', () => {
 
     const result = await parse(4248, 2019, 9);
 
-    assert.equal(result.length, 30);
-    assert.deepEqual(result[3], {
-      cityId: 4248,
+    assert.equal(result.cityId, 4248);
+    assert.equal(result.year, 2019);
+    assert.equal(result.month, 9);
+
+    assert.equal(result.history.length, 30);
+    assert.deepEqual(result.history[3], {
       cloudiness: 0.5,
       day: 4,
-      month: 9,
-      year: 2019,
       fallout: false,
       temperature: 20,
     });
@@ -38,7 +39,8 @@ describe('Integration test: lib/services/history/index.js', () => {
 
     const result = await parse(10997, 2002, 9);
 
-    assert.equal(result.length, 0);
+    assert.equal(result.cityId, 10997);
+    assert.equal(result.history.length, 0);
   });
 
   it('should throw if underlying service returns 400', async () => {

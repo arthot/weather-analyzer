@@ -1,5 +1,8 @@
-import { cacheHistory } from '../../services/db';
+import { cacheHistory, getLastCachedMonth } from '../../services/db';
+import { getLastCachedDate } from '../../common/get-last-cached-date';
 import { parse } from '../../services/history';
+import { getYearsRangeToUpdate } from '../../common/get-years-range-to-update';
+import logger from '../../logger';
 
 /**
  * Caches weather history by cityId and month
@@ -8,4 +11,18 @@ import { parse } from '../../services/history';
  * @param {number} month
  * @returns {Promise<{body: any[], status: number}>}
  */
-export function cacheData(cityId, month) {}
+export async function cacheData(cityId, month) {
+  const lastCachedRecord = await getLastCachedMonth(cityId);
+  const years = getYearsRangeToUpdate(month, getLastCachedDate(lastCachedRecord));
+
+  await Promise.all(
+    years.map(async year => {
+      try {
+        const record = await parse(cityId, year, month);
+        await cacheHistory(record);
+      } catch (err) {
+        logger.error({ err, cityId, month, year }, 'Error fetching data');
+      }
+    }),
+  );
+}

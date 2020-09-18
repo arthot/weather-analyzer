@@ -40,12 +40,14 @@ export async function parse(cityId, year, month) {
     const page = await res.text();
     cookieStore.set(host, res.headers.raw()['set-cookie']);
 
-    return parseResult(page).map(i => ({
-      ...i,
+    const history = await parseResult(page);
+
+    return {
+      cityId,
       year,
       month,
-      cityId,
-    }));
+      history,
+    };
   }
 
   throw new InternalServerError();

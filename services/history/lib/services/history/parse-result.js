@@ -2,6 +2,14 @@ import cheerio from 'cheerio';
 import logger from '../../logger';
 
 /**
+ * @typedef DayRecord
+ * @property {number} day
+ * @property {number} temperature
+ * @property {number} cloudiness
+ * @property {boolean} fallout
+ */
+
+/**
  * Checks if gismeteo page has no data
  *
  * @param {Cherio} tds
@@ -45,7 +53,7 @@ const parseCloudiness = tds => {
  * Parses fallout
  *
  * @param {Cherio} tds
- * @returns {string}
+ * @returns {boolean}
  */
 const parseFallout = tds => !!tds.eq(4).html().trim();
 
@@ -53,6 +61,7 @@ const parseFallout = tds => !!tds.eq(4).html().trim();
  * Parses Gismeteo history page
  *
  * @param {string} page
+ * @returns {Array<DayRecord>}
  */
 export function parseResult(page) {
   const $ = cheerio.load(page);
