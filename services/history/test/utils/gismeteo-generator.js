@@ -2,73 +2,6 @@ export const okResult1 = `
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <html>
 <head>
-	<title>GISMETEO.RU: Gismeteo.Дневник: Дневник погоды в Минске за Сентябрь 2019 г. Архив погоды за за Сентябрь 2019 г. по г. Минск, Минск, Беларусь</title>
-	<meta name="Author" content="gismeteo">
-	<meta name="description" content="Дневник фактических данных погоды в Минске, Сентябрь 2019 г. для школьников.">
-	<meta name="keywords" content="фактическая погода в Минске, фактические данные, дневник погоды в Минске, дневник, дневник погоды, архив, архив погоды, архив погоды по г. Минск, Сентябрь, 2019, школьник, ученик, дневник погоды для школьников, дневник наблюдений за погодой, погодный дневник.">
-	<link rel="shortcut icon" type="image/ico" href="//st7.gismeteo.ru/favicon2.ico" />
-	<link rel="icon" type="image/ico" href="//st7.gismeteo.ru/favicon2.ico" />
-	<script src="https://yastatic.net/pcode/adfox/loader.js"></script>
-	<script type="text/javascript" src="//st7.gismeteo.ru/static/js/jquery-1.4.2.min.js?f3f8c"></script>
-	<script type="text/javascript" src="//st6.gismeteo.ru/static/js/classes/Gis.class.js?f3f8c"></script>
-	<script type="text/javascript" src="//st4.gismeteo.ru/static/js/classes/Site.class.js?f3f8c"></script>
-	<script type="text/javascript" src="//st6.gismeteo.ru/static/js/common.js?f3f8c"></script>
-	<script type="text/javascript" src="//st8.gismeteo.ru/static/js/gis.adfox.js?f3f8c"></script>
-	<link rel="stylesheet" type="text/css" href="//st8.gismeteo.ru/static/diary/css/common.css?f3f8c"  />
-	<link rel="stylesheet" type="text/css" href="//st8.gismeteo.ru/static/diary/css/screen.css?f3f8c" media="screen"  />
-	<link rel="stylesheet" type="text/css" href="//st7.gismeteo.ru/static/diary/css/print_bw.css?f3f8c" media="print"  />
-	<link rel="stylesheet" type="text/css" href="//st8.gismeteo.ru/static/diary/css/print_color.css?f3f8c" media="print"  />
-
-		<!--[if lt IE 8]><style type="text/css">
-			img.png, div.png { behavior: url(./static/diary/css/iepngfix_v2/iepngfix.htc) }
-		</style><![endif]-->
-	<script type="text/javascript" src="//st6.gismeteo.ru/static/diary/css/iepngfix_v2/iepngfix_tilebg.js?f3f8c"></script>
-		<script type="text/javascript">
-			var default_args = {"region": "367", "country": "156", "distr": "all", "city": "4368"};
-			var currentTime = new Date()
-			default_args.month = currentTime.getMonth() + 1;
-			default_args.year = currentTime.getFullYear();
-			function choosePrintStyle(mode)
-			{
-				if(mode=='color') {
-					$('body').removeClass('pr_bw').addClass('pr_color');
-				}
-				else{
-					$('body').removeClass('pr_color').addClass('pr_bw');
-				}
-				window.print();
-			}
-			function setTownParam(id, name, n){
-				$('city_id').value = id;
-			}
-			function setCookie (name, value, expires, path, domain, secure) {
-				document.cookie = name + "=" + escape(value) +
-						((expires) ? "; expires=" + expires : "") +
-						((path) ? "; path=" + path : "") +
-						((domain) ? "; domain=" + domain : "") +
-						((secure) ? "; secure" : "");
-			}
-			function getCookie(name) {
-				var cookie = " " + document.cookie;
-				var search = " " + name + "=";
-				var setStr = null;
-				var offset = 0;
-				var end = 0;
-				if (cookie.length > 0) {
-					offset = cookie.indexOf(search);
-					if (offset != -1) {
-						offset += search.length;
-						end = cookie.indexOf(";", offset)
-						if (end == -1) {
-							end = cookie.length;
-						}
-						setStr = unescape(cookie.substring(offset, end));
-					}
-				}
-				return(setStr);
-			}
-		</script>
-
 </head>
 <body>
 <div id=pre-container>
@@ -77,15 +10,7 @@ export const okResult1 = `
 			<div id=site_header>
 				<div id="header">
 <div class="top"></div><div class="bottom"></div>
-<a href="//www.gismeteo.ru" id="logo" class="logo" title="Gismeteo.Ru Прогноз погоды."></a>
-	<div class="bnr" id="weather-top"><!-- Gismeteo Adfox banner TOP -->
-<script type="text/javascript">
-    new adfox({
-        id : "weather-top",
-        slot: "top",
-        targeting : {pt:'b',pp:'g',ps:'dlyj',p2:'fckw',pct:'c',puid18:'gismeteo_ru_old_desktop',puid1:12,puid2:'sun',puid3:4368,puid4:156,puid5:477,puid6:4146,puid18:'gismeteo_ru_old_desktop'}
-});
-</script></div>
+	<div class="bnr" id="weather-top"></div>
 </div>				<div id="mainMenu">
 	<ul>
 		<li class="tt"><a href="/"><i>Главная</i></a></li>
@@ -172,17 +97,7 @@ export const okResult1 = `
 							</div></div>
 					<div class=clear></div>
 				</div>
-
 					<input type=hidden id="city_id" name="city_id" value="">
-				<script type="text/javascript" src="//st4.gismeteo.ru/static/js/classes/Selector.class.js?f3f8c"></script>
-				<script type="text/javascript">
-					jQuery(function($){
-// $(window).bind('load', function($){
-						site.selector = new Selector();
-						site.selector.init({submit_btn:'selector_go_btn', selectors:{country:'sd_country', district:'sd_distr', city:'sd_city', year:'date_Year', month:'date_Month'}, data:{country:19, district:341, city:4368, year:2019, month:09}});
-					});
-				</script>
-
 				</form>
 			</div>
 			<div id=logo></div>
@@ -638,154 +553,18 @@ export const okResult1 = `
 					</div>
 				</div>
 			</div>
-			<div id=bottom_shadow class=png>
-				<div class="agreement">
-					<a href="https://www.gismeteo.ru/page/agreement/" target="_blank">Соглашение</a>
-				</div>
-				&copy 1998 - 2020 "Мэп Мэйкер"
-			</div>
-			<div id=counter>
-				<!--LiveInternet counter--><script type="text/javascript"><!--
-					document.write("<a href='https://www.gismeteo.ru/ref/?url=aHR0cDovL3d3dy5saXZlaW50ZXJuZXQucnUvY2xpY2s=' "+
-							"target=_blank><img src='//counter.yadro.ru/hit?t26.1;r"+
-							escape(document.referrer)+((typeof(screen)=="undefined")?"":
-							";s"+screen.width+"*"+screen.height+"*"+(screen.colorDepth?
-									screen.colorDepth:screen.pixelDepth))+";u"+escape(document.URL)+
-							";"+Math.random()+
-							"' alt='' title='LiveInternet: показано число посетителей за"+
-							" сегодня' "+
-							"border='0' width='88' height='15'><\/a>")
-					//--></script><!--/LiveInternet-->
-			</div>
-		</div>
 	</div>
 </div>
 </div>
 </div>
-<script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-  ga('create', 'UA-12105830-1', 'auto');
-  ga('send', 'pageview');
-</script>
-	<script type="text/JavaScript">
-		//<!--[CDATA[
-		function onload_inits() {
-			if (_timer) {
-				clearInterval(_timer);
-				_timer = null;
-			}
-			try {
-				for (var i=0, l=onloads.length; i<l; i++) {
-					var onloads_item = onloads.shift();
-					onloads_item();
-				}
-			} catch(error) {}
-		};
-		if (document.addEventListener) {
-			document.addEventListener("DOMContentLoaded", onload_inits, false);
-		}
-		/*@cc_on @*/
-		/*@if (@_win32)
-		 document.write("<script id=__ie_onload defer src=javascript:void(0)><\/script>");
-		 var script = document.getElementById("__ie_onload");
-		 script.onreadystatechange = function() {
-		 if (this.readyState == "complete") {
-		 onload_inits();
-		 }
-		 };
-		 /*@end @*/
-		if (/WebKit/i.test(navigator.userAgent)) {
-			var _timer = setInterval(function() {
-				if (/loaded|complete/.test(document.readyState)) {
-					onload_inits();
-				}
-			}, 10);
-		}
-		window.onload = onload_inits;
-		//]]-->
-	</script>
 </body>
-<!--GMT+0: 2020-09-16 17:11:50-->
-<!--GMT+0: 2020-09-16 17:11:50-->
 </html>
 `;
 
 export const okResult2 = `
-
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <html>
 <head>
-	<title>GISMETEO.RU: Gismeteo.Дневник: Дневник погоды в Париже за Сентябрь 2015 г. Архив погоды за за Сентябрь 2015 г. по г. Париж, Париж, Франция</title>
-	<meta name="Author" content="gismeteo">
-	<meta name="description" content="Дневник фактических данных погоды в Париже, Сентябрь 2015 г. для школьников.">
-	<meta name="keywords" content="фактическая погода в Париже, фактические данные, дневник погоды в Париже, дневник, дневник погоды, архив, архив погоды, архив погоды по г. Париж, Сентябрь, 2015, школьник, ученик, дневник погоды для школьников, дневник наблюдений за погодой, погодный дневник.">
-	<link rel="shortcut icon" type="image/ico" href="//st7.gismeteo.ru/favicon2.ico" />
-	<link rel="icon" type="image/ico" href="//st7.gismeteo.ru/favicon2.ico" />
-	<script src="https://yastatic.net/pcode/adfox/loader.js"></script>
-	<script type="text/javascript" src="//st7.gismeteo.ru/static/js/jquery-1.4.2.min.js?f3f8c"></script>
-	<script type="text/javascript" src="//st6.gismeteo.ru/static/js/classes/Gis.class.js?f3f8c"></script>
-	<script type="text/javascript" src="//st4.gismeteo.ru/static/js/classes/Site.class.js?f3f8c"></script>
-	<script type="text/javascript" src="//st6.gismeteo.ru/static/js/common.js?f3f8c"></script>
-	<script type="text/javascript" src="//st8.gismeteo.ru/static/js/gis.adfox.js?f3f8c"></script>
-	<link rel="stylesheet" type="text/css" href="//st8.gismeteo.ru/static/diary/css/common.css?f3f8c"  />
-	<link rel="stylesheet" type="text/css" href="//st8.gismeteo.ru/static/diary/css/screen.css?f3f8c" media="screen"  />
-	<link rel="stylesheet" type="text/css" href="//st7.gismeteo.ru/static/diary/css/print_bw.css?f3f8c" media="print"  />
-	<link rel="stylesheet" type="text/css" href="//st8.gismeteo.ru/static/diary/css/print_color.css?f3f8c" media="print"  />
-
-		<!--[if lt IE 8]><style type="text/css">
-			img.png, div.png { behavior: url(./static/diary/css/iepngfix_v2/iepngfix.htc) }
-		</style><![endif]-->
-	<script type="text/javascript" src="//st6.gismeteo.ru/static/diary/css/iepngfix_v2/iepngfix_tilebg.js?f3f8c"></script>
-		<script type="text/javascript">
-			var default_args = {"region": "367", "country": "156", "distr": "all", "city": "4368"};
-			var currentTime = new Date()
-			default_args.month = currentTime.getMonth() + 1;
-			default_args.year = currentTime.getFullYear();
-			function choosePrintStyle(mode)
-			{
-				if(mode=='color') {
-					$('body').removeClass('pr_bw').addClass('pr_color');
-				}
-				else{
-					$('body').removeClass('pr_color').addClass('pr_bw');
-				}
-				window.print();
-			}
-			function setTownParam(id, name, n){
-				$('city_id').value = id;
-			}
-			function setCookie (name, value, expires, path, domain, secure) {
-				document.cookie = name + "=" + escape(value) +
-						((expires) ? "; expires=" + expires : "") +
-						((path) ? "; path=" + path : "") +
-						((domain) ? "; domain=" + domain : "") +
-						((secure) ? "; secure" : "");
-			}
-			function getCookie(name) {
-				var cookie = " " + document.cookie;
-				var search = " " + name + "=";
-				var setStr = null;
-				var offset = 0;
-				var end = 0;
-				if (cookie.length > 0) {
-					offset = cookie.indexOf(search);
-					if (offset != -1) {
-						offset += search.length;
-						end = cookie.indexOf(";", offset)
-						if (end == -1) {
-							end = cookie.length;
-						}
-						setStr = unescape(cookie.substring(offset, end));
-					}
-				}
-				return(setStr);
-			}
-		</script>
-
 </head>
 <body>
 <div id=pre-container>
@@ -795,14 +574,7 @@ export const okResult2 = `
 				<div id="header">
 <div class="top"></div><div class="bottom"></div>
 <a href="//www.gismeteo.ru" id="logo" class="logo" title="Gismeteo.Ru Прогноз погоды."></a>
-	<div class="bnr" id="weather-top"><!-- Gismeteo Adfox banner TOP -->
-<script type="text/javascript">
-    new adfox({
-        id : "weather-top",
-        slot: "top",
-        targeting : {pt:'b',pp:'g',ps:'dlyj',p2:'fckw',pct:'c',puid18:'gismeteo_ru_old_desktop',puid1:10,puid2:'sun',puid3:4368,puid4:156,puid5:477,puid6:4146,puid18:'gismeteo_ru_old_desktop'}
-});
-</script></div>
+	<div class="bnr" id="weather-top"></div>
 </div>				<div id="mainMenu">
 	<ul>
 		<li class="tt"><a href="/"><i>Главная</i></a></li>
@@ -891,15 +663,6 @@ export const okResult2 = `
 				</div>
 
 					<input type=hidden id="city_id" name="city_id" value="">
-				<script type="text/javascript" src="//st4.gismeteo.ru/static/js/classes/Selector.class.js?f3f8c"></script>
-				<script type="text/javascript">
-					jQuery(function($){
-// $(window).bind('load', function($){
-						site.selector = new Selector();
-						site.selector.init({submit_btn:'selector_go_btn', selectors:{country:'sd_country', district:'sd_distr', city:'sd_city', year:'date_Year', month:'date_Month'}, data:{country:205, district:585, city:4368, year:2015, month:09}});
-					});
-				</script>
-
 				</form>
 			</div>
 			<div id=logo></div>
@@ -1264,76 +1027,11 @@ export const okResult2 = `
 					</div>
 				</div>
 			</div>
-			<div id=bottom_shadow class=png>
-				<div class="agreement">
-					<a href="https://www.gismeteo.ru/page/agreement/" target="_blank">Соглашение</a>
-				</div>
-				&copy 1998 - 2020 "Мэп Мэйкер"
-			</div>
-			<div id=counter>
-				<!--LiveInternet counter--><script type="text/javascript"><!--
-					document.write("<a href='https://www.gismeteo.ru/ref/?url=aHR0cDovL3d3dy5saXZlaW50ZXJuZXQucnUvY2xpY2s=' "+
-							"target=_blank><img src='//counter.yadro.ru/hit?t26.1;r"+
-							escape(document.referrer)+((typeof(screen)=="undefined")?"":
-							";s"+screen.width+"*"+screen.height+"*"+(screen.colorDepth?
-									screen.colorDepth:screen.pixelDepth))+";u"+escape(document.URL)+
-							";"+Math.random()+
-							"' alt='' title='LiveInternet: показано число посетителей за"+
-							" сегодня' "+
-							"border='0' width='88' height='15'><\/a>")
-					//--></script><!--/LiveInternet-->
-			</div>
 		</div>
 	</div>
 </div>
 </div>
 </div>
-<script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-  ga('create', 'UA-12105830-1', 'auto');
-  ga('send', 'pageview');
-</script>
-	<script type="text/JavaScript">
-		//<!--[CDATA[
-		function onload_inits() {
-			if (_timer) {
-				clearInterval(_timer);
-				_timer = null;
-			}
-			try {
-				for (var i=0, l=onloads.length; i<l; i++) {
-					var onloads_item = onloads.shift();
-					onloads_item();
-				}
-			} catch(error) {}
-		};
-		if (document.addEventListener) {
-			document.addEventListener("DOMContentLoaded", onload_inits, false);
-		}
-		/*@cc_on @*/
-		/*@if (@_win32)
-		 document.write("<script id=__ie_onload defer src=javascript:void(0)><\/script>");
-		 var script = document.getElementById("__ie_onload");
-		 script.onreadystatechange = function() {
-		 if (this.readyState == "complete") {
-		 onload_inits();
-		 }
-		 };
-		 /*@end @*/
-		if (/WebKit/i.test(navigator.userAgent)) {
-			var _timer = setInterval(function() {
-				if (/loaded|complete/.test(document.readyState)) {
-					onload_inits();
-				}
-			}, 10);
-		}
-		window.onload = onload_inits;
-		//]]-->
-	</script>
 </body>
 <!--GMT+0: 2020-09-16 17:39:32-->
 <!--GMT+0: 2020-09-16 17:39:32-->
@@ -1341,77 +1039,9 @@ export const okResult2 = `
 `;
 
 export const okEmptyResult = `
-
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <html>
 <head>
-	<title>GISMETEO.RU: Дневник погоды на Северном полюсе за Сентябрь 2002 г. Архив погоды за Сентябрь 2002 г. по г. Северный полюс, Северный полюс, Северный Полюс</title>
-	<meta name="Author" content="gismeteo">
-	<meta name="description" content="Дневник фактических данных погоды на Северном полюсе, Сентябрь 2002 г. для школьников.">
-	<meta name="keywords" content="фактическая погода на Северном полюсе, фактические данные, дневник погоды на Северном полюсе, дневник, дневник погоды, архив, архив погоды, архив погоды по г. Северный полюс, Сентябрь, 2002, школьник, ученик, дневник погоды для школьников, дневник наблюдений за погодой, погодный дневник.">
-	<link rel="shortcut icon" type="image/ico" href="//st7.gismeteo.ru/favicon2.ico" />
-	<link rel="icon" type="image/ico" href="//st7.gismeteo.ru/favicon2.ico" />
-	<script src="https://yastatic.net/pcode/adfox/loader.js"></script>
-	<script type="text/javascript" src="//st7.gismeteo.ru/static/js/jquery-1.4.2.min.js?f3f8c"></script>
-	<script type="text/javascript" src="//st6.gismeteo.ru/static/js/classes/Gis.class.js?f3f8c"></script>
-	<script type="text/javascript" src="//st4.gismeteo.ru/static/js/classes/Site.class.js?f3f8c"></script>
-	<script type="text/javascript" src="//st6.gismeteo.ru/static/js/common.js?f3f8c"></script>
-	<script type="text/javascript" src="//st8.gismeteo.ru/static/js/gis.adfox.js?f3f8c"></script>
-	<link rel="stylesheet" type="text/css" href="//st8.gismeteo.ru/static/diary/css/common.css?f3f8c"  />
-	<link rel="stylesheet" type="text/css" href="//st8.gismeteo.ru/static/diary/css/screen.css?f3f8c" media="screen"  />
-	<link rel="stylesheet" type="text/css" href="//st7.gismeteo.ru/static/diary/css/print_bw.css?f3f8c" media="print"  />
-	<link rel="stylesheet" type="text/css" href="//st8.gismeteo.ru/static/diary/css/print_color.css?f3f8c" media="print"  />
-
-		<!--[if lt IE 8]><style type="text/css">
-			img.png, div.png { behavior: url(./static/diary/css/iepngfix_v2/iepngfix.htc) }
-		</style><![endif]-->
-	<script type="text/javascript" src="//st6.gismeteo.ru/static/diary/css/iepngfix_v2/iepngfix_tilebg.js?f3f8c"></script>
-		<script type="text/javascript">
-			var default_args = {"region": "367", "country": "156", "distr": "all", "city": "4368"};
-			var currentTime = new Date()
-			default_args.month = currentTime.getMonth() + 1;
-			default_args.year = currentTime.getFullYear();
-			function choosePrintStyle(mode)
-			{
-				if(mode=='color') {
-					$('body').removeClass('pr_bw').addClass('pr_color');
-				}
-				else{
-					$('body').removeClass('pr_color').addClass('pr_bw');
-				}
-				window.print();
-			}
-			function setTownParam(id, name, n){
-				$('city_id').value = id;
-			}
-			function setCookie (name, value, expires, path, domain, secure) {
-				document.cookie = name + "=" + escape(value) +
-						((expires) ? "; expires=" + expires : "") +
-						((path) ? "; path=" + path : "") +
-						((domain) ? "; domain=" + domain : "") +
-						((secure) ? "; secure" : "");
-			}
-			function getCookie(name) {
-				var cookie = " " + document.cookie;
-				var search = " " + name + "=";
-				var setStr = null;
-				var offset = 0;
-				var end = 0;
-				if (cookie.length > 0) {
-					offset = cookie.indexOf(search);
-					if (offset != -1) {
-						offset += search.length;
-						end = cookie.indexOf(";", offset)
-						if (end == -1) {
-							end = cookie.length;
-						}
-						setStr = unescape(cookie.substring(offset, end));
-					}
-				}
-				return(setStr);
-			}
-		</script>
-
 </head>
 <body>
 <div id=pre-container>
@@ -1515,17 +1145,7 @@ export const okEmptyResult = `
 							</div></div>
 					<div class=clear></div>
 				</div>
-
 					<input type=hidden id="city_id" name="city_id" value="">
-				<script type="text/javascript" src="//st4.gismeteo.ru/static/js/classes/Selector.class.js?f3f8c"></script>
-				<script type="text/javascript">
-					jQuery(function($){
-// $(window).bind('load', function($){
-						site.selector = new Selector();
-						site.selector.init({submit_btn:'selector_go_btn', selectors:{country:'sd_country', district:'sd_distr', city:'sd_city', year:'date_Year', month:'date_Month'}, data:{country:165, district:null, city:4368, year:2002, month:09}});
-					});
-				</script>
-
 				</form>
 			</div>
 			<div id=logo></div>
@@ -1566,78 +1186,11 @@ export const okEmptyResult = `
 					</div>
 				</div>
 			</div>
-			<div id=bottom_shadow class=png>
-				<div class="agreement">
-					<a href="https://www.gismeteo.ru/page/agreement/" target="_blank">Соглашение</a>
-				</div>
-				&copy 1998 - 2020 "Мэп Мэйкер"
-			</div>
-			<div id=counter>
-				<!--LiveInternet counter--><script type="text/javascript"><!--
-					document.write("<a href='https://www.gismeteo.ru/ref/?url=aHR0cDovL3d3dy5saXZlaW50ZXJuZXQucnUvY2xpY2s=' "+
-							"target=_blank><img src='//counter.yadro.ru/hit?t26.1;r"+
-							escape(document.referrer)+((typeof(screen)=="undefined")?"":
-							";s"+screen.width+"*"+screen.height+"*"+(screen.colorDepth?
-									screen.colorDepth:screen.pixelDepth))+";u"+escape(document.URL)+
-							";"+Math.random()+
-							"' alt='' title='LiveInternet: показано число посетителей за"+
-							" сегодня' "+
-							"border='0' width='88' height='15'><\/a>")
-					//--></script><!--/LiveInternet-->
-			</div>
 		</div>
 	</div>
 </div>
 </div>
 </div>
-<script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-  ga('create', 'UA-12105830-1', 'auto');
-  ga('send', 'pageview');
-</script>
-	<script type="text/JavaScript">
-		//<!--[CDATA[
-		function onload_inits() {
-			if (_timer) {
-				clearInterval(_timer);
-				_timer = null;
-			}
-			try {
-				for (var i=0, l=onloads.length; i<l; i++) {
-					var onloads_item = onloads.shift();
-					onloads_item();
-				}
-			} catch(error) {}
-		};
-		if (document.addEventListener) {
-			document.addEventListener("DOMContentLoaded", onload_inits, false);
-		}
-		/*@cc_on @*/
-		/*@if (@_win32)
-		 document.write("<script id=__ie_onload defer src=javascript:void(0)><\/script>");
-		 var script = document.getElementById("__ie_onload");
-		 script.onreadystatechange = function() {
-		 if (this.readyState == "complete") {
-		 onload_inits();
-		 }
-		 };
-		 /*@end @*/
-		if (/WebKit/i.test(navigator.userAgent)) {
-			var _timer = setInterval(function() {
-				if (/loaded|complete/.test(document.readyState)) {
-					onload_inits();
-				}
-			}, 10);
-		}
-		window.onload = onload_inits;
-		//]]-->
-	</script>
 </body>
-<!--GMT+0: 2020-09-16 17:07:05-->
-<!--GMT+0: 2020-09-16 17:07:05-->
 </html>
 `;

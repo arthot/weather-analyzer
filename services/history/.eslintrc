@@ -21,6 +21,7 @@
       "safe"
     ],
     "import/prefer-default-export": 0,
+    "import/extensions": 0,
     "jsdoc/check-param-names": 2,
     "jsdoc/check-tag-names": 2,
     "jsdoc/check-types": 2,
