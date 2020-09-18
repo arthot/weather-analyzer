@@ -21,7 +21,7 @@ export async function cacheData(cityId, month) {
         const record = await parse(cityId, year, month);
         await cacheHistory(record);
       } catch (err) {
-        logger.error({ err, cityId, month, year }, 'Error fetching data');
+        logger.error({ err, cityId, month, year }, `Error caching data: ${err.message}`);
       }
     }),
   );

@@ -20,13 +20,12 @@ export function cacheHistory({ cityId, year, month, history }) {
   return weather().updateOne(
     { cityId, year, month },
     {
+      $set: { history },
       $setOnInsert: {
         cityId,
         year,
         month,
-        history,
       },
-      $set: { history },
     },
     { upsert: true },
   );
@@ -36,10 +35,10 @@ export function cacheHistory({ cityId, year, month, history }) {
  * Gets the last cached date for set cityId
  *
  * @param {number} cityId
- * @returns {Promise<HistoryRecord>}
+ * @returns {Promise<HistoryRecord | undefined>}
  */
 export function getLastCachedMonth(cityId) {
-  return weather().find({ cityId }).sort({ year: -1, month: -1 }).limit(1).toArray();
+  return weather().find({ cityId }).sort({ year: -1, month: -1 }).limit(1).toArray()[0];
 }
 
 /**
