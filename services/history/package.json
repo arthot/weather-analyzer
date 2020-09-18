@@ -59,7 +59,7 @@
     "mocha-junit-reporter": "^2.0.0",
     "mocha-multi-reporters": "^1.1.7",
     "nock": "^13.0.4",
-    "prettier": "^2.1.1",
+    "prettier": "^2.1.2",
     "sinon": "^9.0.3",
     "supertest": "^4.0.2",
     "test-listen": "^1.1.0"

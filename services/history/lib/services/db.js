@@ -7,7 +7,7 @@ import { weather } from '../mongo.js';
  * @property {number} cityId
  * @property {number} year
  * @property {number} month
- * @property {Array<DayRecord>} records
+ * @property {Array<DayRecord>} history
  */
 
 /**

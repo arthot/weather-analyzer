@@ -1,10 +1,11 @@
 import errors from '@umnico/api-errors';
 import fetch from 'node-fetch';
 import logger from '../../logger.js';
-
 import { parseResult } from './parse-result.js';
 
 const { NotFound, BadRequest, InternalServerError } = errors;
+
+/** @typedef {import('../db').HistoryRecord} HistoryRecord */
 
 const headers = {
   'Accept-Language': 'en-GB,en-US;q=0.9,en;q=0.8,ru;q=0.7',
@@ -22,6 +23,7 @@ const cookieStore = new Map();
  * @param {number} cityId
  * @param {number} year
  * @param {number} month
+ * @returns {HistoryRecord}
  */
 export async function parse(cityId, year, month) {
   const host = 'www.gismeteo.ru';
