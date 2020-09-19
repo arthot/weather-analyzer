@@ -1,5 +1,5 @@
 # RUN DEV
-FROM node:alpine
+FROM node:14
 WORKDIR /var/www/client
 ADD package*.json ./
 RUN ["npm", "i"]

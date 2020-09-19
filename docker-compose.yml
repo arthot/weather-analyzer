@@ -1,32 +1,38 @@
-version: '3.6'
+version: "3.6"
 services:
-  server:
+  city:
     build:
-      context: ./server
-    volumes:
-     - ./server/src:/var/www/server/src
-     - ./server/db.sqlite3:/var/www/server/db.sqlite3
+      context: ./services/city
     environment:
-      NODE_ENV: development
-      MONGODB_URI: 'mongo:27017'
+      MONGODB_URI: "mongodb://mongo:27017/weather"
+    depends_on:
+      - mongo
+  history:
+    build:
+      context: ./services/history
+    environment:
+      MONGODB_URI: "mongodb://mongo:27017/weather"
+    depends_on:
+      - mongo
   client:
     build:
       context: ./client
     volumes:
-     - ./client/src:/var/www/client/src
-     - ./client/webpack:/var/www/client/webpack
+      - ./client/src:/var/www/client/src
+      - ./client/webpack:/var/www/client/webpack
     environment:
       NODE_ENV: development
   nginx:
     build:
       context: ./tools/nginx
     ports:
-     - "3003:80"
+      - "3003:80"
     depends_on:
-     - server
-     - client
+      - city
+      - history
+      - client
   mongo:
     image: mongo:4
-    command: mongod
+    command: mongod --quiet
     ports:
-     - 27017:27017
+      - 27017:27017
