@@ -27,7 +27,7 @@ describe('Integration test: lib/api/get-history-by-month/cache-data.js', () => {
 
   it('should cache pages for the current month', async () => {
     const now = new Date();
-    const month = now.getMonth();
+    const month = now.getMonth() + 1;
 
     const url = 'https://www.gismeteo.ru/diary';
 
@@ -49,7 +49,7 @@ describe('Integration test: lib/api/get-history-by-month/cache-data.js', () => {
 
   it('should cache pages with empty data', async () => {
     const now = new Date();
-    const month = now.getMonth();
+    const month = now.getMonth() + 1;
 
     const url = 'https://www.gismeteo.ru/diary';
 
@@ -71,7 +71,7 @@ describe('Integration test: lib/api/get-history-by-month/cache-data.js', () => {
 
   it('should not cache if underlying service returns 400', async () => {
     const now = new Date();
-    const month = now.getMonth();
+    const month = now.getMonth() + 1;
 
     const url = 'https://www.gismeteo.ru/diary';
 
@@ -84,5 +84,36 @@ describe('Integration test: lib/api/get-history-by-month/cache-data.js', () => {
     const result = await weather().find({ cityId: 4248, month }).toArray();
 
     assert.equal(result.length, 1);
+  });
+
+  it('should not cache actual data', async () => {
+    const now = new Date();
+    const month = now.getMonth() + 1;
+
+    const url = 'https://www.gismeteo.ru/diary';
+
+    const range = getYearsRange(month);
+    range.forEach(y => nock(url).get(`/4248/${y}/${month}/`).reply(200, okResult1));
+
+    await cacheData(4248, month);
+
+    nock.cleanAll();
+    const scopes = range.map(y => nock(url).get(`/4248/${y}/${month}/`).reply(500, okResult1));
+
+    await cacheData(4248, month);
+
+    assert.isTrue(
+      scopes.every(s => !s.isDone()),
+      'should not call external data provider again',
+    );
+
+    const result = await weather().find({ cityId: 4248, month }).toArray();
+    assert.equal(result.length, range.length);
+    assert.deepOwnInclude(result[0], { cityId: 4248, year: range[0], month });
+    assert.deepOwnInclude(result[result.length - 1], {
+      cityId: 4248,
+      year: range[range.length - 1],
+      month,
+    });
   });
 });

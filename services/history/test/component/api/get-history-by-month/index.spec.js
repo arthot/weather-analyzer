@@ -1,23 +1,17 @@
 import chai from 'chai';
 import chaiAsPromised from 'chai-as-promised';
-import sinon from 'sinon';
 import nock from 'nock';
-import Chance from 'chance';
 import { weather } from '../../../../lib/mongo.js';
 import { startServer, stopServer } from '../../../../lib/server.js';
 import { api } from '../../../utils/index.js';
-import { okEmptyResult, okResult1 } from '../../../utils/gismeteo-generator.js';
+import { getYearsRange } from '../../../../lib/common/generate-years-range.js';
+import { okResult1 } from '../../../utils/gismeteo-generator.js';
 
 const { assert } = chai;
 chai.use(chaiAsPromised);
 
-const chance = new Chance();
-
-let clock;
-
-describe('Component test: GET /city/:lang/search', () => {
+describe('Component test: GET /weather/:cityId/:month', () => {
   before(async () => {
-    clock = sinon.useFakeTimers(new Date());
     await startServer();
   });
 
@@ -27,96 +21,38 @@ describe('Component test: GET /city/:lang/search', () => {
 
   after(async function testSetup() {
     nock.cleanAll();
-    clock.restore();
     await weather().deleteMany({});
     await stopServer();
   });
 
-  it('should return 400 if id is not valid', async () => {
-    await api.get('/city/en/search?query=').set('Content-Type', 'application/json').expect(400);
+  it('should return 400 if month is not valid', async () => {
+    await api.get('/weather/abc/12').set('Content-Type', 'application/json').expect(400);
   });
 
-  it('should return empty if lang is unknown', async () => {
-    const query = chance.string({ length: 10, alpha: true });
-    nock('https://www.gismeteo.com')
-      .get('/ajax/suggest/')
-      .query({ lang: 'du', startsWith: query, sort: 'typ' })
-      .matchHeader('content-type', 'application/json')
-      .reply(200, okEmptyResult);
+  it('should return 400 if city id is not valid', async () => {
+    await api.get('/weather/123/abc').set('Content-Type', 'application/json').expect(400);
+  });
+
+  it('should return data for the current month', async () => {
+    const now = new Date();
+    const month = now.getMonth() + 1;
+
+    const url = 'https://www.gismeteo.ru/diary';
+
+    const range = getYearsRange(month);
+    range.forEach(y => nock(url).get(`/4248/${y}/${month}/`).reply(200, okResult1));
 
     const { body } = await api
-      .get('/city/du/search')
-      .query({ query })
+      .get(`/weather/4248/${month}`)
       .set('Content-Type', 'application/json')
       .expect(200);
 
-    assert.sameDeepMembers(body, []);
-  });
-
-  it('should return empty if city is unknown', async () => {
-    const query = chance.string({ length: 10, alpha: true });
-    nock('https://www.gismeteo.com')
-      .get('/ajax/suggest/')
-      .query({ lang: 'en', startsWith: query, sort: 'typ' })
-      .matchHeader('content-type', 'application/json')
-      .reply(200, okEmptyResult);
-
-    const { body } = await api
-      .get('/city/en/search')
-      .query({ query })
-      .set('Content-Type', 'application/json')
-      .expect(200);
-
-    assert.sameDeepMembers(body, []);
-  });
-
-  it('should cache and return result', async () => {
-    const query = chance.string({ length: 10, alpha: true });
-    nock('https://www.gismeteo.com')
-      .get('/ajax/suggest/')
-      .query({ lang: 'en', startsWith: query, sort: 'typ' })
-      .matchHeader('content-type', 'application/json')
-      .reply(200, okResultEn1);
-
-    const { body } = await api
-      .get('/city/en/search')
-      .query({ query })
-      .set('Content-Type', 'application/json')
-      .expect(200);
-
-    assert.lengthOf(body, 7);
-  });
-
-  it('should cache and return cached result', async () => {
-    const query = chance.string({ length: 10, alpha: true });
-    nock('https://www.gismeteo.com')
-      .get('/ajax/suggest/')
-      .query({ lang: 'en', startsWith: query, sort: 'typ' })
-      .matchHeader('content-type', 'application/json')
-      .reply(200, okResultEn1);
-
-    const { body: fresh } = await api
-      .get('/city/en/search')
-      .query({ query })
-      .set('Content-Type', 'application/json')
-      .expect(200);
-
-    assert.lengthOf(fresh, 7);
-
-    nock.cleanAll();
-
-    nock('https://www.gismeteo.com')
-      .get('/ajax/suggest/')
-      .query({ lang: 'en', startsWith: query, sort: 'typ' })
-      .matchHeader('content-type', 'application/json')
-      .reply(500);
-
-    const { body: cached } = await api
-      .get('/city/en/search')
-      .query({ query })
-      .set('Content-Type', 'application/json')
-      .expect(200);
-
-    assert.lengthOf(cached, 7);
+    assert.equal(body.length, range.length);
+    assert.deepOwnInclude(body[0], { cityId: 4248, year: range[0], month });
+    assert.deepOwnInclude(body[body.length - 1], {
+      cityId: 4248,
+      year: range[range.length - 1],
+      month,
+    });
   });
 });

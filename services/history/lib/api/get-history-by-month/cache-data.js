@@ -9,7 +9,7 @@ import logger from '../../logger.js';
  *
  * @param {number} cityId
  * @param {number} month
- * @returns {Promise<{body: any[], status: number}>}
+ * @returns {Promise}
  */
 export async function cacheData(cityId, month) {
   const lastCachedRecord = await getLastCachedMonth(cityId);

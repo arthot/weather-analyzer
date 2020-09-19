@@ -37,8 +37,14 @@ export function cacheHistory({ cityId, year, month, history }) {
  * @param {number} cityId
  * @returns {Promise<HistoryRecord | undefined>}
  */
-export function getLastCachedMonth(cityId) {
-  return weather().find({ cityId }).sort({ year: -1, month: -1 }).limit(1).toArray()[0];
+export async function getLastCachedMonth(cityId) {
+  const [record] = await weather()
+    .find({ cityId })
+    .sort({ year: -1, month: -1 })
+    .limit(1)
+    .toArray();
+
+  return record;
 }
 
 /**
