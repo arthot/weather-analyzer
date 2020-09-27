@@ -23,10 +23,11 @@ export function weather(state = INITIAL_SEARCH_STATE, action) {
         }
         case ACTIONS.WEATHER_MONTH_DATA_RESPONSE: {
             const { month, data } = action.payload;
+            const weather = data && data.length ? data.reduce((h, y) => h.set(y.year, y.history.reduce((r, d) => r.set(d.day, d), new Map())), new Map()) : new Map();
             return {
                 ...state,
                 data: Object.assign([], state.data, {
-                    [month - 1]: { loading: false, weather: data }
+                    [month - 1]: { loading: false, weather }
                 })
             }
         }

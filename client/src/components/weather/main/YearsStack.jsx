@@ -43,7 +43,7 @@ class YearsStack extends PureComponent {
                                 key={d}
                                 day={d}
                                 mode={mode}
-                                data={data.weather[`${y}-${month.toString().padStart(2, '0')}-${d.toString().padStart(2, '0')}`]}
+                                data={data.weather.get(y) && data.weather.get(y).get(d)}
                             />
                         ))}
                     </div>

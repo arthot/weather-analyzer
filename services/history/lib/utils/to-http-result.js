@@ -1,8 +1,20 @@
+/** @typedef {import('../services/db').HistoryRecord} HistoryRecord */
+
 /**
  * Maps weather history record object to http interface
  *
- * @param {{ day: number, month: number, year: number, temperature: number, cloudiness: number, fallout: boolean, cityId: number }} historyRecord
+ * @param {HistoryRecord} historyRecord
  */
-export function toHttpResult({ day, month, year, temperature, cloudiness, fallout, cityId }) {
-  return { day, month, year, temperature, cloudiness, fallout, cityId };
+export function toHttpResult({ month, year, cityId, history }) {
+  return {
+    month,
+    year,
+    cityId,
+    history: history.map(({ day, temperature, cloudiness, fallout }) => ({
+      day,
+      temperature,
+      cloudiness,
+      fallout,
+    })),
+  };
 }

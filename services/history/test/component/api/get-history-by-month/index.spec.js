@@ -47,12 +47,14 @@ describe('Component test: GET /weather/:cityId/:month', () => {
       .set('Content-Type', 'application/json')
       .expect(200);
 
+    const [firstYear] = body;
+
     assert.equal(body.length, range.length);
-    assert.deepOwnInclude(body[0], { cityId: 4248, year: range[0], month });
-    assert.deepOwnInclude(body[body.length - 1], {
-      cityId: 4248,
-      year: range[range.length - 1],
-      month,
-    });
+    assert.deepOwnInclude(firstYear, { cityId: 4248, year: range[0], month });
+    assert.isArray(firstYear.history);
+
+    const [firstDay] = firstYear.history;
+
+    assert.deepEqual(firstDay, { day: 1, temperature: 20, cloudiness: 1, fallout: false });
   });
 });
