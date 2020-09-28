@@ -1,4 +1,4 @@
-import { cacheHistory, getLastCachedMonth } from '../../services/db.js';
+import { cacheHistory, getLastCachedYear } from '../../services/db.js';
 import { getLastCachedDate } from '../../common/get-last-cached-date.js';
 import { parse } from '../../services/history/index.js';
 import { getYearsRangeToUpdate } from '../../common/get-years-range-to-update.js';
@@ -12,7 +12,7 @@ import logger from '../../logger.js';
  * @returns {Promise}
  */
 export async function cacheData(cityId, month) {
-  const lastCachedRecord = await getLastCachedMonth(cityId);
+  const lastCachedRecord = await getLastCachedYear(cityId, month);
   const years = getYearsRangeToUpdate(month, getLastCachedDate(lastCachedRecord));
 
   await Promise.all(

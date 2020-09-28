@@ -52,7 +52,7 @@ const shouldMonthDataBeUpdate = (year, month, lastCachedDate, today) => {
  */
 export function getYearsRangeToUpdate(month, lastCachedDate) {
   return getYearsRange(month).filter(y => {
-    if (!lastCachedDate) return true;
+    if (!lastCachedDate || lastCachedDate.getMonth() !== month - 1) return true;
 
     return (
       lastCachedDate.getFullYear() <= y &&
