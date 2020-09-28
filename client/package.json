@@ -21,7 +21,7 @@
     "famfamfam-flags": "^1.0.0",
     "immutability-helper": "^3.0.0",
     "immutable": "^3.8.2",
-    "lodash": "^4.17.11",
+    "lodash": "^4.17.19",
     "parallax-js": "^3.1.0",
     "query-string": "^6.5.0",
     "react": "^16.8.6",
