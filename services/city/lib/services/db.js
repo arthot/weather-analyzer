@@ -16,7 +16,7 @@ export async function searchByQuery(lang, query) {
     .find({ lang, id: { $in: cachedQuery.cities } })
     .toArray();
 
-  return cachedQuery.cities.map(id => cts.find(c => c.id === id));
+  return cachedQuery.cities.map(id => cts.find(c => c.id === id)).filter(c => c);
 }
 
 /**
