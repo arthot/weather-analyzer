@@ -12,7 +12,7 @@ import { cacheData } from './cache-data.js';
  * @returns {Promise<{body: any[], status: number}>}
  */
 export const getHistoryByMonth = async (cityId, month) => {
-  logger.debug(`Reading weather [cityId="${cityId}", month="${month}"]`);
+  logger.debug(`Reading weather [cityId='${cityId}', month='${month}']`);
 
   ensureValidParams({ cityId, month });
 
