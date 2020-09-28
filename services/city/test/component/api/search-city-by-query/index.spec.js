@@ -1,6 +1,5 @@
 import chai from 'chai';
 import chaiAsPromised from 'chai-as-promised';
-import sinon from 'sinon';
 import nock from 'nock';
 import Chance from 'chance';
 import { cities } from '../../../../lib/mongo';
@@ -13,11 +12,8 @@ chai.use(chaiAsPromised);
 
 const chance = new Chance();
 
-let clock;
-
 describe('Component test: GET /city/:lang/search', () => {
   before(async () => {
-    clock = sinon.useFakeTimers(new Date());
     await startServer();
   });
 
@@ -27,7 +23,6 @@ describe('Component test: GET /city/:lang/search', () => {
 
   after(async function testSetup() {
     nock.cleanAll();
-    clock.restore();
     await cities().deleteMany({});
     await stopServer();
   });

@@ -1,6 +1,5 @@
 import chai from 'chai';
 import chaiAsPromised from 'chai-as-promised';
-import sinon from 'sinon';
 import { cities } from '../../../../lib/mongo';
 import { startServer, stopServer } from '../../../../lib/server';
 import { api } from '../../../utils/index';
@@ -8,11 +7,8 @@ import { api } from '../../../utils/index';
 const { assert } = chai;
 chai.use(chaiAsPromised);
 
-let clock;
-
 describe('Component test: GET /city/:lang/:id', () => {
   before(async () => {
-    clock = sinon.useFakeTimers(new Date());
     await startServer();
   });
 
@@ -21,7 +17,6 @@ describe('Component test: GET /city/:lang/:id', () => {
   });
 
   after(async function testSetup() {
-    clock.restore();
     await cities().deleteMany({});
     await stopServer();
   });
