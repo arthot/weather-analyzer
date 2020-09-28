@@ -1,5 +1,6 @@
 import errors from '@umnico/api-errors';
 import fetch from 'node-fetch';
+import { URL } from 'url';
 import logger from '../../logger.js';
 import { parseResult } from './parse-result.js';
 
@@ -27,7 +28,7 @@ const cookieStore = new Map();
  */
 export async function parse(cityId, year, month) {
   const host = 'www.gismeteo.ru';
-  const url = `https://${host}/diary/${cityId}/${year}/${month}/`;
+  const url = new URL(`https://${host}/diary/${cityId}/${year}/${month}/`);
 
   logger.debug(`Fetching weather history from ${url}`);
 
