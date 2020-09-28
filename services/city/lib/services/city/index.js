@@ -1,5 +1,6 @@
 import errors from '@umnico/api-errors';
 import fetch from 'node-fetch';
+import { URL } from 'url';
 import { convertApiResult } from './convert-result';
 
 const { NotFound, BadRequest, InternalServerError } = errors;
@@ -22,7 +23,7 @@ const cookieStore = new Map();
  */
 export async function searchCity(lang, query) {
   const host = `www.gismeteo.${lang === 'ru' ? 'ru' : 'com'}`;
-  const url = `https://${host}/ajax/suggest/?lang=${lang}&startsWith=${query}&sort=typ`;
+  const url = new URL(`https://${host}/ajax/suggest/?lang=${lang}&startsWith=${query}&sort=typ`);
 
   const res = await fetch(url, {
     headers: { ...headers, cookie: cookieStore.get(host) },
