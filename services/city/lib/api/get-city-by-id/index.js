@@ -14,7 +14,7 @@ const { NotFound } = errors;
  * @returns {Promise<{body: any[], status: number}>}
  */
 export const getCityById = async (lang, id) => {
-  logger.debug(`Reading city "${id}" [lang=${lang}]`);
+  logger.debug(`Reading city '${id}' [lang='${lang}']`);
 
   ensureValidParams({ lang, id });
 

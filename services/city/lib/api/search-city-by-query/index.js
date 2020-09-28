@@ -12,7 +12,7 @@ import { searchCity } from '../../services/city/index';
  * @returns {Promise<{body: any[], status: number}>}
  */
 export const searchCityByName = async (lang, query) => {
-  logger.debug(`Searching city "${query}" [lang=${lang}]`);
+  logger.debug(`Searching city '${query}' [lang='${lang}']`);
 
   ensureValidParams({ lang, query });
 
