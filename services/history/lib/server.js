@@ -27,3 +27,13 @@ export async function stopServer() {
   await serverClose();
   await disconnectDB();
 }
+
+process.on('unhandledRejection', reason => {
+  logger.fatal(reason, 'Unhandled rejection at Promise');
+  process.exit(1);
+});
+
+process.on('uncaughtException', err => {
+  logger.fatal(err, 'Uncaught exception');
+  process.exit(1);
+});
