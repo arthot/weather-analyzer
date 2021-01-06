@@ -1,9 +1,10 @@
-import Ajv from 'ajv';
+import _Ajv from 'ajv';
 import errors from '@umnico/api-errors';
 import schema from './request-params-schema.json';
 
 const { BadRequest } = errors;
 
+const Ajv = _Ajv.default;
 const ajv = new Ajv();
 const areValidParams = ajv.compile(schema);
 

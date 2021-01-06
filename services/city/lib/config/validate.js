@@ -1,6 +1,7 @@
-import Ajv from 'ajv';
+import _Ajv from 'ajv';
 import configSchema from './schema.json';
 
+const Ajv = _Ajv.default;
 const ajv = new Ajv();
 const validateAjv = ajv.compile(configSchema);
 

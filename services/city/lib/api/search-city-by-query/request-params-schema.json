@@ -2,6 +2,7 @@
   "title": "Search params object",
   "additionalProperties": false,
   "required": ["query", "lang"],
+  "type": "object",
   "properties": {
     "query": {
       "description": "City name to search for",

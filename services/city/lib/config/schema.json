@@ -3,6 +3,7 @@
   "title": "Weather city service config",
   "description": "A city service config object",
   "required": ["db", "logger", "port"],
+  "type":"object",
   "properties": {
     "db": { "$ref": "#/definitions/MongoDB" },
     "logger": { "$ref": "#/definitions/Logger" },

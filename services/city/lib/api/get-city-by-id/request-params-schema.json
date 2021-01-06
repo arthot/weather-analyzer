@@ -2,11 +2,12 @@
   "title": "Get id params object",
   "additionalProperties": false,
   "required": ["id", "lang"],
+  "type": "object",
   "properties": {
     "id": {
       "description": "City id",
       "type": "integer",
-      "min": 0
+      "minimum": 0
     },
     "lang": {
       "description": "Conduct search using specified language",
