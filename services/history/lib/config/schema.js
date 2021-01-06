@@ -3,6 +3,7 @@ export default {
   title: 'Weather history service config',
   description: 'A history service config object',
   required: ['db', 'logger', 'port'],
+  type: 'object',
   properties: {
     db: { $ref: '#/definitions/MongoDB' },
     logger: { $ref: '#/definitions/Logger' },

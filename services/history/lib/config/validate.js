@@ -1,7 +1,11 @@
-import Ajv from 'ajv';
+import _Ajv from 'ajv';
+import keywords from 'ajv-keywords';
 import configSchema from './schema.js';
 
+const Ajv = _Ajv.default;
+
 const ajv = new Ajv();
+keywords(ajv);
 const validateAjv = ajv.compile(configSchema);
 
 /**
