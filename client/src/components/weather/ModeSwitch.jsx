@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import i18n from 'es2015-i18n-tag'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
-import classNames from 'classnames'
 
 import * as ACTIONS from '../../weather/actions'
 import { MODES } from '../../weather/constants'
