@@ -38,6 +38,15 @@ describe('Unit test: lib/common/get-years-range-to-update.js', () => {
     assert.equal(range[range.length - 1], 2019, 'Wrong end date');
   });
 
+  it('should generate range for the current month and if its not current year', () => {
+    clock = sinon.useFakeTimers(new Date(2019, 3, 25));
+
+    const range = getYearsRangeToUpdate(4, new Date(2018, 3, 30));
+
+    assert.equal(range.length, 1, 'Wrong range length');
+    assert.equal(range[0], 2019, 'Wrong start date');
+  });
+
   it('should generate range for the current month if data is downloaded', () => {
     clock = sinon.useFakeTimers(new Date(2019, 3, 31));
 

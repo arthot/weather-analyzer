@@ -54,9 +54,11 @@ export function getYearsRangeToUpdate(month, lastCachedDate) {
   return getYearsRange(month).filter(y => {
     if (!lastCachedDate || lastCachedDate.getMonth() !== month - 1) return true;
 
+    const cachedYear = lastCachedDate.getFullYear();
+
     return (
-      lastCachedDate.getFullYear() <= y &&
-      shouldMonthDataBeUpdate(y, month, lastCachedDate, new Date())
+      cachedYear < y ||
+      (cachedYear === y && shouldMonthDataBeUpdate(y, month, lastCachedDate, new Date()))
     );
   });
 }

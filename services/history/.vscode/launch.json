@@ -20,12 +20,14 @@
       "program": "${workspaceRoot}/node_modules/mocha/bin/_mocha",
       "stopOnEntry": false,
       "args": [
+        "--exclude 'test/end-to-end/**'",
+        "configFile=./test/mocha-config.json",
         "--no-timeouts",
         "--bail",
         "--exit",
         "--recursive",
         "--no-timeouts",
-        "test/**/*.spec"
+        "test/**/**/*.spec.js"
       ],
       "cwd": "${workspaceRoot}",
       "runtimeExecutable": null,
